@@ -14,7 +14,7 @@ namespace CarbonTools.Sync
 {
     /// <summary>
     /// Builds the JSON payload described in the sync protocol
-    /// (E:\Carbon\Carbon工具-方法论决策记录.md section 15):
+    /// (docs/decision-record.md section 15):
     /// meta { units, origin_offset, timestamp, mesh_tolerance } + groups[ { color, objects[] } ].
     /// Units are converted to meters and geometry is shifted to origin here,
     /// so the web/three.js side never has to deal with model units or huge coordinates.

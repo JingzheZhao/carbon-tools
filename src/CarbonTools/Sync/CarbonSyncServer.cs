@@ -10,7 +10,8 @@ namespace CarbonTools.Sync
 {
     /// <summary>
     /// Minimal local HTTP server embedded in the CC Sync component
-    /// (docs/decision-record.zh.md section 16: "自研 GH 组件内嵌本地服务，不用 Speckle").
+    /// (docs/decision-record.md section 16: a local server inside the component,
+/// rather than Speckle).
     /// Serves the current sync JSON at /data.json, the carbon dataset under /data/,
     /// and the viewer at /.
     /// The transport can later be swapped for WebSocket without touching the protocol.

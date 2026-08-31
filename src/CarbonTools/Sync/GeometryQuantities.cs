@@ -9,7 +9,7 @@ namespace CarbonTools.Sync
     /// <summary>
     /// Computes area / length / volume / count for a single piece of geometry and
     /// a stable id derived from the geometry itself, per the sync protocol
-    /// (E:\Carbon\Carbon工具-方法论决策记录.md section 15).
+    /// (docs/decision-record.md section 15).
     /// </summary>
     public static class GeometryQuantities
     {

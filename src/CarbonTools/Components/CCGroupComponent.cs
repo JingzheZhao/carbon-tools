@@ -12,7 +12,7 @@ namespace CarbonTools.Components
     /// <summary>
     /// CC Group: user picks a color via the swatch on the component body and
     /// feeds geometry in. The color is the group key.
-    /// See E:\Carbon\Carbon工具-方法论决策记录.md sections 13-14.
+    /// See docs/decision-record.md sections 13-14.
     /// </summary>
     public class CCGroupComponent : GH_Component
     {

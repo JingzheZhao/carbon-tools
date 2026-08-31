@@ -16,7 +16,7 @@ namespace CarbonTools.Components
     /// <summary>
     /// CC Sync: collects Tagged Objects from one or more CC Group components and
     /// serves them as JSON over a local HTTP server, per the sync protocol
-    /// (E:\Carbon\Carbon工具-方法论决策记录.md sections 15-16).
+    /// (docs/decision-record.md sections 15-16).
     /// Run keeps the server alive and refreshed every solve; Open launches the
     /// browser once per click, so dragging a slider doesn't spawn dozens of tabs.
     /// </summary>
