@@ -98,7 +98,7 @@ src/CarbonTools/     the Grasshopper plugin (C#, net48)
   Sync/              geometry export, quantities, and the localhost server
   WebAssets/         viewer.html — the single-page viewer, embedded in the .gha
 data/                the Carbon Conscience dataset, versioned
-docs/                design documents and the decision record (in Chinese)
+docs/                design documents and the decision record
 tools/               development scripts and test fixtures
 ```
 
