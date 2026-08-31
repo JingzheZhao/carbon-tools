@@ -48,7 +48,7 @@
 
 **这一决定的意义**：省掉 400+ 篇文献综述、100+ 种材料碳因子、230+ 景观土地利用、200+ 建筑土地利用的重建工作（保守估计 3–5 人年）。全部精力放在 Rhino 联动、可视化、AI 上。
 
-**状态（2026-08-28 更新）**：**数据集已获取并验证完整**，不再阻塞。从应用前端提取，落在 `references/`：
+**状态（2026-08-28 更新）**：**数据集已获取并验证完整**，不再阻塞。从应用前端提取，落在 `data/`：
 
 | 文件 | 条数 | 内容 |
 |---|---:|---|
@@ -460,11 +460,11 @@ CC 的三层结构（可直接沿用）：**基础材料 → 场地要素 elemen
 | **系统设计** | `Carbon工具-系统设计.md` | 七层架构、来路机制、推进顺序 |
 | **UI 交互设计** | `Carbon工具-UI交互设计.md` | 结果面板七段式、布局骨架、交互机制 |
 | CC_Group.py | `CC_Group.py` | Python 原型版分组电池，可跑，作为 C# 版的逻辑参考 |
-| **解算器原型** | `references/resolver_prototype.py` | 可直接运行，验证优雅降级与 CC 逐位吻合 |
-| **CC 基础构件** | `references/cc_site_elements.json` + `.csv` | 259 条，碳因子三档 |
-| **CC 景观配方** | `references/cc_landuse_surface.json` | 193 条，含 subItems 百分比 |
-| **CC 建筑基准** | `references/cc_landuse_building.json` | 216 条，地上/地下分开 |
-| infrared.city 截图 | `references/01-…05-*.png` | 界面参考 |
+| **解算器原型** | `tools/resolver_prototype.py` | 可直接运行，验证优雅降级与 CC 逐位吻合 |
+| **CC 基础构件** | `data/cc_site_elements.json` + `.csv` | 259 条，碳因子三档 |
+| **CC 景观配方** | `data/cc_landuse_surface.json` | 193 条，含 subItems 百分比 |
+| **CC 建筑基准** | `data/cc_landuse_building.json` | 216 条，地上/地下分开 |
+| infrared.city 截图 | `_research/ui-references/01-…05-*.png` | 界面参考 |
 | 白皮书页面图 | `_pages\` | 92 页 JPG，便于回查 |
 | 白皮书原文 | `ISSUU PDF Downloader.pdf` | 92 页，纯图片无文字层 |
 

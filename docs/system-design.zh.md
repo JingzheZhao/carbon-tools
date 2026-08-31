@@ -109,7 +109,7 @@ CC 的混凝土广场分三档,让用户选:
 
 **10 米那一行逐位吻合 CC。**这证明我们不是另起炉灶,而是把 CC 的模型解冻 —— 它原本被钉死在三个点上,现在连成了连续的。
 
-原型代码:`references/resolver_prototype.py`,可直接运行。
+原型代码:`tools/resolver_prototype.py`,可直接运行。
 
 > **诚实的边界**:50 米和 100 米两行低于 CC,是因为 CC 的高档位还同时调高了照明和排水,而我们只替换了实测得到的墙与铺装。**这是对的做法** —— 灯和排水沟属于「假设」类,不该被挡墙长度悄悄带着跑。但必须在界面上写明:这两项仍是假设值。
 
@@ -422,8 +422,8 @@ Rhino 里树本来就是点或块,棵数、位置、间距全都现成。三点�
 
 | 文件 | 位置 | 内容 |
 |---|---|---|
-| 基础构件 | `references/cc_site_elements.json` | 259 条,含碳因子三档 |
-| 基础构件(表格) | `references/carbon_conscience_data_table.csv` | 同上,CSV 版 |
-| 景观配方 | `references/cc_landuse_surface.json` | 193 条,含 subItems |
-| 建筑基准 | `references/cc_landuse_building.json` | 216 条,地上/地下分开 |
-| 解算器原型 | `references/resolver_prototype.py` | 可直接运行,验证优雅降级 |
+| 基础构件 | `data/cc_site_elements.json` | 259 条,含碳因子三档 |
+| 基础构件(表格) | `data/carbon_conscience_data_table.csv` | 同上,CSV 版 |
+| 景观配方 | `data/cc_landuse_surface.json` | 193 条,含 subItems |
+| 建筑基准 | `data/cc_landuse_building.json` | 216 条,地上/地下分开 |
+| 解算器原型 | `tools/resolver_prototype.py` | 可直接运行,验证优雅降级 |

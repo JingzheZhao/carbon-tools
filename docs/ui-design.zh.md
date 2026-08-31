@@ -272,7 +272,7 @@ Edit Buildings
   Delete  ⌫
 ```
 
-(见 `references/04-edit-buildings-shortcuts.png`)
+(见 `_research/ui-references/04-edit-buildings-shortcuts.png`)
 
 **这正是它的天花板,也正是我们的起点。**我们的几何来自 Rhino,精度和自由度完全不是一个量级。这条差异要在产品叙事里守住。
 
@@ -288,10 +288,10 @@ infrared 的 "5 analyses" 是黑盒 —— 用户看不到这 5 个分析怎么�
 
 | 文件 | 内容 |
 |---|---|
-| `references/01-thermal-comfort-july.png` | 热舒适结果面板 |
-| `references/02-thermal-comfort-august-toolbar.png` | 工具栏 |
-| `references/03-wind-speed.png` | 风速分析 |
-| `references/04-edit-buildings-shortcuts.png` | 体块编辑 + 快捷键面板 |
-| `references/05-thermal-comfort-duplicate.png` | 场景复制 |
+| `_research/ui-`_research/ui-references/01-thermal-comfort-july.png` | 热舒适结果面板 |
+| `_research/ui-references/02-thermal-comfort-august-toolbar.png` | 工具栏 |
+| `_research/ui-references/03-wind-speed.png` | 风速分析 |
+| `_research/ui-references/04-edit-buildings-shortcuts.png` | 体块编辑 + 快捷键面板 |
+| `_research/ui-references/05-thermal-comfort-duplicate.png` | 场景复制 |
 
 **实地考察补充观察**(2026-08-28,`platform.infrared.city/workflows`):结果面板七段式、Comparison study 模态(Runs / Across scenarios / Within scenario + Total/Δ/% + 五档密度)、workflow 目录卡片与详情面板、Add to cart 流程。
