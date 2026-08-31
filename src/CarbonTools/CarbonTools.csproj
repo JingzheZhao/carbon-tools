@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <OutputType>Library</OutputType>
+    <UseWindowsForms>true</UseWindowsForms>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>CarbonTools</AssemblyName>
+    <TargetExt>.gha</TargetExt>
+    <RootNamespace>CarbonTools</RootNamespace>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="WebAssets\viewer.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="RhinoCommon">
+      <HintPath>D:\Softwares\Rhino\System\RhinoCommon.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Grasshopper">
+      <HintPath>D:\Softwares\Rhino\Plug-ins\Grasshopper\Grasshopper.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="GH_IO">
+      <HintPath>D:\Softwares\Rhino\Plug-ins\Grasshopper\GH_IO.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>D:\Softwares\Rhino\System\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+
+  <Target Name="CopyToGrasshopperLibraries" AfterTargets="Build">
+    <ItemGroup>
+      <GhaOutput Include="$(OutDir)$(AssemblyName).gha" />
+    </ItemGroup>
+    <Copy SourceFiles="@(GhaOutput)" DestinationFolder="$(APPDATA)\Grasshopper\Libraries" SkipUnchangedFiles="false" />
+  </Target>
+
+</Project>

@@ -1,0 +1,3458 @@
+[
+ {
+  "uid": "280775044927-462",
+  "name": "Masonry Veneer",
+  "ref": "01.01.01",
+  "parents": [
+   "Building",
+   "Office",
+   "Steel"
+  ],
+  "costLow_AboveGrade": 251.1882528,
+  "costHigh_AboveGrade": 618.9435896,
+  "costLow_BelowGrade": 239.836272,
+  "costHigh_BelowGrade": 426.3134766,
+  "stored": 0,
+  "overallValue": 435.0659212
+ },
+ {
+  "uid": "280775044927-3160",
+  "name": "Masonry Rainscreen",
+  "ref": "01.01.02",
+  "parents": [
+   "Building",
+   "Office",
+   "Steel"
+  ],
+  "costLow_AboveGrade": 252.5777465,
+  "costHigh_AboveGrade": 621.651581,
+  "costLow_BelowGrade": 239.836272,
+  "costHigh_BelowGrade": 426.3134766,
+  "stored": 0,
+  "overallValue": 437.11466375
+ },
+ {
+  "uid": "280775044927-3927",
+  "name": "Metal Rainscreen",
+  "ref": "01.01.03",
+  "parents": [
+   "Building",
+   "Office",
+   "Steel"
+  ],
+  "costLow_AboveGrade": 269.5138539,
+  "costHigh_AboveGrade": 654.6584473,
+  "costLow_BelowGrade": 239.836272,
+  "costHigh_BelowGrade": 426.3134766,
+  "stored": 0,
+  "overallValue": 462.0861506
+ },
+ {
+  "uid": "280775044927-4742",
+  "name": "Wood Rainscreen",
+  "ref": "01.01.04",
+  "parents": [
+   "Building",
+   "Office",
+   "Steel"
+  ],
+  "costLow_AboveGrade": 228.4168762,
+  "costHigh_AboveGrade": 574.5643374,
+  "costLow_BelowGrade": 239.836272,
+  "costHigh_BelowGrade": 426.3134766,
+  "stored": 0,
+  "overallValue": 401.4906068
+ },
+ {
+  "uid": "280775044927-4847",
+  "name": "Masonry Veneer",
+  "ref": "01.02.01",
+  "parents": [
+   "Building",
+   "Office",
+   "Concrete"
+  ],
+  "costLow_AboveGrade": 290.0106709,
+  "costHigh_AboveGrade": 524.0986189,
+  "costLow_BelowGrade": 239.836272,
+  "costHigh_BelowGrade": 426.3134766,
+  "stored": 0,
+  "overallValue": 407.05464489999997
+ },
+ {
+  "uid": "280775044927-1171",
+  "name": "Masonry Rainscreen",
+  "ref": "01.02.02",
+  "parents": [
+   "Building",
+   "Office",
+   "Concrete"
+  ],
+  "costLow_AboveGrade": 291.4001646,
+  "costHigh_AboveGrade": 526.8066102,
+  "costLow_BelowGrade": 239.836272,
+  "costHigh_BelowGrade": 426.3134766,
+  "stored": 0,
+  "overallValue": 409.1033874
+ },
+ {
+  "uid": "280775044927-4700",
+  "name": "Metal Rainscreen",
+  "ref": "01.02.03",
+  "parents": [
+   "Building",
+   "Office",
+   "Concrete"
+  ],
+  "costLow_AboveGrade": 308.336272,
+  "costHigh_AboveGrade": 559.8134766,
+  "costLow_BelowGrade": 239.836272,
+  "costHigh_BelowGrade": 426.3134766,
+  "stored": 0,
+  "overallValue": 434.0748743
+ },
+ {
+  "uid": "280775044927-179",
+  "name": "Wood Rainscreen",
+  "ref": "01.02.04",
+  "parents": [
+   "Building",
+   "Office",
+   "Concrete"
+  ],
+  "costLow_AboveGrade": 267.2392943,
+  "costHigh_AboveGrade": 479.7193667,
+  "costLow_BelowGrade": 239.836272,
+  "costHigh_BelowGrade": 426.3134766,
+  "stored": 0,
+  "overallValue": 373.4793305
+ },
+ {
+  "uid": "280775044927-3110",
+  "name": "Masonry Veneer",
+  "ref": "01.03.01",
+  "parents": [
+   "Building",
+   "Office",
+   "Composite Concrete-Steel"
+  ],
+  "costLow_AboveGrade": 261.5408976,
+  "costHigh_AboveGrade": 559.2988142,
+  "costLow_BelowGrade": 239.836272,
+  "costHigh_BelowGrade": 426.3134766,
+  "stored": 0,
+  "overallValue": 410.4198559
+ },
+ {
+  "uid": "280775044927-4515",
+  "name": "Masonry Rainscreen",
+  "ref": "01.03.02",
+  "parents": [
+   "Building",
+   "Office",
+   "Composite Concrete-Steel"
+  ],
+  "costLow_AboveGrade": 262.9303913,
+  "costHigh_AboveGrade": 562.0068056,
+  "costLow_BelowGrade": 239.836272,
+  "costHigh_BelowGrade": 426.3134766,
+  "stored": 0,
+  "overallValue": 412.46859845
+ },
+ {
+  "uid": "280775044927-9882",
+  "name": "Metal Rainscreen",
+  "ref": "01.03.03",
+  "parents": [
+   "Building",
+   "Office",
+   "Composite Concrete-Steel"
+  ],
+  "costLow_AboveGrade": 279.8664987,
+  "costHigh_AboveGrade": 595.0136719,
+  "costLow_BelowGrade": 239.836272,
+  "costHigh_BelowGrade": 426.3134766,
+  "stored": 0,
+  "overallValue": 437.44008529999996
+ },
+ {
+  "uid": "280775044927-586",
+  "name": "Wood Rainscreen",
+  "ref": "01.03.04",
+  "parents": [
+   "Building",
+   "Office",
+   "Composite Concrete-Steel"
+  ],
+  "costLow_AboveGrade": 238.769521,
+  "costHigh_AboveGrade": 514.919562,
+  "costLow_BelowGrade": 239.836272,
+  "costHigh_BelowGrade": 426.3134766,
+  "stored": 0,
+  "overallValue": 376.8445415
+ },
+ {
+  "uid": "280775044927-2574",
+  "name": "Masonry Veneer",
+  "ref": "01.04.01",
+  "parents": [
+   "Building",
+   "Office",
+   "Masonry"
+  ],
+  "costLow_AboveGrade": 274.4817036,
+  "costHigh_AboveGrade": 401.8757185,
+  "costLow_BelowGrade": 239.836272,
+  "costHigh_BelowGrade": 426.3134766,
+  "stored": 0,
+  "overallValue": 338.17871105
+ },
+ {
+  "uid": "280775044927-2695",
+  "name": "Masonry Rainscreen",
+  "ref": "01.04.02",
+  "parents": [
+   "Building",
+   "Office",
+   "Masonry"
+  ],
+  "costLow_AboveGrade": 275.8711974,
+  "costHigh_AboveGrade": 404.5837099,
+  "costLow_BelowGrade": 239.836272,
+  "costHigh_BelowGrade": 426.3134766,
+  "stored": 0,
+  "overallValue": 340.22745365000003
+ },
+ {
+  "uid": "280775044927-6128",
+  "name": "Metal Rainscreen",
+  "ref": "01.04.03",
+  "parents": [
+   "Building",
+   "Office",
+   "Masonry"
+  ],
+  "costLow_AboveGrade": 292.8073048,
+  "costHigh_AboveGrade": 437.5905762,
+  "costLow_BelowGrade": 239.836272,
+  "costHigh_BelowGrade": 426.3134766,
+  "stored": 0,
+  "overallValue": 365.1989405
+ },
+ {
+  "uid": "280775044927-637",
+  "name": "Wood Rainscreen",
+  "ref": "01.04.04",
+  "parents": [
+   "Building",
+   "Office",
+   "Masonry"
+  ],
+  "costLow_AboveGrade": 251.7103271,
+  "costHigh_AboveGrade": 357.4964663,
+  "costLow_BelowGrade": 239.836272,
+  "costHigh_BelowGrade": 426.3134766,
+  "stored": 0,
+  "overallValue": 304.6033967
+ },
+ {
+  "uid": "280775044927-4606",
+  "name": "Masonry Veneer",
+  "ref": "01.05.01",
+  "parents": [
+   "Building",
+   "Office",
+   "Timber"
+  ],
+  "costLow_AboveGrade": 201.1504694,
+  "costHigh_AboveGrade": 387.2089704,
+  "costLow_BelowGrade": 239.836272,
+  "costHigh_BelowGrade": 426.3134766,
+  "stored": -332.8,
+  "overallValue": -38.6202801
+ },
+ {
+  "uid": "280775044927-6756",
+  "name": "Masonry Rainscreen",
+  "ref": "01.05.02",
+  "parents": [
+   "Building",
+   "Office",
+   "Timber"
+  ],
+  "costLow_AboveGrade": 202.5399631,
+  "costHigh_AboveGrade": 389.9169618,
+  "costLow_BelowGrade": 239.836272,
+  "costHigh_BelowGrade": 426.3134766,
+  "stored": -335.6,
+  "overallValue": -39.37153755000003
+ },
+ {
+  "uid": "280775044927-3082",
+  "name": "Metal Rainscreen",
+  "ref": "01.05.03",
+  "parents": [
+   "Building",
+   "Office",
+   "Timber"
+  ],
+  "costLow_AboveGrade": 219.4760705,
+  "costHigh_AboveGrade": 422.9238281,
+  "costLow_BelowGrade": 239.836272,
+  "costHigh_BelowGrade": 426.3134766,
+  "stored": -369.9,
+  "overallValue": -48.70005070000002
+ },
+ {
+  "uid": "280775044927-6591",
+  "name": "Wood Rainscreen",
+  "ref": "01.05.04",
+  "parents": [
+   "Building",
+   "Office",
+   "Timber"
+  ],
+  "costLow_AboveGrade": 178.3790928,
+  "costHigh_AboveGrade": 342.8297183,
+  "costLow_BelowGrade": 239.836272,
+  "costHigh_BelowGrade": 426.3134766,
+  "stored": -286.7,
+  "overallValue": -26.095594449999965
+ },
+ {
+  "uid": "280775044927-5857",
+  "name": "Masonry Veneer",
+  "ref": "01.06.01",
+  "parents": [
+   "Building",
+   "Office",
+   "Wood Light Frame"
+  ],
+  "costLow_AboveGrade": 179.6393989,
+  "costHigh_AboveGrade": 350.1001423,
+  "costLow_BelowGrade": 239.836272,
+  "costHigh_BelowGrade": 426.3134766,
+  "stored": -434.2,
+  "overallValue": -169.33022939999995
+ },
+ {
+  "uid": "280775044927-9054",
+  "name": "Masonry Rainscreen",
+  "ref": "01.06.02",
+  "parents": [
+   "Building",
+   "Office",
+   "Wood Light Frame"
+  ],
+  "costLow_AboveGrade": 181.0288926,
+  "costHigh_AboveGrade": 352.8081337,
+  "costLow_BelowGrade": 239.836272,
+  "costHigh_BelowGrade": 426.3134766,
+  "stored": -437,
+  "overallValue": -170.08148685000003
+ },
+ {
+  "uid": "280775044927-731",
+  "name": "Metal Rainscreen",
+  "ref": "01.06.03",
+  "parents": [
+   "Building",
+   "Office",
+   "Wood Light Frame"
+  ],
+  "costLow_AboveGrade": 197.965,
+  "costHigh_AboveGrade": 385.815,
+  "costLow_BelowGrade": 239.836272,
+  "costHigh_BelowGrade": 426.3134766,
+  "stored": -471.3,
+  "overallValue": -179.41000000000003
+ },
+ {
+  "uid": "280775044927-9626",
+  "name": "Wood Rainscreen",
+  "ref": "01.06.04",
+  "parents": [
+   "Building",
+   "Office",
+   "Wood Light Frame"
+  ],
+  "costLow_AboveGrade": 156.8680223,
+  "costHigh_AboveGrade": 305.7208901,
+  "costLow_BelowGrade": 239.836272,
+  "costHigh_BelowGrade": 426.3134766,
+  "stored": -388.1,
+  "overallValue": -156.8055438
+ },
+ {
+  "uid": "280775044927-6373",
+  "name": "Masonry Veneer",
+  "ref": "02.01.01",
+  "parents": [
+   "Building",
+   "Educational",
+   "Steel"
+  ],
+  "costLow_AboveGrade": 208.1012167,
+  "costHigh_AboveGrade": 532.0133101,
+  "costLow_BelowGrade": 198.6964736,
+  "costHigh_BelowGrade": 366.4379883,
+  "stored": 0,
+  "overallValue": 370.0572634
+ },
+ {
+  "uid": "280775044927-5897",
+  "name": "Masonry Rainscreen",
+  "ref": "02.01.02",
+  "parents": [
+   "Building",
+   "Educational",
+   "Steel"
+  ],
+  "costLow_AboveGrade": 209.2523666,
+  "costHigh_AboveGrade": 534.3409656,
+  "costLow_BelowGrade": 198.6964736,
+  "costHigh_BelowGrade": 366.4379883,
+  "stored": 0,
+  "overallValue": 371.7966661
+ },
+ {
+  "uid": "280775044927-859",
+  "name": "Metal Rainscreen",
+  "ref": "02.01.03",
+  "parents": [
+   "Building",
+   "Educational",
+   "Steel"
+  ],
+  "costLow_AboveGrade": 223.2833753,
+  "costHigh_AboveGrade": 562.7120361,
+  "costLow_BelowGrade": 198.6964736,
+  "costHigh_BelowGrade": 366.4379883,
+  "stored": 0,
+  "overallValue": 392.9977057
+ },
+ {
+  "uid": "280775044927-2325",
+  "name": "Wood Rainscreen",
+  "ref": "02.01.04",
+  "parents": [
+   "Building",
+   "Educational",
+   "Steel"
+  ],
+  "costLow_AboveGrade": 189.2358792,
+  "costHigh_AboveGrade": 493.867099,
+  "costLow_BelowGrade": 198.6964736,
+  "costHigh_BelowGrade": 366.4379883,
+  "stored": 0,
+  "overallValue": 341.5514891
+ },
+ {
+  "uid": "280775044927-9278",
+  "name": "Masonry Veneer",
+  "ref": "02.02.01",
+  "parents": [
+   "Building",
+   "Educational",
+   "Concrete"
+  ],
+  "costLow_AboveGrade": 240.2643149,
+  "costHigh_AboveGrade": 450.4892623,
+  "costLow_BelowGrade": 198.6964736,
+  "costHigh_BelowGrade": 366.4379883,
+  "stored": 0,
+  "overallValue": 345.3767886
+ },
+ {
+  "uid": "280775044927-8744",
+  "name": "Masonry Rainscreen",
+  "ref": "02.02.02",
+  "parents": [
+   "Building",
+   "Educational",
+   "Concrete"
+  ],
+  "costLow_AboveGrade": 241.4154648,
+  "costHigh_AboveGrade": 452.8169178,
+  "costLow_BelowGrade": 198.6964736,
+  "costHigh_BelowGrade": 366.4379883,
+  "stored": 0,
+  "overallValue": 347.11619129999997
+ },
+ {
+  "uid": "280775044927-5074",
+  "name": "Metal Rainscreen",
+  "ref": "02.02.03",
+  "parents": [
+   "Building",
+   "Educational",
+   "Concrete"
+  ],
+  "costLow_AboveGrade": 255.4464736,
+  "costHigh_AboveGrade": 481.1879883,
+  "costLow_BelowGrade": 198.6964736,
+  "costHigh_BelowGrade": 366.4379883,
+  "stored": 0,
+  "overallValue": 368.31723094999995
+ },
+ {
+  "uid": "280775044927-8125",
+  "name": "Wood Rainscreen",
+  "ref": "02.02.04",
+  "parents": [
+   "Building",
+   "Educational",
+   "Concrete"
+  ],
+  "costLow_AboveGrade": 221.3989774,
+  "costHigh_AboveGrade": 412.3430512,
+  "costLow_BelowGrade": 198.6964736,
+  "costHigh_BelowGrade": 366.4379883,
+  "stored": 0,
+  "overallValue": 316.8710143
+ },
+ {
+  "uid": "280775044927-6250",
+  "name": "Masonry Veneer",
+  "ref": "02.03.01",
+  "parents": [
+   "Building",
+   "Educational",
+   "Composite Concrete-Steel"
+  ],
+  "costLow_AboveGrade": 216.6780429,
+  "costHigh_AboveGrade": 480.7456099,
+  "costLow_BelowGrade": 198.6964736,
+  "costHigh_BelowGrade": 366.4379883,
+  "stored": 0,
+  "overallValue": 348.7118264
+ },
+ {
+  "uid": "280775044927-8797",
+  "name": "Masonry Rainscreen",
+  "ref": "02.03.02",
+  "parents": [
+   "Building",
+   "Educational",
+   "Composite Concrete-Steel"
+  ],
+  "costLow_AboveGrade": 217.8291928,
+  "costHigh_AboveGrade": 483.0732655,
+  "costLow_BelowGrade": 198.6964736,
+  "costHigh_BelowGrade": 366.4379883,
+  "stored": 0,
+  "overallValue": 350.45122915
+ },
+ {
+  "uid": "280775044927-4155",
+  "name": "Metal Rainscreen",
+  "ref": "02.03.03",
+  "parents": [
+   "Building",
+   "Educational",
+   "Composite Concrete-Steel"
+  ],
+  "costLow_AboveGrade": 231.8602015,
+  "costHigh_AboveGrade": 511.4443359,
+  "costLow_BelowGrade": 198.6964736,
+  "costHigh_BelowGrade": 366.4379883,
+  "stored": 0,
+  "overallValue": 371.6522687
+ },
+ {
+  "uid": "280775044927-9586",
+  "name": "Wood Rainscreen",
+  "ref": "02.03.04",
+  "parents": [
+   "Building",
+   "Educational",
+   "Composite Concrete-Steel"
+  ],
+  "costLow_AboveGrade": 197.8127054,
+  "costHigh_AboveGrade": 442.5993988,
+  "costLow_BelowGrade": 198.6964736,
+  "costHigh_BelowGrade": 366.4379883,
+  "stored": 0,
+  "overallValue": 320.2060521
+ },
+ {
+  "uid": "280775044927-731",
+  "name": "Masonry Veneer",
+  "ref": "02.04.01",
+  "parents": [
+   "Building",
+   "Educational",
+   "Masonry"
+  ],
+  "costLow_AboveGrade": 227.3990756,
+  "costHigh_AboveGrade": 345.4324996,
+  "costLow_BelowGrade": 198.6964736,
+  "costHigh_BelowGrade": 366.4379883,
+  "stored": 0,
+  "overallValue": 286.41578760000004
+ },
+ {
+  "uid": "280775044927-559",
+  "name": "Masonry Rainscreen",
+  "ref": "02.04.02",
+  "parents": [
+   "Building",
+   "Educational",
+   "Masonry"
+  ],
+  "costLow_AboveGrade": 228.5502255,
+  "costHigh_AboveGrade": 347.7601551,
+  "costLow_BelowGrade": 198.6964736,
+  "costHigh_BelowGrade": 366.4379883,
+  "stored": 0,
+  "overallValue": 288.1551903
+ },
+ {
+  "uid": "280775044927-3351",
+  "name": "Metal Rainscreen",
+  "ref": "02.04.03",
+  "parents": [
+   "Building",
+   "Educational",
+   "Masonry"
+  ],
+  "costLow_AboveGrade": 242.5812343,
+  "costHigh_AboveGrade": 376.1312256,
+  "costLow_BelowGrade": 198.6964736,
+  "costHigh_BelowGrade": 366.4379883,
+  "stored": 0,
+  "overallValue": 309.35622995
+ },
+ {
+  "uid": "280775044927-6058",
+  "name": "Wood Rainscreen",
+  "ref": "02.04.04",
+  "parents": [
+   "Building",
+   "Educational",
+   "Masonry"
+  ],
+  "costLow_AboveGrade": 208.5337381,
+  "costHigh_AboveGrade": 307.2862885,
+  "costLow_BelowGrade": 198.6964736,
+  "costHigh_BelowGrade": 366.4379883,
+  "stored": 0,
+  "overallValue": 257.9100133
+ },
+ {
+  "uid": "280775044928-943",
+  "name": "Masonry Veneer",
+  "ref": "02.05.01",
+  "parents": [
+   "Building",
+   "Educational",
+   "Timber"
+  ],
+  "costLow_AboveGrade": 166.6465568,
+  "costHigh_AboveGrade": 332.8256881,
+  "costLow_BelowGrade": 198.6964736,
+  "costHigh_BelowGrade": 366.4379883,
+  "stored": -280.6,
+  "overallValue": -30.86387755000004
+ },
+ {
+  "uid": "280775044928-2324",
+  "name": "Masonry Rainscreen",
+  "ref": "02.05.02",
+  "parents": [
+   "Building",
+   "Educational",
+   "Timber"
+  ],
+  "costLow_AboveGrade": 167.7977067,
+  "costHigh_AboveGrade": 335.1533436,
+  "costLow_BelowGrade": 198.6964736,
+  "costHigh_BelowGrade": 366.4379883,
+  "stored": -283,
+  "overallValue": -31.52447484999999
+ },
+ {
+  "uid": "280775044928-9645",
+  "name": "Metal Rainscreen",
+  "ref": "02.05.03",
+  "parents": [
+   "Building",
+   "Educational",
+   "Timber"
+  ],
+  "costLow_AboveGrade": 181.8287154,
+  "costHigh_AboveGrade": 363.5244141,
+  "costLow_BelowGrade": 198.6964736,
+  "costHigh_BelowGrade": 366.4379883,
+  "stored": -312.1,
+  "overallValue": -39.42343525000001
+ },
+ {
+  "uid": "280775044928-2242",
+  "name": "Wood Rainscreen",
+  "ref": "02.05.04",
+  "parents": [
+   "Building",
+   "Educational",
+   "Timber"
+  ],
+  "costLow_AboveGrade": 147.7812192,
+  "costHigh_AboveGrade": 294.6794769,
+  "costLow_BelowGrade": 198.6964736,
+  "costHigh_BelowGrade": 366.4379883,
+  "stored": -241.5,
+  "overallValue": -20.269651949999997
+ },
+ {
+  "uid": "280775044928-8099",
+  "name": "Masonry Veneer",
+  "ref": "02.06.01",
+  "parents": [
+   "Building",
+   "Educational",
+   "Wood Light Frame"
+  ],
+  "costLow_AboveGrade": 148.8253414,
+  "costHigh_AboveGrade": 300.928774,
+  "costLow_BelowGrade": 198.6964736,
+  "costHigh_BelowGrade": 366.4379883,
+  "stored": -254.8,
+  "overallValue": -29.922942300000017
+ },
+ {
+  "uid": "280775044928-9999",
+  "name": "Masonry Rainscreen",
+  "ref": "02.06.02",
+  "parents": [
+   "Building",
+   "Educational",
+   "Wood Light Frame"
+  ],
+  "costLow_AboveGrade": 149.9764913,
+  "costHigh_AboveGrade": 303.2564295,
+  "costLow_BelowGrade": 198.6964736,
+  "costHigh_BelowGrade": 366.4379883,
+  "stored": -371.1,
+  "overallValue": -144.48353960000003
+ },
+ {
+  "uid": "280775044928-7232",
+  "name": "Metal Rainscreen",
+  "ref": "02.06.03",
+  "parents": [
+   "Building",
+   "Educational",
+   "Wood Light Frame"
+  ],
+  "costLow_AboveGrade": 164.0075,
+  "costHigh_AboveGrade": 331.6275,
+  "costLow_BelowGrade": 198.6964736,
+  "costHigh_BelowGrade": 366.4379883,
+  "stored": -400.2,
+  "overallValue": -152.3825
+ },
+ {
+  "uid": "280775044928-8628",
+  "name": "Wood Rainscreen",
+  "ref": "02.06.04",
+  "parents": [
+   "Building",
+   "Educational",
+   "Wood Light Frame"
+  ],
+  "costLow_AboveGrade": 129.9600039,
+  "costHigh_AboveGrade": 262.7825629,
+  "costLow_BelowGrade": 198.6964736,
+  "costHigh_BelowGrade": 366.4379883,
+  "stored": -329.5,
+  "overallValue": -133.1287166
+ },
+ {
+  "uid": "280775044928-2567",
+  "name": "Masonry Veneer",
+  "ref": "03.01.01",
+  "parents": [
+   "Building",
+   "Multi-family Residential",
+   "Steel"
+  ],
+  "costLow_AboveGrade": 313.5269432,
+  "costHigh_AboveGrade": 770.781811,
+  "costLow_BelowGrade": 299.3576826,
+  "costHigh_BelowGrade": 530.8959961,
+  "stored": 0,
+  "overallValue": 542.1543770999999
+ },
+ {
+  "uid": "280775044928-3944",
+  "name": "Masonry Rainscreen",
+  "ref": "03.01.02",
+  "parents": [
+   "Building",
+   "Multi-family Residential",
+   "Steel"
+  ],
+  "costLow_AboveGrade": 315.2612748,
+  "costHigh_AboveGrade": 774.1541223,
+  "costLow_BelowGrade": 299.3576826,
+  "costHigh_BelowGrade": 530.8959961,
+  "stored": 0,
+  "overallValue": 544.70769855
+ },
+ {
+  "uid": "280775044928-475",
+  "name": "Metal Rainscreen",
+  "ref": "03.01.03",
+  "parents": [
+   "Building",
+   "Multi-family Residential",
+   "Steel"
+  ],
+  "costLow_AboveGrade": 336.4005038,
+  "costHigh_AboveGrade": 815.2581787,
+  "costLow_BelowGrade": 299.3576826,
+  "costHigh_BelowGrade": 530.8959961,
+  "stored": 0,
+  "overallValue": 575.82934125
+ },
+ {
+  "uid": "280775044928-1021",
+  "name": "Wood Rainscreen",
+  "ref": "03.01.04",
+  "parents": [
+   "Building",
+   "Multi-family Residential",
+   "Steel"
+  ],
+  "costLow_AboveGrade": 285.1042761,
+  "costHigh_AboveGrade": 715.5155138,
+  "costLow_BelowGrade": 299.3576826,
+  "costHigh_BelowGrade": 530.8959961,
+  "stored": 0,
+  "overallValue": 500.30989495
+ },
+ {
+  "uid": "280775044928-1132",
+  "name": "Masonry Veneer",
+  "ref": "03.02.01",
+  "parents": [
+   "Building",
+   "Multi-family Residential",
+   "Concrete"
+  ],
+  "costLow_AboveGrade": 361.9841221,
+  "costHigh_AboveGrade": 652.6696283,
+  "costLow_BelowGrade": 299.3576826,
+  "costHigh_BelowGrade": 530.8959961,
+  "stored": 0,
+  "overallValue": 507.3268752
+ },
+ {
+  "uid": "280775044928-8017",
+  "name": "Masonry Rainscreen",
+  "ref": "03.02.02",
+  "parents": [
+   "Building",
+   "Multi-family Residential",
+   "Concrete"
+  ],
+  "costLow_AboveGrade": 363.7184536,
+  "costHigh_AboveGrade": 656.0419397,
+  "costLow_BelowGrade": 299.3576826,
+  "costHigh_BelowGrade": 530.8959961,
+  "stored": 0,
+  "overallValue": 509.88019664999996
+ },
+ {
+  "uid": "280775044928-3278",
+  "name": "Metal Rainscreen",
+  "ref": "03.02.03",
+  "parents": [
+   "Building",
+   "Multi-family Residential",
+   "Concrete"
+  ],
+  "costLow_AboveGrade": 384.8576826,
+  "costHigh_AboveGrade": 697.1459961,
+  "costLow_BelowGrade": 299.3576826,
+  "costHigh_BelowGrade": 530.8959961,
+  "stored": 0,
+  "overallValue": 541.00183935
+ },
+ {
+  "uid": "280775044928-8419",
+  "name": "Wood Rainscreen",
+  "ref": "03.02.04",
+  "parents": [
+   "Building",
+   "Multi-family Residential",
+   "Concrete"
+  ],
+  "costLow_AboveGrade": 333.561455,
+  "costHigh_AboveGrade": 597.4033312,
+  "costLow_BelowGrade": 299.3576826,
+  "costHigh_BelowGrade": 530.8959961,
+  "stored": 0,
+  "overallValue": 465.4823931
+ },
+ {
+  "uid": "280775044928-4535",
+  "name": "Masonry Veneer",
+  "ref": "03.03.01",
+  "parents": [
+   "Building",
+   "Multi-family Residential",
+   "Composite Concrete-Steel"
+  ],
+  "costLow_AboveGrade": 326.4488576,
+  "costHigh_AboveGrade": 696.5050776,
+  "costLow_BelowGrade": 299.3576826,
+  "costHigh_BelowGrade": 530.8959961,
+  "stored": 0,
+  "overallValue": 511.4769676
+ },
+ {
+  "uid": "280775044928-6138",
+  "name": "Masonry Rainscreen",
+  "ref": "03.03.02",
+  "parents": [
+   "Building",
+   "Multi-family Residential",
+   "Composite Concrete-Steel"
+  ],
+  "costLow_AboveGrade": 328.1831891,
+  "costHigh_AboveGrade": 699.8773889,
+  "costLow_BelowGrade": 299.3576826,
+  "costHigh_BelowGrade": 530.8959961,
+  "stored": 0,
+  "overallValue": 514.030289
+ },
+ {
+  "uid": "280775044928-6273",
+  "name": "Metal Rainscreen",
+  "ref": "03.03.03",
+  "parents": [
+   "Building",
+   "Multi-family Residential",
+   "Composite Concrete-Steel"
+  ],
+  "costLow_AboveGrade": 349.3224181,
+  "costHigh_AboveGrade": 740.9814453,
+  "costLow_BelowGrade": 299.3576826,
+  "costHigh_BelowGrade": 530.8959961,
+  "stored": 0,
+  "overallValue": 545.1519317
+ },
+ {
+  "uid": "280775044928-5390",
+  "name": "Wood Rainscreen",
+  "ref": "03.03.04",
+  "parents": [
+   "Building",
+   "Multi-family Residential",
+   "Composite Concrete-Steel"
+  ],
+  "costLow_AboveGrade": 298.0261905,
+  "costHigh_AboveGrade": 641.2387804,
+  "costLow_BelowGrade": 299.3576826,
+  "costHigh_BelowGrade": 530.8959961,
+  "stored": 0,
+  "overallValue": 469.63248545
+ },
+ {
+  "uid": "280775044928-8854",
+  "name": "Masonry Veneer",
+  "ref": "03.04.01",
+  "parents": [
+   "Building",
+   "Multi-family Residential",
+   "Masonry"
+  ],
+  "costLow_AboveGrade": 342.6012505,
+  "costHigh_AboveGrade": 500.4632074,
+  "costLow_BelowGrade": 299.3576826,
+  "costHigh_BelowGrade": 530.8959961,
+  "stored": 0,
+  "overallValue": 421.53222895
+ },
+ {
+  "uid": "280775044928-356",
+  "name": "Masonry Rainscreen",
+  "ref": "03.04.02",
+  "parents": [
+   "Building",
+   "Multi-family Residential",
+   "Masonry"
+  ],
+  "costLow_AboveGrade": 344.3355821,
+  "costHigh_AboveGrade": 503.8355188,
+  "costLow_BelowGrade": 299.3576826,
+  "costHigh_BelowGrade": 530.8959961,
+  "stored": 0,
+  "overallValue": 424.08555045
+ },
+ {
+  "uid": "280775044928-5746",
+  "name": "Metal Rainscreen",
+  "ref": "03.04.03",
+  "parents": [
+   "Building",
+   "Multi-family Residential",
+   "Masonry"
+  ],
+  "costLow_AboveGrade": 365.4748111,
+  "costHigh_AboveGrade": 544.9395752,
+  "costLow_BelowGrade": 299.3576826,
+  "costHigh_BelowGrade": 530.8959961,
+  "stored": 0,
+  "overallValue": 455.20719315
+ },
+ {
+  "uid": "280775044928-6551",
+  "name": "Wood Rainscreen",
+  "ref": "03.04.04",
+  "parents": [
+   "Building",
+   "Multi-family Residential",
+   "Masonry"
+  ],
+  "costLow_AboveGrade": 314.1785834,
+  "costHigh_AboveGrade": 445.1969103,
+  "costLow_BelowGrade": 299.3576826,
+  "costHigh_BelowGrade": 530.8959961,
+  "stored": 0,
+  "overallValue": 379.68774685
+ },
+ {
+  "uid": "280775044928-8113",
+  "name": "Masonry Veneer",
+  "ref": "03.05.01",
+  "parents": [
+   "Building",
+   "Multi-family Residential",
+   "Timber"
+  ],
+  "costLow_AboveGrade": 251.0710238,
+  "costHigh_AboveGrade": 482.1984369,
+  "costLow_BelowGrade": 299.3576826,
+  "costHigh_BelowGrade": 530.8959961,
+  "stored": -414.9,
+  "overallValue": -48.26526964999999
+ },
+ {
+  "uid": "280775044928-5693",
+  "name": "Masonry Rainscreen",
+  "ref": "03.05.02",
+  "parents": [
+   "Building",
+   "Multi-family Residential",
+   "Timber"
+  ],
+  "costLow_AboveGrade": 252.8053554,
+  "costHigh_AboveGrade": 485.5707483,
+  "costLow_BelowGrade": 299.3576826,
+  "costHigh_BelowGrade": 530.8959961,
+  "stored": -418.4,
+  "overallValue": -49.21194815000001
+ },
+ {
+  "uid": "280775044928-5986",
+  "name": "Metal Rainscreen",
+  "ref": "03.05.03",
+  "parents": [
+   "Building",
+   "Multi-family Residential",
+   "Timber"
+  ],
+  "costLow_AboveGrade": 273.9445844,
+  "costHigh_AboveGrade": 526.6748047,
+  "costLow_BelowGrade": 299.3576826,
+  "costHigh_BelowGrade": 530.8959961,
+  "stored": -461.2,
+  "overallValue": -60.89030544999997
+ },
+ {
+  "uid": "280775044928-8574",
+  "name": "Wood Rainscreen",
+  "ref": "03.05.04",
+  "parents": [
+   "Building",
+   "Multi-family Residential",
+   "Timber"
+  ],
+  "costLow_AboveGrade": 222.6483567,
+  "costHigh_AboveGrade": 426.9321398,
+  "costLow_BelowGrade": 299.3576826,
+  "costHigh_BelowGrade": 530.8959961,
+  "stored": -357.5,
+  "overallValue": -32.70975175000001
+ },
+ {
+  "uid": "280775044928-5403",
+  "name": "Masonry Veneer",
+  "ref": "03.06.01",
+  "parents": [
+   "Building",
+   "Multi-family Residential",
+   "Wood Light Frame"
+  ],
+  "costLow_AboveGrade": 224.2214394,
+  "costHigh_AboveGrade": 435.9861323,
+  "costLow_BelowGrade": 299.3576826,
+  "costHigh_BelowGrade": 530.8959961,
+  "stored": -541.2,
+  "overallValue": -211.09621415000004
+ },
+ {
+  "uid": "280775044928-2012",
+  "name": "Masonry Rainscreen",
+  "ref": "03.06.02",
+  "parents": [
+   "Building",
+   "Multi-family Residential",
+   "Wood Light Frame"
+  ],
+  "costLow_AboveGrade": 225.955771,
+  "costHigh_AboveGrade": 439.3584436,
+  "costLow_BelowGrade": 299.3576826,
+  "costHigh_BelowGrade": 530.8959961,
+  "stored": -544.7,
+  "overallValue": -212.04289270000004
+ },
+ {
+  "uid": "280775044928-2803",
+  "name": "Metal Rainscreen",
+  "ref": "03.06.03",
+  "parents": [
+   "Building",
+   "Multi-family Residential",
+   "Wood Light Frame"
+  ],
+  "costLow_AboveGrade": 247.095,
+  "costHigh_AboveGrade": 480.4625,
+  "costLow_BelowGrade": 299.3576826,
+  "costHigh_BelowGrade": 530.8959961,
+  "stored": -587.4,
+  "overallValue": -223.62124999999997
+ },
+ {
+  "uid": "280775044928-7614",
+  "name": "Wood Rainscreen",
+  "ref": "03.06.04",
+  "parents": [
+   "Building",
+   "Multi-family Residential",
+   "Wood Light Frame"
+  ],
+  "costLow_AboveGrade": 195.7987723,
+  "costHigh_AboveGrade": 380.7198351,
+  "costLow_BelowGrade": 299.3576826,
+  "costHigh_BelowGrade": 530.8959961,
+  "stored": -483.7,
+  "overallValue": -195.44069629999996
+ },
+ {
+  "uid": "280775044928-3083",
+  "name": "Masonry Veneer",
+  "ref": "04.01.01",
+  "parents": [
+   "Building",
+   "Single-family Residential",
+   "Steel"
+  ],
+  "costLow_AboveGrade": 146.6792717,
+  "costHigh_AboveGrade": 433.4923268,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 290.08579925
+ },
+ {
+  "uid": "280775044928-4099",
+  "name": "Masonry Rainscreen",
+  "ref": "04.01.02",
+  "parents": [
+   "Building",
+   "Single-family Residential",
+   "Steel"
+  ],
+  "costLow_AboveGrade": 147.4906549,
+  "costHigh_AboveGrade": 435.388935,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 291.43979495
+ },
+ {
+  "uid": "280775044928-2410",
+  "name": "Metal Rainscreen",
+  "ref": "04.01.03",
+  "parents": [
+   "Building",
+   "Single-family Residential",
+   "Steel"
+  ],
+  "costLow_AboveGrade": 157.3803526,
+  "costHigh_AboveGrade": 458.5061035,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 307.94322805
+ },
+ {
+  "uid": "280775044928-5157",
+  "name": "Wood Rainscreen",
+  "ref": "04.01.04",
+  "parents": [
+   "Building",
+   "Single-family Residential",
+   "Steel"
+  ],
+  "costLow_AboveGrade": 133.3821175,
+  "costHigh_AboveGrade": 402.4102288,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 267.89617315
+ },
+ {
+  "uid": "280775044928-1792",
+  "name": "Masonry Veneer",
+  "ref": "04.02.01",
+  "parents": [
+   "Building",
+   "Single-family Residential",
+   "Concrete"
+  ],
+  "costLow_AboveGrade": 169.3492969,
+  "costHigh_AboveGrade": 367.0653248,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 268.20731085
+ },
+ {
+  "uid": "280775044928-2504",
+  "name": "Masonry Rainscreen",
+  "ref": "04.02.02",
+  "parents": [
+   "Building",
+   "Single-family Residential",
+   "Concrete"
+  ],
+  "costLow_AboveGrade": 170.1606801,
+  "costHigh_AboveGrade": 368.961933,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 269.56130655
+ },
+ {
+  "uid": "280775044928-3749",
+  "name": "Metal Rainscreen",
+  "ref": "04.02.03",
+  "parents": [
+   "Building",
+   "Single-family Residential",
+   "Concrete"
+  ],
+  "costLow_AboveGrade": 180.0503778,
+  "costHigh_AboveGrade": 392.0791016,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 286.0647397
+ },
+ {
+  "uid": "280775044928-73",
+  "name": "Wood Rainscreen",
+  "ref": "04.02.04",
+  "parents": [
+   "Building",
+   "Single-family Residential",
+   "Concrete"
+  ],
+  "costLow_AboveGrade": 156.0521427,
+  "costHigh_AboveGrade": 335.9832269,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 246.01768479999998
+ },
+ {
+  "uid": "280775044928-8175",
+  "name": "Masonry Veneer",
+  "ref": "04.03.01",
+  "parents": [
+   "Building",
+   "Single-family Residential",
+   "Composite Concrete-Steel"
+  ],
+  "costLow_AboveGrade": 152.7246117,
+  "costHigh_AboveGrade": 391.7186451,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 272.2216284
+ },
+ {
+  "uid": "280775044928-4495",
+  "name": "Masonry Rainscreen",
+  "ref": "04.03.02",
+  "parents": [
+   "Building",
+   "Single-family Residential",
+   "Composite Concrete-Steel"
+  ],
+  "costLow_AboveGrade": 153.5359949,
+  "costHigh_AboveGrade": 393.6152533,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 273.5756241
+ },
+ {
+  "uid": "280775044928-8699",
+  "name": "Metal Rainscreen",
+  "ref": "04.03.03",
+  "parents": [
+   "Building",
+   "Single-family Residential",
+   "Composite Concrete-Steel"
+  ],
+  "costLow_AboveGrade": 163.4256927,
+  "costHigh_AboveGrade": 416.7324219,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 290.07905730000004
+ },
+ {
+  "uid": "280775044928-9041",
+  "name": "Wood Rainscreen",
+  "ref": "04.03.04",
+  "parents": [
+   "Building",
+   "Single-family Residential",
+   "Composite Concrete-Steel"
+  ],
+  "costLow_AboveGrade": 139.4274575,
+  "costHigh_AboveGrade": 360.6365472,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 250.03200235
+ },
+ {
+  "uid": "280775044928-7458",
+  "name": "Masonry Veneer",
+  "ref": "04.04.01",
+  "parents": [
+   "Building",
+   "Single-family Residential",
+   "Masonry"
+  ],
+  "costLow_AboveGrade": 160.2812868,
+  "costHigh_AboveGrade": 281.4635182,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 220.87240250000002
+ },
+ {
+  "uid": "280775044928-8567",
+  "name": "Masonry Rainscreen",
+  "ref": "04.04.02",
+  "parents": [
+   "Building",
+   "Single-family Residential",
+   "Masonry"
+  ],
+  "costLow_AboveGrade": 161.09267,
+  "costHigh_AboveGrade": 283.3601264,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 222.2263982
+ },
+ {
+  "uid": "280775044928-7282",
+  "name": "Metal Rainscreen",
+  "ref": "04.04.03",
+  "parents": [
+   "Building",
+   "Single-family Residential",
+   "Masonry"
+  ],
+  "costLow_AboveGrade": 170.9823678,
+  "costHigh_AboveGrade": 306.4772949,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 238.72983134999998
+ },
+ {
+  "uid": "280775044928-6381",
+  "name": "Wood Rainscreen",
+  "ref": "04.04.04",
+  "parents": [
+   "Building",
+   "Single-family Residential",
+   "Masonry"
+  ],
+  "costLow_AboveGrade": 146.9841326,
+  "costHigh_AboveGrade": 250.3814202,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 198.68277640000002
+ },
+ {
+  "uid": "280775044928-897",
+  "name": "Masonry Veneer",
+  "ref": "04.05.01",
+  "parents": [
+   "Building",
+   "Single-family Residential",
+   "Timber"
+  ],
+  "costLow_AboveGrade": 117.4601281,
+  "costHigh_AboveGrade": 271.1913014,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": -212.7,
+  "overallValue": -18.374285249999986
+ },
+ {
+  "uid": "280775044928-7615",
+  "name": "Masonry Rainscreen",
+  "ref": "04.05.02",
+  "parents": [
+   "Building",
+   "Single-family Residential",
+   "Timber"
+  ],
+  "costLow_AboveGrade": 118.2715113,
+  "costHigh_AboveGrade": 273.0879096,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": -214.5,
+  "overallValue": -18.820289550000012
+ },
+ {
+  "uid": "280775044928-9242",
+  "name": "Metal Rainscreen",
+  "ref": "04.05.03",
+  "parents": [
+   "Building",
+   "Single-family Residential",
+   "Timber"
+  ],
+  "costLow_AboveGrade": 128.1612091,
+  "costHigh_AboveGrade": 296.2050781,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": -237.2,
+  "overallValue": -25.016856399999995
+ },
+ {
+  "uid": "280775044928-3042",
+  "name": "Wood Rainscreen",
+  "ref": "04.05.04",
+  "parents": [
+   "Building",
+   "Single-family Residential",
+   "Timber"
+  ],
+  "costLow_AboveGrade": 104.1629739,
+  "costHigh_AboveGrade": 240.1092034,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": -182.2,
+  "overallValue": -10.063911349999984
+ },
+ {
+  "uid": "280775044928-2114",
+  "name": "Masonry Veneer",
+  "ref": "04.06.01",
+  "parents": [
+   "Building",
+   "Single-family Residential",
+   "Wood Light Frame"
+  ],
+  "costLow_AboveGrade": 104.898919,
+  "costHigh_AboveGrade": 245.2012233,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": -287,
+  "overallValue": -111.94992884999999
+ },
+ {
+  "uid": "280775044928-7215",
+  "name": "Masonry Rainscreen",
+  "ref": "04.06.02",
+  "parents": [
+   "Building",
+   "Single-family Residential",
+   "Wood Light Frame"
+  ],
+  "costLow_AboveGrade": 105.7103022,
+  "costHigh_AboveGrade": 247.0978315,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": -288.8,
+  "overallValue": -112.39593315000002
+ },
+ {
+  "uid": "280775044928-6043",
+  "name": "Metal Rainscreen",
+  "ref": "04.06.03",
+  "parents": [
+   "Building",
+   "Single-family Residential",
+   "Wood Light Frame"
+  ],
+  "costLow_AboveGrade": 115.6,
+  "costHigh_AboveGrade": 270.215,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": -311.5,
+  "overallValue": -118.59250000000003
+ },
+ {
+  "uid": "280775044928-5355",
+  "name": "Wood Rainscreen",
+  "ref": "04.06.04",
+  "parents": [
+   "Building",
+   "Single-family Residential",
+   "Wood Light Frame"
+  ],
+  "costLow_AboveGrade": 91.60176484,
+  "costHigh_AboveGrade": 214.1191253,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": -256.5,
+  "overallValue": -103.63955493
+ },
+ {
+  "uid": "280775044928-562",
+  "name": "Masonry Veneer",
+  "ref": "05.01.01",
+  "parents": [
+   "Building",
+   "Mercantile",
+   "Steel"
+  ],
+  "costLow_AboveGrade": 317.193925,
+  "costHigh_AboveGrade": 611.9891672,
+  "costLow_BelowGrade": 302.8589421,
+  "costHigh_BelowGrade": 421.5234375,
+  "stored": 0,
+  "overallValue": 464.59154609999996
+ },
+ {
+  "uid": "280775044928-3585",
+  "name": "Masonry Rainscreen",
+  "ref": "05.01.02",
+  "parents": [
+   "Building",
+   "Mercantile",
+   "Steel"
+  ],
+  "costLow_AboveGrade": 318.9485412,
+  "costHigh_AboveGrade": 614.6667317,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 466.80763645
+ },
+ {
+  "uid": "280775044928-7386",
+  "name": "Metal Rainscreen",
+  "ref": "05.01.03",
+  "parents": [
+   "Building",
+   "Mercantile",
+   "Steel"
+  ],
+  "costLow_AboveGrade": 340.3350126,
+  "costHigh_AboveGrade": 647.3027344,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 493.8188735
+ },
+ {
+  "uid": "280775044928-1884",
+  "name": "Wood Rainscreen",
+  "ref": "05.01.04",
+  "parents": [
+   "Building",
+   "Mercantile",
+   "Steel"
+  ],
+  "costLow_AboveGrade": 288.4388291,
+  "costHigh_AboveGrade": 568.1085583,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 428.2736937
+ },
+ {
+  "uid": "280775044928-523",
+  "name": "Masonry Veneer",
+  "ref": "05.02.01",
+  "parents": [
+   "Building",
+   "Mercantile",
+   "Concrete"
+  ],
+  "costLow_AboveGrade": 366.2178545,
+  "costHigh_AboveGrade": 518.2098703,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 442.21386240000004
+ },
+ {
+  "uid": "280775044928-2571",
+  "name": "Masonry Rainscreen",
+  "ref": "05.02.02",
+  "parents": [
+   "Building",
+   "Mercantile",
+   "Concrete"
+  ],
+  "costLow_AboveGrade": 367.9724706,
+  "costHigh_AboveGrade": 520.8874349,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 444.42995275
+ },
+ {
+  "uid": "280775044928-6669",
+  "name": "Metal Rainscreen",
+  "ref": "05.02.03",
+  "parents": [
+   "Building",
+   "Mercantile",
+   "Concrete"
+  ],
+  "costLow_AboveGrade": 389.3589421,
+  "costHigh_AboveGrade": 553.5234375,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 471.44118979999996
+ },
+ {
+  "uid": "280775044928-5987",
+  "name": "Wood Rainscreen",
+  "ref": "05.02.04",
+  "parents": [
+   "Building",
+   "Mercantile",
+   "Concrete"
+  ],
+  "costLow_AboveGrade": 337.4627585,
+  "costHigh_AboveGrade": 474.3292615,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 405.89601
+ },
+ {
+  "uid": "280775044928-1183",
+  "name": "Masonry Veneer",
+  "ref": "05.03.01",
+  "parents": [
+   "Building",
+   "Mercantile",
+   "Composite Concrete-Steel"
+  ],
+  "costLow_AboveGrade": 330.2669729,
+  "costHigh_AboveGrade": 553.0145578,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 441.64076535000004
+ },
+ {
+  "uid": "280775044928-1867",
+  "name": "Masonry Rainscreen",
+  "ref": "05.03.02",
+  "parents": [
+   "Building",
+   "Mercantile",
+   "Composite Concrete-Steel"
+  ],
+  "costLow_AboveGrade": 332.021589,
+  "costHigh_AboveGrade": 555.6921224,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 443.8568557
+ },
+ {
+  "uid": "280775044928-6733",
+  "name": "Metal Rainscreen",
+  "ref": "05.03.03",
+  "parents": [
+   "Building",
+   "Mercantile",
+   "Composite Concrete-Steel"
+  ],
+  "costLow_AboveGrade": 353.4080605,
+  "costHigh_AboveGrade": 588.328125,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 470.86809274999996
+ },
+ {
+  "uid": "280775044928-3396",
+  "name": "Wood Rainscreen",
+  "ref": "05.03.04",
+  "parents": [
+   "Building",
+   "Mercantile",
+   "Composite Concrete-Steel"
+  ],
+  "costLow_AboveGrade": 301.5118769,
+  "costHigh_AboveGrade": 509.133949,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 405.32291295
+ },
+ {
+  "uid": "280775044928-1666",
+  "name": "Masonry Veneer",
+  "ref": "05.04.01",
+  "parents": [
+   "Building",
+   "Mercantile",
+   "Masonry"
+  ],
+  "costLow_AboveGrade": 346.6082827,
+  "costHigh_AboveGrade": 397.360261,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 371.98427185
+ },
+ {
+  "uid": "280775044928-575",
+  "name": "Masonry Rainscreen",
+  "ref": "05.04.02",
+  "parents": [
+   "Building",
+   "Mercantile",
+   "Masonry"
+  ],
+  "costLow_AboveGrade": 348.3628988,
+  "costHigh_AboveGrade": 400.0378255,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 374.20036215
+ },
+ {
+  "uid": "280775044928-8996",
+  "name": "Metal Rainscreen",
+  "ref": "05.04.03",
+  "parents": [
+   "Building",
+   "Mercantile",
+   "Masonry"
+  ],
+  "costLow_AboveGrade": 369.7493703,
+  "costHigh_AboveGrade": 432.6738281,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 401.2115992
+ },
+ {
+  "uid": "280775044928-8962",
+  "name": "Wood Rainscreen",
+  "ref": "05.04.04",
+  "parents": [
+   "Building",
+   "Mercantile",
+   "Masonry"
+  ],
+  "costLow_AboveGrade": 317.8531867,
+  "costHigh_AboveGrade": 353.4796521,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 335.6664194
+ },
+ {
+  "uid": "280775044929-8404",
+  "name": "Masonry Veneer",
+  "ref": "05.05.01",
+  "parents": [
+   "Building",
+   "Mercantile",
+   "Timber"
+  ],
+  "costLow_AboveGrade": 254.007527,
+  "costHigh_AboveGrade": 382.8583078,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": -377.1,
+  "overallValue": -58.667082600000015
+ },
+ {
+  "uid": "280775044929-7386",
+  "name": "Masonry Rainscreen",
+  "ref": "05.05.02",
+  "parents": [
+   "Building",
+   "Mercantile",
+   "Timber"
+  ],
+  "costLow_AboveGrade": 255.7621432,
+  "costHigh_AboveGrade": 385.5358724,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": -380.2,
+  "overallValue": -59.550992199999996
+ },
+ {
+  "uid": "280775044929-2449",
+  "name": "Metal Rainscreen",
+  "ref": "05.05.03",
+  "parents": [
+   "Building",
+   "Mercantile",
+   "Timber"
+  ],
+  "costLow_AboveGrade": 277.1486146,
+  "costHigh_AboveGrade": 418.171875,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": -417.3,
+  "overallValue": -69.63975520000002
+ },
+ {
+  "uid": "280775044929-7602",
+  "name": "Wood Rainscreen",
+  "ref": "05.05.04",
+  "parents": [
+   "Building",
+   "Mercantile",
+   "Timber"
+  ],
+  "costLow_AboveGrade": 225.2524311,
+  "costHigh_AboveGrade": 338.977699,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": -327.3,
+  "overallValue": -45.18493495000001
+ },
+ {
+  "uid": "280775044929-3703",
+  "name": "Masonry Veneer",
+  "ref": "05.06.01",
+  "parents": [
+   "Building",
+   "Mercantile",
+   "Wood Light Frame"
+  ],
+  "costLow_AboveGrade": 226.8439124,
+  "costHigh_AboveGrade": 346.1664328,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": -469.7,
+  "overallValue": -183.1948274
+ },
+ {
+  "uid": "280775044929-4835",
+  "name": "Masonry Rainscreen",
+  "ref": "05.06.02",
+  "parents": [
+   "Building",
+   "Mercantile",
+   "Wood Light Frame"
+  ],
+  "costLow_AboveGrade": 228.5985286,
+  "costHigh_AboveGrade": 348.8439974,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": -472.7,
+  "overallValue": -183.97873699999997
+ },
+ {
+  "uid": "280775044929-6685",
+  "name": "Metal Rainscreen",
+  "ref": "05.06.03",
+  "parents": [
+   "Building",
+   "Mercantile",
+   "Wood Light Frame"
+  ],
+  "costLow_AboveGrade": 249.985,
+  "costHigh_AboveGrade": 381.48,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": -246.4,
+  "overallValue": 69.33250000000001
+ },
+ {
+  "uid": "280775044929-3700",
+  "name": "Wood Rainscreen",
+  "ref": "05.06.04",
+  "parents": [
+   "Building",
+   "Mercantile",
+   "Wood Light Frame"
+  ],
+  "costLow_AboveGrade": 198.0888165,
+  "costHigh_AboveGrade": 302.285824,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": -419.9,
+  "overallValue": -169.71267974999998
+ },
+ {
+  "uid": "280775044929-9552",
+  "name": "Masonry Veneer",
+  "ref": "06.01.01",
+  "parents": [
+   "Building",
+   "Mixed-Use",
+   "Steel"
+  ],
+  "costLow_AboveGrade": 180.5988533,
+  "costHigh_AboveGrade": 740.6459808,
+  "costLow_BelowGrade": 172.4370277,
+  "costHigh_BelowGrade": 510.1391602,
+  "stored": 0,
+  "overallValue": 460.62241704999997
+ },
+ {
+  "uid": "280775044929-7466",
+  "name": "Masonry Rainscreen",
+  "ref": "06.01.02",
+  "parents": [
+   "Building",
+   "Mixed-Use",
+   "Steel"
+  ],
+  "costLow_AboveGrade": 181.5978688,
+  "costHigh_AboveGrade": 743.8864424,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 462.7421556
+ },
+ {
+  "uid": "280775044929-7938",
+  "name": "Metal Rainscreen",
+  "ref": "06.01.03",
+  "parents": [
+   "Building",
+   "Mixed-Use",
+   "Steel"
+  ],
+  "costLow_AboveGrade": 193.7745592,
+  "costHigh_AboveGrade": 783.3834229,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 488.57899105
+ },
+ {
+  "uid": "280775044929-1807",
+  "name": "Wood Rainscreen",
+  "ref": "06.01.04",
+  "parents": [
+   "Building",
+   "Mixed-Use",
+   "Steel"
+  ],
+  "costLow_AboveGrade": 164.2267321,
+  "costHigh_AboveGrade": 687.5404712,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 425.88360164999995
+ },
+ {
+  "uid": "280775044929-3851",
+  "name": "Masonry Veneer",
+  "ref": "06.02.01",
+  "parents": [
+   "Building",
+   "Mixed-Use",
+   "Concrete"
+  ],
+  "costLow_AboveGrade": 208.5113218,
+  "costHigh_AboveGrade": 627.1517181,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 417.83151995000003
+ },
+ {
+  "uid": "280775044929-8276",
+  "name": "Masonry Rainscreen",
+  "ref": "06.02.02",
+  "parents": [
+   "Building",
+   "Mixed-Use",
+   "Concrete"
+  ],
+  "costLow_AboveGrade": 209.5103373,
+  "costHigh_AboveGrade": 630.3921797,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 419.9512585
+ },
+ {
+  "uid": "280775044929-4866",
+  "name": "Metal Rainscreen",
+  "ref": "06.02.03",
+  "parents": [
+   "Building",
+   "Mixed-Use",
+   "Concrete"
+  ],
+  "costLow_AboveGrade": 221.6870277,
+  "costHigh_AboveGrade": 669.8891602,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 445.78809394999996
+ },
+ {
+  "uid": "280775044929-3107",
+  "name": "Wood Rainscreen",
+  "ref": "06.02.04",
+  "parents": [
+   "Building",
+   "Mixed-Use",
+   "Concrete"
+  ],
+  "costLow_AboveGrade": 192.1392007,
+  "costHigh_AboveGrade": 574.0462085,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 383.09270460000005
+ },
+ {
+  "uid": "280775044929-2037",
+  "name": "Masonry Veneer",
+  "ref": "06.03.01",
+  "parents": [
+   "Building",
+   "Mixed-Use",
+   "Composite Concrete-Steel"
+  ],
+  "costLow_AboveGrade": 188.0421782,
+  "costHigh_AboveGrade": 669.2733001,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 428.65773915
+ },
+ {
+  "uid": "280775044929-5366",
+  "name": "Masonry Rainscreen",
+  "ref": "06.03.02",
+  "parents": [
+   "Building",
+   "Mixed-Use",
+   "Composite Concrete-Steel"
+  ],
+  "costLow_AboveGrade": 189.0411937,
+  "costHigh_AboveGrade": 672.5137617,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 430.7774777
+ },
+ {
+  "uid": "280775044929-9136",
+  "name": "Metal Rainscreen",
+  "ref": "06.03.03",
+  "parents": [
+   "Building",
+   "Mixed-Use",
+   "Composite Concrete-Steel"
+  ],
+  "costLow_AboveGrade": 201.2178841,
+  "costHigh_AboveGrade": 712.0107422,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 456.61431315
+ },
+ {
+  "uid": "280775044929-522",
+  "name": "Wood Rainscreen",
+  "ref": "06.03.04",
+  "parents": [
+   "Building",
+   "Mixed-Use",
+   "Composite Concrete-Steel"
+  ],
+  "costLow_AboveGrade": 171.6700571,
+  "costHigh_AboveGrade": 616.1677905,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 393.9189238
+ },
+ {
+  "uid": "280775044929-8485",
+  "name": "Masonry Veneer",
+  "ref": "06.04.01",
+  "parents": [
+   "Building",
+   "Mixed-Use",
+   "Masonry"
+  ],
+  "costLow_AboveGrade": 197.3463344,
+  "costHigh_AboveGrade": 480.8962249,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 339.12127965
+ },
+ {
+  "uid": "280775044929-6207",
+  "name": "Masonry Rainscreen",
+  "ref": "06.04.02",
+  "parents": [
+   "Building",
+   "Mixed-Use",
+   "Masonry"
+  ],
+  "costLow_AboveGrade": 198.3453499,
+  "costHigh_AboveGrade": 484.1366865,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 341.2410182
+ },
+ {
+  "uid": "280775044929-6732",
+  "name": "Metal Rainscreen",
+  "ref": "06.04.03",
+  "parents": [
+   "Building",
+   "Mixed-Use",
+   "Masonry"
+  ],
+  "costLow_AboveGrade": 210.5220403,
+  "costHigh_AboveGrade": 523.633667,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 367.07785364999995
+ },
+ {
+  "uid": "280775044929-7897",
+  "name": "Wood Rainscreen",
+  "ref": "06.04.04",
+  "parents": [
+   "Building",
+   "Mixed-Use",
+   "Masonry"
+  ],
+  "costLow_AboveGrade": 180.9742133,
+  "costHigh_AboveGrade": 427.7907153,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 304.3824643
+ },
+ {
+  "uid": "280775044929-1620",
+  "name": "Masonry Veneer",
+  "ref": "06.05.01",
+  "parents": [
+   "Building",
+   "Mixed-Use",
+   "Timber"
+  ],
+  "costLow_AboveGrade": 144.6227827,
+  "costHigh_AboveGrade": 463.3455657,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": -314.4,
+  "overallValue": -10.415825799999993
+ },
+ {
+  "uid": "280775044929-8899",
+  "name": "Masonry Rainscreen",
+  "ref": "06.05.02",
+  "parents": [
+   "Building",
+   "Mixed-Use",
+   "Timber"
+  ],
+  "costLow_AboveGrade": 145.6217983,
+  "costHigh_AboveGrade": 466.5860273,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": -317.3,
+  "overallValue": -11.196087200000022
+ },
+ {
+  "uid": "280775044929-9341",
+  "name": "Metal Rainscreen",
+  "ref": "06.05.03",
+  "parents": [
+   "Building",
+   "Mixed-Use",
+   "Timber"
+  ],
+  "costLow_AboveGrade": 157.7984887,
+  "costHigh_AboveGrade": 506.0830078,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": -352.8,
+  "overallValue": -20.85925175
+ },
+ {
+  "uid": "280775044929-603",
+  "name": "Wood Rainscreen",
+  "ref": "06.05.04",
+  "parents": [
+   "Building",
+   "Mixed-Use",
+   "Timber"
+  ],
+  "costLow_AboveGrade": 128.2506616,
+  "costHigh_AboveGrade": 410.2400561,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": -266.8,
+  "overallValue": 2.445358849999991
+ },
+ {
+  "uid": "280775044929-3757",
+  "name": "Masonry Veneer",
+  "ref": "06.06.01",
+  "parents": [
+   "Building",
+   "Mixed-Use",
+   "Wood Light Frame"
+  ],
+  "costLow_AboveGrade": 129.1567941,
+  "costHigh_AboveGrade": 418.9400579,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": -449.3,
+  "overallValue": -175.251574
+ },
+ {
+  "uid": "280775044929-8345",
+  "name": "Masonry Rainscreen",
+  "ref": "06.06.02",
+  "parents": [
+   "Building",
+   "Mixed-Use",
+   "Wood Light Frame"
+  ],
+  "costLow_AboveGrade": 130.1558096,
+  "costHigh_AboveGrade": 422.1805195,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": -452.2,
+  "overallValue": -176.03183544999996
+ },
+ {
+  "uid": "280775044929-8997",
+  "name": "Metal Rainscreen",
+  "ref": "06.06.03",
+  "parents": [
+   "Building",
+   "Mixed-Use",
+   "Wood Light Frame"
+  ],
+  "costLow_AboveGrade": 142.3325,
+  "costHigh_AboveGrade": 461.6775,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": -487.6,
+  "overallValue": -185.59500000000003
+ },
+ {
+  "uid": "280775044929-5093",
+  "name": "Wood Rainscreen",
+  "ref": "06.06.04",
+  "parents": [
+   "Building",
+   "Mixed-Use",
+   "Wood Light Frame"
+  ],
+  "costLow_AboveGrade": 112.784673,
+  "costHigh_AboveGrade": 365.8345483,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": -401.6,
+  "overallValue": -162.29038935000003
+ },
+ {
+  "uid": "280775044929-9876",
+  "name": "Masonry Veneer",
+  "ref": "07.01.01",
+  "parents": [
+   "Building",
+   "Healthcare",
+   "Steel"
+  ],
+  "costLow_AboveGrade": 231.9365983,
+  "costHigh_AboveGrade": 625.8980119,
+  "costLow_BelowGrade": 221.4546599,
+  "costHigh_BelowGrade": 431.1035156,
+  "stored": 0,
+  "overallValue": 428.9173051
+ },
+ {
+  "uid": "280775044929-4692",
+  "name": "Masonry Rainscreen",
+  "ref": "07.01.02",
+  "parents": [
+   "Building",
+   "Healthcare",
+   "Steel"
+  ],
+  "costLow_AboveGrade": 233.219598,
+  "costHigh_AboveGrade": 628.6364302,
+  "costLow_BelowGrade": 221.4546599,
+  "costHigh_BelowGrade": 431.1035156,
+  "stored": 0,
+  "overallValue": 430.9280141
+ },
+ {
+  "uid": "280775044929-9355",
+  "name": "Metal Rainscreen",
+  "ref": "07.01.03",
+  "parents": [
+   "Building",
+   "Healthcare",
+   "Steel"
+  ],
+  "costLow_AboveGrade": 248.8576826,
+  "costHigh_AboveGrade": 662.0141602,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 455.4359214
+ },
+ {
+  "uid": "280775044929-3155",
+  "name": "Wood Rainscreen",
+  "ref": "07.01.04",
+  "parents": [
+   "Building",
+   "Healthcare",
+   "Steel"
+  ],
+  "costLow_AboveGrade": 210.9104733,
+  "costHigh_AboveGrade": 581.0201165,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 395.9652949
+ },
+ {
+  "uid": "280775044929-5301",
+  "name": "Masonry Veneer",
+  "ref": "07.02.01",
+  "parents": [
+   "Building",
+   "Healthcare",
+   "Concrete"
+  ],
+  "costLow_AboveGrade": 267.7835757,
+  "costHigh_AboveGrade": 529.9873674,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 398.88547155000003
+ },
+ {
+  "uid": "280775044929-7906",
+  "name": "Masonry Rainscreen",
+  "ref": "07.02.02",
+  "parents": [
+   "Building",
+   "Healthcare",
+   "Concrete"
+  ],
+  "costLow_AboveGrade": 269.0665753,
+  "costHigh_AboveGrade": 532.7257856,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 400.89618045
+ },
+ {
+  "uid": "280775044929-5466",
+  "name": "Metal Rainscreen",
+  "ref": "07.02.03",
+  "parents": [
+   "Building",
+   "Healthcare",
+   "Concrete"
+  ],
+  "costLow_AboveGrade": 284.7046599,
+  "costHigh_AboveGrade": 566.1035156,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 425.40408775000003
+ },
+ {
+  "uid": "280775044929-9030",
+  "name": "Wood Rainscreen",
+  "ref": "07.02.04",
+  "parents": [
+   "Building",
+   "Healthcare",
+   "Concrete"
+  ],
+  "costLow_AboveGrade": 246.7574506,
+  "costHigh_AboveGrade": 485.1094719,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 365.93346125
+ },
+ {
+  "uid": "280775044929-9531",
+  "name": "Masonry Veneer",
+  "ref": "07.03.01",
+  "parents": [
+   "Building",
+   "Healthcare",
+   "Composite Concrete-Steel"
+  ],
+  "costLow_AboveGrade": 241.4957923,
+  "costHigh_AboveGrade": 565.5830705,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 403.5394314
+ },
+ {
+  "uid": "280775044929-6530",
+  "name": "Masonry Rainscreen",
+  "ref": "07.03.02",
+  "parents": [
+   "Building",
+   "Healthcare",
+   "Composite Concrete-Steel"
+  ],
+  "costLow_AboveGrade": 242.778792,
+  "costHigh_AboveGrade": 568.3214888,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 405.55014040000003
+ },
+ {
+  "uid": "280775044929-3630",
+  "name": "Metal Rainscreen",
+  "ref": "07.03.03",
+  "parents": [
+   "Building",
+   "Healthcare",
+   "Composite Concrete-Steel"
+  ],
+  "costLow_AboveGrade": 258.4168766,
+  "costHigh_AboveGrade": 601.6992188,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 430.05804770000003
+ },
+ {
+  "uid": "280775044929-875",
+  "name": "Wood Rainscreen",
+  "ref": "07.03.04",
+  "parents": [
+   "Building",
+   "Healthcare",
+   "Composite Concrete-Steel"
+  ],
+  "costLow_AboveGrade": 220.4696672,
+  "costHigh_AboveGrade": 520.7051751,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 370.58742115
+ },
+ {
+  "uid": "280775044929-9868",
+  "name": "Masonry Veneer",
+  "ref": "07.04.01",
+  "parents": [
+   "Building",
+   "Healthcare",
+   "Masonry"
+  ],
+  "costLow_AboveGrade": 253.4447847,
+  "costHigh_AboveGrade": 406.391176,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 329.91798035
+ },
+ {
+  "uid": "280775044929-1155",
+  "name": "Masonry Rainscreen",
+  "ref": "07.04.02",
+  "parents": [
+   "Building",
+   "Healthcare",
+   "Masonry"
+  ],
+  "costLow_AboveGrade": 254.7277844,
+  "costHigh_AboveGrade": 409.1295942,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 331.9286893
+ },
+ {
+  "uid": "280775044929-7052",
+  "name": "Metal Rainscreen",
+  "ref": "07.04.03",
+  "parents": [
+   "Building",
+   "Healthcare",
+   "Masonry"
+  ],
+  "costLow_AboveGrade": 270.365869,
+  "costHigh_AboveGrade": 442.5073242,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 356.43659660000003
+ },
+ {
+  "uid": "280775044929-7458",
+  "name": "Wood Rainscreen",
+  "ref": "07.04.04",
+  "parents": [
+   "Building",
+   "Healthcare",
+   "Masonry"
+  ],
+  "costLow_AboveGrade": 232.4186597,
+  "costHigh_AboveGrade": 361.5132805,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": 0,
+  "overallValue": 296.9659701
+ },
+ {
+  "uid": "280775044929-8761",
+  "name": "Masonry Veneer",
+  "ref": "07.05.01",
+  "parents": [
+   "Building",
+   "Healthcare",
+   "Timber"
+  ],
+  "costLow_AboveGrade": 185.7338276,
+  "costHigh_AboveGrade": 391.559633,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": -321.1,
+  "overallValue": -32.45326970000002
+ },
+ {
+  "uid": "280775044929-7774",
+  "name": "Masonry Rainscreen",
+  "ref": "07.05.02",
+  "parents": [
+   "Building",
+   "Healthcare",
+   "Timber"
+  ],
+  "costLow_AboveGrade": 187.0168272,
+  "costHigh_AboveGrade": 394.2980513,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": -323.9,
+  "overallValue": -33.242560749999996
+ },
+ {
+  "uid": "280775044929-6341",
+  "name": "Metal Rainscreen",
+  "ref": "07.05.03",
+  "parents": [
+   "Building",
+   "Healthcare",
+   "Timber"
+  ],
+  "costLow_AboveGrade": 202.6549118,
+  "costHigh_AboveGrade": 427.6757813,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": -357.5,
+  "overallValue": -42.33465345000002
+ },
+ {
+  "uid": "280775044929-3933",
+  "name": "Wood Rainscreen",
+  "ref": "07.05.04",
+  "parents": [
+   "Building",
+   "Healthcare",
+   "Timber"
+  ],
+  "costLow_AboveGrade": 164.7077025,
+  "costHigh_AboveGrade": 346.6817376,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": -275.9,
+  "overallValue": -20.205279949999976
+ },
+ {
+  "uid": "280775044929-7220",
+  "name": "Masonry Veneer",
+  "ref": "07.06.01",
+  "parents": [
+   "Building",
+   "Healthcare",
+   "Wood Light Frame"
+  ],
+  "costLow_AboveGrade": 165.8714157,
+  "costHigh_AboveGrade": 354.0338518,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": -426.2,
+  "overallValue": -166.24736624999997
+ },
+ {
+  "uid": "280775044929-8055",
+  "name": "Masonry Rainscreen",
+  "ref": "07.06.02",
+  "parents": [
+   "Building",
+   "Healthcare",
+   "Wood Light Frame"
+  ],
+  "costLow_AboveGrade": 167.1544154,
+  "costHigh_AboveGrade": 356.77227,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": -428.9,
+  "overallValue": -166.93665729999998
+ },
+ {
+  "uid": "280775044929-5398",
+  "name": "Metal Rainscreen",
+  "ref": "07.06.03",
+  "parents": [
+   "Building",
+   "Healthcare",
+   "Wood Light Frame"
+  ],
+  "costLow_AboveGrade": 182.7925,
+  "costHigh_AboveGrade": 390.15,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": -462.6,
+  "overallValue": -176.12875000000003
+ },
+ {
+  "uid": "280775044929-8731",
+  "name": "Wood Rainscreen",
+  "ref": "07.06.04",
+  "parents": [
+   "Building",
+   "Healthcare",
+   "Wood Light Frame"
+  ],
+  "costLow_AboveGrade": 186.0660848,
+  "costHigh_AboveGrade": 269.6526952,
+  "costLow_BelowGrade": 140.0503778,
+  "costHigh_BelowGrade": 298.5791016,
+  "stored": -382.4,
+  "overallValue": -154.54061
+ },
+ {
+  "uid": "280775044929-2207",
+  "name": "Masonry Veneer",
+  "ref": "08.01.01",
+  "parents": [
+   "Building",
+   "Public Assembly",
+   "Steel"
+  ],
+  "costLow_AboveGrade": 297.9422706,
+  "costHigh_AboveGrade": 545.9221548,
+  "costLow_BelowGrade": 284.47733,
+  "costHigh_BelowGrade": 376.0180664,
+  "stored": 0,
+  "overallValue": 421.93221270000004
+ },
+ {
+  "uid": "280775044929-9455",
+  "name": "Masonry Rainscreen",
+  "ref": "08.01.02",
+  "parents": [
+   "Building",
+   "Public Assembly",
+   "Steel"
+  ],
+  "costLow_AboveGrade": 299.5903927,
+  "costHigh_AboveGrade": 548.3106641,
+  "costLow_BelowGrade": 284.47733,
+  "costHigh_BelowGrade": 376.0180664,
+  "stored": 0,
+  "overallValue": 423.95052840000005
+ },
+ {
+  "uid": "280775044929-8064",
+  "name": "Metal Rainscreen",
+  "ref": "08.01.03",
+  "parents": [
+   "Building",
+   "Public Assembly",
+   "Steel"
+  ],
+  "costLow_AboveGrade": 319.6788413,
+  "costHigh_AboveGrade": 577.4234619,
+  "costLow_BelowGrade": 284.47733,
+  "costHigh_BelowGrade": 376.0180664,
+  "stored": 0,
+  "overallValue": 448.5511516
+ },
+ {
+  "uid": "280775044929-8929",
+  "name": "Wood Rainscreen",
+  "ref": "08.01.04",
+  "parents": [
+   "Building",
+   "Public Assembly",
+   "Steel"
+  ],
+  "costLow_AboveGrade": 270.9324261,
+  "costHigh_AboveGrade": 506.7786571,
+  "costLow_BelowGrade": 284.47733,
+  "costHigh_BelowGrade": 376.0180664,
+  "stored": 0,
+  "overallValue": 388.8555416
+ },
+ {
+  "uid": "280775044929-3942",
+  "name": "Masonry Veneer",
+  "ref": "08.02.01",
+  "parents": [
+   "Building",
+   "Public Assembly",
+   "Concrete"
+  ],
+  "costLow_AboveGrade": 343.9907593,
+  "costHigh_AboveGrade": 462.2667593,
+  "costLow_BelowGrade": 284.47733,
+  "costHigh_BelowGrade": 376.0180664,
+  "stored": 0,
+  "overallValue": 403.12875929999996
+ },
+ {
+  "uid": "280775044929-7627",
+  "name": "Masonry Rainscreen",
+  "ref": "08.02.02",
+  "parents": [
+   "Building",
+   "Public Assembly",
+   "Concrete"
+  ],
+  "costLow_AboveGrade": 345.6388814,
+  "costHigh_AboveGrade": 464.6552686,
+  "costLow_BelowGrade": 284.47733,
+  "costHigh_BelowGrade": 376.0180664,
+  "stored": 0,
+  "overallValue": 405.147075
+ },
+ {
+  "uid": "280775044929-5780",
+  "name": "Metal Rainscreen",
+  "ref": "08.02.03",
+  "parents": [
+   "Building",
+   "Public Assembly",
+   "Concrete"
+  ],
+  "costLow_AboveGrade": 365.72733,
+  "costHigh_AboveGrade": 493.7680664,
+  "costLow_BelowGrade": 284.47733,
+  "costHigh_BelowGrade": 376.0180664,
+  "stored": 0,
+  "overallValue": 429.7476982
+ },
+ {
+  "uid": "280775044929-8465",
+  "name": "Wood Rainscreen",
+  "ref": "08.02.04",
+  "parents": [
+   "Building",
+   "Public Assembly",
+   "Concrete"
+  ],
+  "costLow_AboveGrade": 316.9809148,
+  "costHigh_AboveGrade": 423.1232616,
+  "costLow_BelowGrade": 284.47733,
+  "costHigh_BelowGrade": 376.0180664,
+  "stored": 0,
+  "overallValue": 370.05208819999996
+ },
+ {
+  "uid": "280775044929-5253",
+  "name": "Masonry Veneer",
+  "ref": "08.03.01",
+  "parents": [
+   "Building",
+   "Public Assembly",
+   "Composite Concrete-Steel"
+  ],
+  "costLow_AboveGrade": 310.2218676,
+  "costHigh_AboveGrade": 493.3141226,
+  "costLow_BelowGrade": 284.47733,
+  "costHigh_BelowGrade": 376.0180664,
+  "stored": 0,
+  "overallValue": 401.7679951
+ },
+ {
+  "uid": "280775044929-9946",
+  "name": "Masonry Rainscreen",
+  "ref": "08.03.02",
+  "parents": [
+   "Building",
+   "Public Assembly",
+   "Composite Concrete-Steel"
+  ],
+  "costLow_AboveGrade": 311.8699897,
+  "costHigh_AboveGrade": 495.7026319,
+  "costLow_BelowGrade": 284.47733,
+  "costHigh_BelowGrade": 376.0180664,
+  "stored": 0,
+  "overallValue": 403.7863108
+ },
+ {
+  "uid": "280775044929-4505",
+  "name": "Metal Rainscreen",
+  "ref": "08.03.03",
+  "parents": [
+   "Building",
+   "Public Assembly",
+   "Composite Concrete-Steel"
+  ],
+  "costLow_AboveGrade": 331.9584383,
+  "costHigh_AboveGrade": 524.8154297,
+  "costLow_BelowGrade": 284.47733,
+  "costHigh_BelowGrade": 376.0180664,
+  "stored": 0,
+  "overallValue": 428.386934
+ },
+ {
+  "uid": "280775044929-2319",
+  "name": "Wood Rainscreen",
+  "ref": "08.03.04",
+  "parents": [
+   "Building",
+   "Public Assembly",
+   "Composite Concrete-Steel"
+  ],
+  "costLow_AboveGrade": 283.2120231,
+  "costHigh_AboveGrade": 454.1706249,
+  "costLow_BelowGrade": 284.47733,
+  "costHigh_BelowGrade": 376.0180664,
+  "stored": 0,
+  "overallValue": 368.691324
+ },
+ {
+  "uid": "280775044929-9591",
+  "name": "Masonry Veneer",
+  "ref": "08.04.01",
+  "parents": [
+   "Building",
+   "Public Assembly",
+   "Masonry"
+  ],
+  "costLow_AboveGrade": 325.5713638,
+  "costHigh_AboveGrade": 354.4634146,
+  "costLow_BelowGrade": 284.47733,
+  "costHigh_BelowGrade": 376.0180664,
+  "stored": 0,
+  "overallValue": 340.0173892
+ },
+ {
+  "uid": "280775044929-2793",
+  "name": "Masonry Rainscreen",
+  "ref": "08.04.02",
+  "parents": [
+   "Building",
+   "Public Assembly",
+   "Masonry"
+  ],
+  "costLow_AboveGrade": 327.2194859,
+  "costHigh_AboveGrade": 356.8519239,
+  "costLow_BelowGrade": 284.47733,
+  "costHigh_BelowGrade": 376.0180664,
+  "stored": 0,
+  "overallValue": 342.0357049
+ },
+ {
+  "uid": "280775044929-2036",
+  "name": "Metal Rainscreen",
+  "ref": "08.04.03",
+  "parents": [
+   "Building",
+   "Public Assembly",
+   "Masonry"
+  ],
+  "costLow_AboveGrade": 347.3079345,
+  "costHigh_AboveGrade": 385.9647217,
+  "costLow_BelowGrade": 284.47733,
+  "costHigh_BelowGrade": 376.0180664,
+  "stored": 0,
+  "overallValue": 366.6363281
+ },
+ {
+  "uid": "280775044929-3392",
+  "name": "Wood Rainscreen",
+  "ref": "08.04.04",
+  "parents": [
+   "Building",
+   "Public Assembly",
+   "Masonry"
+  ],
+  "costLow_AboveGrade": 298.5615193,
+  "costHigh_AboveGrade": 315.3199169,
+  "costLow_BelowGrade": 284.47733,
+  "costHigh_BelowGrade": 376.0180664,
+  "stored": 0,
+  "overallValue": 306.9407181
+ },
+ {
+  "uid": "280775044929-8080",
+  "name": "Masonry Veneer",
+  "ref": "08.05.01",
+  "parents": [
+   "Building",
+   "Public Assembly",
+   "Timber"
+  ],
+  "costLow_AboveGrade": 238.5908852,
+  "costHigh_AboveGrade": 341.5270132,
+  "costLow_BelowGrade": 284.47733,
+  "costHigh_BelowGrade": 376.0180664,
+  "stored": -346.9,
+  "overallValue": -56.84105079999995
+ },
+ {
+  "uid": "280775044929-5818",
+  "name": "Masonry Rainscreen",
+  "ref": "08.05.02",
+  "parents": [
+   "Building",
+   "Public Assembly",
+   "Timber"
+  ],
+  "costLow_AboveGrade": 240.2390073,
+  "costHigh_AboveGrade": 343.9155225,
+  "costLow_BelowGrade": 284.47733,
+  "costHigh_BelowGrade": 376.0180664,
+  "stored": -349.7,
+  "overallValue": -57.6227351
+ },
+ {
+  "uid": "280775044929-4915",
+  "name": "Metal Rainscreen",
+  "ref": "08.05.03",
+  "parents": [
+   "Building",
+   "Public Assembly",
+   "Timber"
+  ],
+  "costLow_AboveGrade": 260.3274559,
+  "costHigh_AboveGrade": 373.0283203,
+  "costLow_BelowGrade": 284.47733,
+  "costHigh_BelowGrade": 376.0180664,
+  "stored": -383.4,
+  "overallValue": -66.72211189999996
+ },
+ {
+  "uid": "280775044929-9186",
+  "name": "Wood Rainscreen",
+  "ref": "08.05.04",
+  "parents": [
+   "Building",
+   "Public Assembly",
+   "Timber"
+  ],
+  "costLow_AboveGrade": 211.5810407,
+  "costHigh_AboveGrade": 302.3835155,
+  "costLow_BelowGrade": 284.47733,
+  "costHigh_BelowGrade": 376.0180664,
+  "stored": -301.5,
+  "overallValue": -44.517721900000026
+ },
+ {
+  "uid": "280775044929-2363",
+  "name": "Masonry Veneer",
+  "ref": "08.06.01",
+  "parents": [
+   "Building",
+   "Public Assembly",
+   "Wood Light Frame"
+  ],
+  "costLow_AboveGrade": 213.0759293,
+  "costHigh_AboveGrade": 308.7961929,
+  "costLow_BelowGrade": 284.47733,
+  "costHigh_BelowGrade": 376.0180664,
+  "stored": -427.8,
+  "overallValue": -166.8639389
+ },
+ {
+  "uid": "280775044929-7332",
+  "name": "Masonry Rainscreen",
+  "ref": "08.06.02",
+  "parents": [
+   "Building",
+   "Public Assembly",
+   "Wood Light Frame"
+  ],
+  "costLow_AboveGrade": 214.7240514,
+  "costHigh_AboveGrade": 311.1847022,
+  "costLow_BelowGrade": 284.47733,
+  "costHigh_BelowGrade": 376.0180664,
+  "stored": -430.6,
+  "overallValue": -167.64562320000005
+ },
+ {
+  "uid": "280775044929-67",
+  "name": "Metal Rainscreen",
+  "ref": "08.06.03",
+  "parents": [
+   "Building",
+   "Public Assembly",
+   "Wood Light Frame"
+  ],
+  "costLow_AboveGrade": 234.8125,
+  "costHigh_AboveGrade": 340.2975,
+  "costLow_BelowGrade": 284.47733,
+  "costHigh_BelowGrade": 376.0180664,
+  "stored": -464.3,
+  "overallValue": -176.745
+ },
+ {
+  "uid": "280775044929-7889",
+  "name": "Wood Rainscreen",
+  "ref": "08.06.04",
+  "parents": [
+   "Building",
+   "Public Assembly",
+   "Wood Light Frame"
+  ],
+  "costLow_AboveGrade": 186.0660848,
+  "costHigh_AboveGrade": 269.6526952,
+  "costLow_BelowGrade": 284.47733,
+  "costHigh_BelowGrade": 376.0180664,
+  "stored": -382.4,
+  "overallValue": -154.54061
+ },
+ {
+  "uid": "280775044929-6676",
+  "name": "Masonry Veneer",
+  "ref": "09.01.01",
+  "parents": [
+   "Building",
+   "Lodging",
+   "Steel"
+  ],
+  "costLow_AboveGrade": 230.1031075,
+  "costHigh_AboveGrade": 617.7845192,
+  "costLow_BelowGrade": 219.7040302,
+  "costHigh_BelowGrade": 425.5151367,
+  "stored": 0,
+  "overallValue": 423.94381334999997
+ },
+ {
+  "uid": "280775044929-3740",
+  "name": "Masonry Rainscreen",
+  "ref": "09.01.02",
+  "parents": [
+   "Building",
+   "Lodging",
+   "Steel"
+  ],
+  "costLow_AboveGrade": 231.3759648,
+  "costHigh_AboveGrade": 620.4874394,
+  "costLow_BelowGrade": 219.7040302,
+  "costHigh_BelowGrade": 425.5151367,
+  "stored": 0,
+  "overallValue": 425.9317021
+ },
+ {
+  "uid": "280775044929-8109",
+  "name": "Metal Rainscreen",
+  "ref": "09.01.03",
+  "parents": [
+   "Building",
+   "Lodging",
+   "Steel"
+  ],
+  "costLow_AboveGrade": 246.8904282,
+  "costHigh_AboveGrade": 653.4324951,
+  "costLow_BelowGrade": 219.7040302,
+  "costHigh_BelowGrade": 425.5151367,
+  "stored": 0,
+  "overallValue": 450.16146165
+ },
+ {
+  "uid": "280775044929-3593",
+  "name": "Wood Rainscreen",
+  "ref": "09.01.04",
+  "parents": [
+   "Building",
+   "Lodging",
+   "Steel"
+  ],
+  "costLow_AboveGrade": 209.2431968,
+  "costHigh_AboveGrade": 573.4883742,
+  "costLow_BelowGrade": 219.7040302,
+  "costHigh_BelowGrade": 425.5151367,
+  "stored": 0,
+  "overallValue": 391.36578549999996
+ },
+ {
+  "uid": "280775044929-5191",
+  "name": "Masonry Veneer",
+  "ref": "09.02.01",
+  "parents": [
+   "Building",
+   "Lodging",
+   "Concrete"
+  ],
+  "costLow_AboveGrade": 265.6667095,
+  "costHigh_AboveGrade": 523.1171608,
+  "costLow_BelowGrade": 219.7040302,
+  "costHigh_BelowGrade": 425.5151367,
+  "stored": 0,
+  "overallValue": 394.39193515
+ },
+ {
+  "uid": "280775044929-8618",
+  "name": "Masonry Rainscreen",
+  "ref": "09.02.02",
+  "parents": [
+   "Building",
+   "Lodging",
+   "Concrete"
+  ],
+  "costLow_AboveGrade": 266.9395668,
+  "costHigh_AboveGrade": 525.820081,
+  "costLow_BelowGrade": 219.7040302,
+  "costHigh_BelowGrade": 425.5151367,
+  "stored": 0,
+  "overallValue": 396.3798239
+ },
+ {
+  "uid": "280775044929-5004",
+  "name": "Metal Rainscreen",
+  "ref": "09.02.03",
+  "parents": [
+   "Building",
+   "Lodging",
+   "Concrete"
+  ],
+  "costLow_AboveGrade": 282.4540302,
+  "costHigh_AboveGrade": 558.7651367,
+  "costLow_BelowGrade": 219.7040302,
+  "costHigh_BelowGrade": 425.5151367,
+  "stored": 0,
+  "overallValue": 420.60958344999995
+ },
+ {
+  "uid": "280775044929-7662",
+  "name": "Wood Rainscreen",
+  "ref": "09.02.04",
+  "parents": [
+   "Building",
+   "Lodging",
+   "Concrete"
+  ],
+  "costLow_AboveGrade": 244.8067988,
+  "costHigh_AboveGrade": 478.8210158,
+  "costLow_BelowGrade": 219.7040302,
+  "costHigh_BelowGrade": 425.5151367,
+  "stored": 0,
+  "overallValue": 361.8139073
+ },
+ {
+  "uid": "280775044929-5674",
+  "name": "Masonry Veneer",
+  "ref": "09.03.01",
+  "parents": [
+   "Building",
+   "Lodging",
+   "Composite Concrete-Steel"
+  ],
+  "costLow_AboveGrade": 239.5867347,
+  "costHigh_AboveGrade": 558.2514381,
+  "costLow_BelowGrade": 219.7040302,
+  "costHigh_BelowGrade": 425.5151367,
+  "stored": 0,
+  "overallValue": 398.91908639999997
+ },
+ {
+  "uid": "280775044929-4176",
+  "name": "Masonry Rainscreen",
+  "ref": "09.03.02",
+  "parents": [
+   "Building",
+   "Lodging",
+   "Composite Concrete-Steel"
+  ],
+  "costLow_AboveGrade": 240.859592,
+  "costHigh_AboveGrade": 560.9543584,
+  "costLow_BelowGrade": 219.7040302,
+  "costHigh_BelowGrade": 425.5151367,
+  "stored": 0,
+  "overallValue": 400.90697520000003
+ },
+ {
+  "uid": "280775044929-8255",
+  "name": "Metal Rainscreen",
+  "ref": "09.03.03",
+  "parents": [
+   "Building",
+   "Lodging",
+   "Composite Concrete-Steel"
+  ],
+  "costLow_AboveGrade": 256.3740554,
+  "costHigh_AboveGrade": 593.8994141,
+  "costLow_BelowGrade": 219.7040302,
+  "costHigh_BelowGrade": 425.5151367,
+  "stored": 0,
+  "overallValue": 425.13673474999996
+ },
+ {
+  "uid": "280775044929-4968",
+  "name": "Wood Rainscreen",
+  "ref": "09.03.04",
+  "parents": [
+   "Building",
+   "Lodging",
+   "Composite Concrete-Steel"
+  ],
+  "costLow_AboveGrade": 218.726824,
+  "costHigh_AboveGrade": 513.9552932,
+  "costLow_BelowGrade": 219.7040302,
+  "costHigh_BelowGrade": 425.5151367,
+  "stored": 0,
+  "overallValue": 366.3410586
+ },
+ {
+  "uid": "280775044929-8364",
+  "name": "Masonry Veneer",
+  "ref": "09.04.01",
+  "parents": [
+   "Building",
+   "Lodging",
+   "Masonry"
+  ],
+  "costLow_AboveGrade": 251.4412687,
+  "costHigh_AboveGrade": 401.1231422,
+  "costLow_BelowGrade": 219.7040302,
+  "costHigh_BelowGrade": 425.5151367,
+  "stored": 0,
+  "overallValue": 326.28220545
+ },
+ {
+  "uid": "280775044929-8796",
+  "name": "Masonry Rainscreen",
+  "ref": "09.04.02",
+  "parents": [
+   "Building",
+   "Lodging",
+   "Masonry"
+  ],
+  "costLow_AboveGrade": 252.714126,
+  "costHigh_AboveGrade": 403.8260625,
+  "costLow_BelowGrade": 219.7040302,
+  "costHigh_BelowGrade": 425.5151367,
+  "stored": 0,
+  "overallValue": 328.27009425
+ },
+ {
+  "uid": "280775044929-9420",
+  "name": "Metal Rainscreen",
+  "ref": "09.04.03",
+  "parents": [
+   "Building",
+   "Lodging",
+   "Masonry"
+  ],
+  "costLow_AboveGrade": 268.2285894,
+  "costHigh_AboveGrade": 436.7711182,
+  "costLow_BelowGrade": 219.7040302,
+  "costHigh_BelowGrade": 425.5151367,
+  "stored": 0,
+  "overallValue": 352.4998538
+ },
+ {
+  "uid": "280775044929-1538",
+  "name": "Wood Rainscreen",
+  "ref": "09.04.04",
+  "parents": [
+   "Building",
+   "Lodging",
+   "Masonry"
+  ],
+  "costLow_AboveGrade": 230.581358,
+  "costHigh_AboveGrade": 356.8269973,
+  "costLow_BelowGrade": 219.7040302,
+  "costHigh_BelowGrade": 425.5151367,
+  "stored": 0,
+  "overallValue": 293.70417765
+ },
+ {
+  "uid": "280775044929-8594",
+  "name": "Masonry Veneer",
+  "ref": "09.05.01",
+  "parents": [
+   "Building",
+   "Lodging",
+   "Timber"
+  ],
+  "costLow_AboveGrade": 184.265576,
+  "costHigh_AboveGrade": 386.48386,
+  "costLow_BelowGrade": 219.7040302,
+  "costHigh_BelowGrade": 425.5151367,
+  "stored": -317.8,
+  "overallValue": -32.42528199999998
+ },
+ {
+  "uid": "280775044929-3888",
+  "name": "Masonry Rainscreen",
+  "ref": "09.05.02",
+  "parents": [
+   "Building",
+   "Lodging",
+   "Timber"
+  ],
+  "costLow_AboveGrade": 185.5384333,
+  "costHigh_AboveGrade": 389.1867802,
+  "costLow_BelowGrade": 219.7040302,
+  "costHigh_BelowGrade": 425.5151367,
+  "stored": -320.5,
+  "overallValue": -33.13739325
+ },
+ {
+  "uid": "280775044929-3118",
+  "name": "Metal Rainscreen",
+  "ref": "09.05.03",
+  "parents": [
+   "Building",
+   "Lodging",
+   "Timber"
+  ],
+  "costLow_AboveGrade": 201.0528967,
+  "costHigh_AboveGrade": 422.1318359,
+  "costLow_BelowGrade": 219.7040302,
+  "costHigh_BelowGrade": 425.5151367,
+  "stored": -353.8,
+  "overallValue": -42.20763370000003
+ },
+ {
+  "uid": "280775044929-374",
+  "name": "Wood Rainscreen",
+  "ref": "09.05.04",
+  "parents": [
+   "Building",
+   "Lodging",
+   "Timber"
+  ],
+  "costLow_AboveGrade": 163.4056653,
+  "costHigh_AboveGrade": 342.187715,
+  "costLow_BelowGrade": 219.7040302,
+  "costHigh_BelowGrade": 425.5151367,
+  "stored": -273.1,
+  "overallValue": -20.303309850000005
+ },
+ {
+  "uid": "280775044929-687",
+  "name": "Masonry Veneer",
+  "ref": "09.06.01",
+  "parents": [
+   "Building",
+   "Lodging",
+   "Wood Light Frame"
+  ],
+  "costLow_AboveGrade": 164.5601792,
+  "costHigh_AboveGrade": 349.444524,
+  "costLow_BelowGrade": 219.7040302,
+  "costHigh_BelowGrade": 425.5151367,
+  "stored": -421.3,
+  "overallValue": -164.2976484
+ },
+ {
+  "uid": "280775044929-2372",
+  "name": "Masonry Rainscreen",
+  "ref": "09.06.02",
+  "parents": [
+   "Building",
+   "Lodging",
+   "Wood Light Frame"
+  ],
+  "costLow_AboveGrade": 165.8330366,
+  "costHigh_AboveGrade": 352.1474443,
+  "costLow_BelowGrade": 219.7040302,
+  "costHigh_BelowGrade": 425.5151367,
+  "stored": -424.1,
+  "overallValue": -165.10975955000004
+ },
+ {
+  "uid": "280775044929-7291",
+  "name": "Metal Rainscreen",
+  "ref": "09.06.03",
+  "parents": [
+   "Building",
+   "Lodging",
+   "Wood Light Frame"
+  ],
+  "costLow_AboveGrade": 181.3475,
+  "costHigh_AboveGrade": 385.0925,
+  "costLow_BelowGrade": 219.7040302,
+  "costHigh_BelowGrade": 425.5151367,
+  "stored": -457.3,
+  "overallValue": -174.08000000000004
+ },
+ {
+  "uid": "280775044929-737",
+  "name": "Wood Rainscreen",
+  "ref": "09.06.04",
+  "parents": [
+   "Building",
+   "Lodging",
+   "Wood Light Frame"
+  ],
+  "costLow_AboveGrade": 143.7002686,
+  "costHigh_AboveGrade": 305.1483791,
+  "costLow_BelowGrade": 219.7040302,
+  "costHigh_BelowGrade": 425.5151367,
+  "stored": -376.6,
+  "overallValue": -152.17567615000002
+ }
+]

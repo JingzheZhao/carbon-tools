@@ -1,0 +1,22 @@
+# Build output
+bin/
+obj/
+*.gha
+*.dll
+*.pdb
+*.user
+
+# IDE
+.vs/
+.idea/
+*.suo
+
+# OS
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Research inputs live outside this repository (see docs/repository-layout.md).
+# Guard against them being copied back in by accident.
+_research/
+*.pdf

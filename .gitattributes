@@ -1,0 +1,12 @@
+# Let git normalise line endings, so a Windows and a macOS checkout agree.
+* text=auto
+
+# The viewer is one large document; keeping it out of diff heuristics that
+# would try to merge it line by line avoids nonsense conflicts.
+*.html   text eol=lf
+*.cs     text eol=crlf
+*.csproj text eol=crlf
+
+# Data files are generated from the published tables, not hand-edited.
+data/*.json linguist-generated=true
+data/*.csv  linguist-generated=true
