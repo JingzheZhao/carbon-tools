@@ -7,8 +7,11 @@ published assembly and the site's embodied carbon and construction cost are
 computed and mapped.
 
 **Your model never leaves your machine.** The plugin runs a small HTTP server on
-`localhost` and the viewer is a single page served from it. There is no account,
-no upload, and no telemetry. Everything below works offline.
+`localhost` and the viewer is served from it. There is no account, no upload, and
+no telemetry.
+
+> three.js is still loaded from a CDN, so the first open needs network access.
+> Bundling it would make the tool fully offline and is an open item.
 
 ---
 
@@ -80,9 +83,10 @@ save it again. The scheme list shows each option's carbon and cost side by side
 with the difference between them. Switching schemes restores the materials,
 rates, colour mapping, and panel figures exactly.
 
-> Schemes are stored in browser local storage, which is scoped to the server's
-> port. That port is currently chosen at random on each start, so schemes do not
-> yet survive a Rhino restart. See `docs/decision-record.zh.md` §17.
+Schemes are stored in browser local storage, which is scoped to the server's
+origin — including its port. The server therefore claims port **51275** on every
+start, falling back to a free port only if something else already holds it, so
+saved schemes are still there after a Rhino restart.
 
 ---
 
@@ -97,6 +101,10 @@ data/                the Carbon Conscience dataset, versioned
 docs/                design documents and the decision record (in Chinese)
 tools/               development scripts and test fixtures
 ```
+
+The carbon factors live in `data/` and nowhere else. The plugin embeds those same
+files at build time and serves them at `/data/cc.js` and `/data/materials.js`, so
+the viewer and the repository can never hold two different copies of the numbers.
 
 Research inputs — the source white paper, page scans, and UI references — are
 deliberately kept **outside** this repository so it stays small enough to clone.
@@ -123,7 +131,15 @@ variable pointing at the file on disk and the server will serve it live:
 setx CARBONTOOLS_VIEWER "E:\Carbon\carbon-tools\src\CarbonTools\WebAssets\viewer.html"
 ```
 
-Restart Rhino once, and from then on viewer edits appear on browser refresh.
+`CARBONTOOLS_DATA` does the same for the dataset — point it at the repository's
+`data/` folder to edit carbon factors and see the result on a refresh:
+
+```bash
+setx CARBONTOOLS_DATA "E:\Carbon\carbon-tools\data"
+```
+
+Restart Rhino once after setting either, since a process reads its environment at
+start. From then on, edits to the viewer or the data appear on browser refresh.
 
 Run the structural checks after editing the viewer — it is a single document
 with one global CSS namespace, so the script catches class collisions, unbalanced

@@ -10,8 +10,9 @@ namespace CarbonTools.Sync
 {
     /// <summary>
     /// Minimal local HTTP server embedded in the CC Sync component
-    /// (E:\Carbon\Carbon工具-方法论决策记录.md section 16: "自研 GH 组件内嵌本地服务，不用 Speckle").
-    /// Serves the current sync JSON at /data.json and a placeholder page at /.
+    /// (docs/decision-record.zh.md section 16: "自研 GH 组件内嵌本地服务，不用 Speckle").
+    /// Serves the current sync JSON at /data.json, the carbon dataset under /data/,
+    /// and the viewer at /.
     /// The transport can later be swapped for WebSocket without touching the protocol.
     /// </summary>
     public class CarbonSyncServer : IDisposable
@@ -21,7 +22,17 @@ namespace CarbonTools.Sync
         private volatile string _json = "{}";
         private volatile string _statusLine = "0 objects";
 
-        private static readonly string _viewerHtml = LoadViewerHtml();
+        private static readonly string _viewerHtml = LoadResource("WebAssets.viewer.html");
+        private static readonly string _ccDataset  = LoadResource("Data.cc_dataset.json");
+        private static readonly string _materials  = LoadResource("Data.materials.json");
+
+        /// <summary>
+        /// Preferred port. Browser local storage is scoped to origin, which includes
+        /// the port, so a port that changed on every start silently orphaned anything
+        /// the viewer had saved. Keeping it stable is what makes saved schemes survive
+        /// a Rhino restart.
+        /// </summary>
+        private const int PreferredPort = 51275;
 
         public int Port { get; private set; } = -1;
 
@@ -34,7 +45,7 @@ namespace CarbonTools.Sync
                 return;
             }
 
-            Port = FindFreePort();
+            Port = ResolvePort();
             _listener = new HttpListener();
             _listener.Prefixes.Add($"http://localhost:{Port}/");
             _listener.Start();
@@ -101,7 +112,25 @@ namespace CarbonTools.Sync
 
             if (path == "/data.json")
             {
+                // the live sync payload from Rhino, not the carbon dataset
                 WriteResponse(context, "application/json", _json);
+            }
+            else if (path == "/data/cc.js")
+            {
+                // a plain script tag keeps the viewer's start-up order synchronous
+                WriteResponse(context, "application/javascript", "const CC=" + Dataset() + ";");
+            }
+            else if (path == "/data/materials.js")
+            {
+                WriteResponse(context, "application/javascript", "const MAT=" + Materials() + ";");
+            }
+            else if (path == "/data/cc_dataset.json")
+            {
+                WriteResponse(context, "application/json", Dataset());
+            }
+            else if (path == "/data/materials.json")
+            {
+                WriteResponse(context, "application/json", Materials());
             }
             else
             {
@@ -117,9 +146,36 @@ namespace CarbonTools.Sync
         /// </summary>
         private static string DevViewerHtml()
         {
+            return DevFile(Environment.GetEnvironmentVariable("CARBONTOOLS_VIEWER"));
+        }
+
+        private static string Dataset()
+        {
+            return DevData("cc_dataset.json") ?? _ccDataset;
+        }
+
+        private static string Materials()
+        {
+            return DevData("materials.json") ?? _materials;
+        }
+
+        /// <summary>
+        /// Development override for the dataset, mirroring CARBONTOOLS_VIEWER.
+        /// Point CARBONTOOLS_DATA at the repository's data folder to edit carbon
+        /// factors and see them on a browser refresh.
+        /// </summary>
+        private static string DevData(string fileName)
+        {
+            var dir = Environment.GetEnvironmentVariable("CARBONTOOLS_DATA");
+            return string.IsNullOrWhiteSpace(dir)
+                ? null
+                : DevFile(Path.Combine(dir, fileName));
+        }
+
+        private static string DevFile(string path)
+        {
             try
             {
-                var path = Environment.GetEnvironmentVariable("CARBONTOOLS_VIEWER");
                 if (string.IsNullOrWhiteSpace(path) || !File.Exists(path))
                 {
                     return null;
@@ -134,16 +190,20 @@ namespace CarbonTools.Sync
             }
         }
 
-        private static string LoadViewerHtml()
+        private static string LoadResource(string suffix)
         {
             var assembly = Assembly.GetExecutingAssembly();
-            const string resourceName = "CarbonTools.WebAssets.viewer.html";
+            var resourceName = "CarbonTools." + suffix;
 
             using (var stream = assembly.GetManifestResourceStream(resourceName))
             {
                 if (stream == null)
                 {
-                    return "<html><body>viewer.html embedded resource not found.</body></html>";
+                    // a missing resource is a packaging fault, not a runtime one;
+                    // say so in a form the caller can render
+                    return suffix.EndsWith(".json")
+                        ? "{}"
+                        : "<html><body>Embedded resource " + suffix + " not found.</body></html>";
                 }
 
                 using (var reader = new StreamReader(stream, Encoding.UTF8))
@@ -161,6 +221,42 @@ namespace CarbonTools.Sync
             context.Response.ContentLength64 = buffer.Length;
             context.Response.OutputStream.Write(buffer, 0, buffer.Length);
             context.Response.OutputStream.Close();
+        }
+
+        /// <summary>
+        /// Use the same port every time so the viewer's saved state is still there
+        /// tomorrow, but never fail to start because something else holds it.
+        /// </summary>
+        private static int ResolvePort()
+        {
+            if (IsPortFree(PreferredPort))
+            {
+                return PreferredPort;
+            }
+
+            return FindFreePort();
+        }
+
+        private static bool IsPortFree(int port)
+        {
+            TcpListener probe = null;
+            try
+            {
+                probe = new TcpListener(IPAddress.Loopback, port);
+                probe.Start();
+                return true;
+            }
+            catch (SocketException)
+            {
+                return false;
+            }
+            finally
+            {
+                if (probe != null)
+                {
+                    try { probe.Stop(); } catch { }
+                }
+            }
         }
 
         private static int FindFreePort()

@@ -8,7 +8,8 @@ it loud instead.
 """
 import io, re, sys, subprocess, os
 
-P = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'viewer.html')
+P = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                 'src', 'CarbonTools', 'WebAssets', 'viewer.html')
 s = io.open(P, encoding='utf-8').read()
 fail = []
 

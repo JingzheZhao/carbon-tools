@@ -42,9 +42,9 @@ should be treated as authoritative-but-unsourced.
 | Newtonsoft.Json | as shipped with Rhino | MIT |
 | RhinoCommon, Grasshopper, GH_IO | referenced, not redistributed | McNeel EULA |
 
-three.js is bundled inside `viewer.html` so the tool works offline. Rhino and
-Grasshopper assemblies are referenced at build time and are **not** redistributed
-with this project.
+three.js is currently loaded from a CDN rather than bundled, so the viewer needs
+network access the first time it is opened. Rhino and Grasshopper assemblies are
+referenced at build time and are **not** redistributed with this project.
 
 ## Typefaces
 

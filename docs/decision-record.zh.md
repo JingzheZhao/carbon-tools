@@ -396,7 +396,7 @@ CC 的三层结构（可直接沿用）：**基础材料 → 场地要素 elemen
 **共享材料库改为不用后端实现**：数据集作为带版本号的 JSON 放在仓库里，插件只读拉取，他人通过 Pull Request 贡献。审核环节在这里是优点——碳排因子出错会静默污染别人的报告，不该允许任何人直接写入。
 
 **方案保存**：一期用浏览器 localStorage（已实现，见 viewer.html 的 SCHEMES）。
-⚠️ 已知问题：`CarbonSyncServer.FindFreePort()` 每次启动端口都变，而 localStorage 按「域名+端口」隔离，因此**跨 Rhino 会话方案会读不到**。修法是 `FindFreePort()` 优先尝试固定端口，占用再退回随机。待办。
+**2026-08-30 已修**：`CarbonSyncServer` 改为优先占用固定端口 **51275**，被占用才退回随机端口。localStorage 按「域名+端口」隔离，端口稳定后方案才能跨 Rhino 会话保留。
 
 **何时重新考虑**：需要团队协作功能时，或想商业化时（后者需先换数据层）。
 
@@ -487,8 +487,9 @@ CC 的三层结构（可直接沿用）：**基础材料 → 场地要素 elemen
 - [ ] AI agent 的 tool calling 设计与情景（what-if）机制 —— 槽位已由来路标签定义
 - [ ] 报告生成与导出
 - [x] ~~后端选型（账号 + 方案快照）~~ → **一期不做后端**，全本地（§十七 2026-08-30 重定）
-- [ ] `FindFreePort()` 改为优先固定端口，否则 localStorage 里的方案跨会话丢失（§十七）
+- [x] ~~`FindFreePort()` 改为优先固定端口~~ → **已改**，固定 51275，占用则退回随机（2026-08-30）
 - [ ] 仓库初始化 git + 目录规范化 + 研究素材移出仓库（212 MB PDF、92 页 JPG 不得入库）
-- [ ] 把内联的 CC 数据集从 viewer.html 拆出为独立 JSON，同时成为版本化共享数据库
+- [x] ~~把内联的 CC 数据集从 viewer.html 拆出~~ → **已拆**，`data/cc_dataset.json` + `data/materials.json`，由服务器在 `/data/cc.js`、`/data/materials.js` 供给；viewer.html 从 200 KB 降到 77 KB（2026-08-30）
+- [ ] three.js 目前从 CDN 加载，首次打开需要联网。要真正离线需内联约 600 KB
 
 > 推进顺序见 `Carbon工具-系统设计.md` 第六部分。

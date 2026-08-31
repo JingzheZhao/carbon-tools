@@ -13,6 +13,10 @@
 
   <ItemGroup>
     <EmbeddedResource Include="WebAssets\viewer.html" />
+    <!-- The dataset is versioned once, at the repository root, and embedded from
+         there so the .gha and the repository can never disagree about it. -->
+    <EmbeddedResource Include="..\..\data\cc_dataset.json" LogicalName="CarbonTools.Data.cc_dataset.json" />
+    <EmbeddedResource Include="..\..\data\materials.json" LogicalName="CarbonTools.Data.materials.json" />
   </ItemGroup>
 
   <ItemGroup>
