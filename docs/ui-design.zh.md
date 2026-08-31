@@ -288,7 +288,7 @@ infrared 的 "5 analyses" 是黑盒 —— 用户看不到这 5 个分析怎么�
 
 | 文件 | 内容 |
 |---|---|
-| `_research/ui-`_research/ui-references/01-thermal-comfort-july.png` | 热舒适结果面板 |
+| `_research/ui-references/01-thermal-comfort-july.png` | 热舒适结果面板 |
 | `_research/ui-references/02-thermal-comfort-august-toolbar.png` | 工具栏 |
 | `_research/ui-references/03-wind-speed.png` | 风速分析 |
 | `_research/ui-references/04-edit-buildings-shortcuts.png` | 体块编辑 + 快捷键面板 |
