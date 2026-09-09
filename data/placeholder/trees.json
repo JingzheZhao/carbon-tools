@@ -1,0 +1,15 @@
+{
+"_meta": {
+  "placeholder": true,
+  "basis": "count",
+  "unit": "tree",
+  "carbon": "kg CO2e per tree; sq is sequestration over the 60-year study",
+  "cost": "USD per tree",
+  "note": "Invented figures. Size is chosen by the user - never read from the modelled geometry."
+},
+"items": {
+  "small":  {"n":"Small tree (4-6 m canopy)",   "lo":6.2,  "me":8.4,  "hi":11.0, "sq":-136, "st":0, "cost":420},
+  "medium": {"n":"Medium tree (6-10 m canopy)", "lo":8.4,  "me":11.0, "hi":14.2, "sq":-203, "st":0, "cost":780},
+  "large":  {"n":"Large tree (10-15 m canopy)", "lo":11.6, "me":15.1, "hi":19.4, "sq":-383, "st":0, "cost":1650}
+}
+}

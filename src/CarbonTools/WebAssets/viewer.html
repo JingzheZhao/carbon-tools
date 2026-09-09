@@ -255,9 +255,6 @@ button,input,select{font-family:inherit;color:inherit}
 .detail{background:var(--track);border-radius:var(--r-surface);padding:10px 11px;margin:0 2px 9px;font-size:var(--fs-meta);color:var(--sub);line-height:1.55}
 .upg{margin-top:8px;padding:7px 9px;border:1px dashed var(--ochre);background:var(--ochreBg);
   border-radius:var(--r-ctrl);font-size:var(--fs-meta);color:var(--ochreInk);line-height:1.5}
-.totrow{margin-top:16px;display:flex;align-items:baseline;justify-content:space-between;padding-top:10px;border-top:1.5px solid var(--text)}
-.totrow .l{font-size:var(--fs-body);font-weight:500}
-.totrow .v{font-family:var(--mono);font-size:var(--fs-figure);font-weight:600;color:var(--accentText)}
 .totnote{font-size:var(--fs-meta);color:var(--dim);margin-top:5px;line-height:1.5}
 .empty{padding:24px 16px;text-align:center;color:var(--dim);font-size:var(--fs-body);line-height:1.7}
 
@@ -274,10 +271,9 @@ button,input,select{font-family:inherit;color:inherit}
 /* Colour key: the one place a full assembly name is written, with room to
    wrap. Truncating it in every chart would hide exactly what separates the
    fourteen "Concrete Hardscape" variants - their wall density. */
-.rs-keyRow{display:grid;grid-template-columns:12px 1fr;gap:10px;align-items:start;
-  padding:8px 0;border-bottom:1px solid var(--line)}
-.rs-keyRow:last-child{border-bottom:0}
-.rs-dot{width:12px;height:12px;border-radius:50%;margin-top:3px}
+.rs-keyRow{display:grid;grid-template-columns:11px 1fr;gap:9px;align-items:start;
+  padding:3px 0}
+.rs-dot{width:11px;height:11px;border-radius:50%;margin-top:3px}
 .rs-full{font-size:var(--fs-body);color:var(--text);line-height:1.45}
 
 /* a chart row: dot, plot, value - three columns that cannot overlap */
@@ -305,10 +301,10 @@ button,input,select{font-family:inherit;color:inherit}
   font-family:var(--mono);font-size:var(--fs-label);color:var(--dim)}
 .rs-ticks span{position:absolute;transform:translateX(-50%);white-space:nowrap}
 
-.rs-line{position:absolute;top:4px;height:6px;border-radius:3px}
+/* with no dot on the end, the bar is the only mark a row has - a group at
+   1% of the largest would otherwise draw under a pixel and vanish */
+.rs-line{position:absolute;top:4px;height:6px;border-radius:3px;min-width:6px}
 .rs-rng{position:absolute;top:4px;height:6px;border-radius:3px;opacity:.32}
-.rs-end{position:absolute;top:0;width:14px;height:14px;border-radius:50%;margin-left:-7px}
-.rs-end.hi{opacity:.42}
 
 /* one card per chart, matching the material cards in the panel above */
 .rs-card{border:1px solid var(--cardLine);border-radius:var(--r-surface);
@@ -330,22 +326,99 @@ button,input,select{font-family:inherit;color:inherit}
 .rs-sum b{color:var(--text);font-weight:600}
 
 /* the sixty-year curve */
-.rs-chart{display:flex;gap:8px;margin-top:10px}
-.rs-yax{display:flex;flex-direction:column;justify-content:space-between;
-  font-family:var(--mono);font-size:var(--fs-label);color:var(--dim);
-  text-align:right;flex:none;padding:1px 0}
-.rs-svg{flex:1;min-width:0;height:150px;display:block;overflow:visible}
-.rs-legend{display:flex;gap:14px;margin-top:8px;font-family:var(--mono);
-  font-size:var(--fs-label);color:var(--dim)}
-.rs-legend i{display:inline-block;width:14px;height:2px;margin-right:5px;vertical-align:middle}
+.rs-chart{display:flex;gap:9px;margin-top:2px}
+.rs-yax{position:relative;flex:none;width:44px;height:132px;
+  font-family:var(--mono);font-size:var(--fs-label);color:var(--dim)}
+.rs-yax span{position:absolute;right:0;transform:translateY(-50%);white-space:nowrap}
+.rs-yax .z{color:var(--sub)}
+.rs-plotcol{flex:1;min-width:0}
+.rs-svg{width:100%;height:132px;display:block;overflow:visible}
 
-/* benchmark strip */
-.rs-bm{position:relative;height:26px;margin-top:12px}
-.rs-bmTrack{position:absolute;left:0;right:0;top:11px;height:4px;border-radius:2px;background:var(--track)}
-.rs-bmFill{position:absolute;left:0;top:11px;height:4px;border-radius:2px;background:var(--accent)}
-.rs-bmMark{position:absolute;top:4px;width:1px;height:18px;background:var(--ochre)}
-.rs-bmCap{position:absolute;top:-2px;transform:translateX(-50%);font-family:var(--mono);
-  font-size:var(--fs-label);color:var(--ochreInk);white-space:nowrap}
+/* Comparison. A full-width surface because the whole point is to see schemes
+   beside each other; the 3D view has nothing to say while it is open. */
+.cmp{position:fixed;left:486px;top:58px;right:64px;bottom:16px;z-index:30;
+  background:var(--scene);border:1px solid var(--cardLine);border-radius:var(--r-shell);
+  box-shadow:var(--shadow);display:flex;flex-direction:column;overflow:hidden}
+.cmp[hidden]{display:none}
+.cmpH{display:flex;align-items:center;gap:14px;padding:13px 18px;
+  border-bottom:1px solid var(--line);background:var(--card);flex:none}
+.cmpH .t{font-size:var(--fs-tab);font-weight:600;color:var(--text);letter-spacing:-.01em}
+.cmpH .n{font-family:var(--mono);font-size:var(--fs-label);color:var(--dim)}
+.cmpX{margin-left:auto;border:0;background:none;color:var(--sub);cursor:pointer;
+  font-size:18px;line-height:1;padding:4px 8px;border-radius:var(--r-ctrl)}
+.cmpX:hover{background:var(--track);color:var(--text)}
+/* the baseline every other column is read against */
+.cmpBase{display:flex;align-items:center;gap:7px;flex-wrap:wrap;
+  padding:9px 18px;border-bottom:1px solid var(--line);background:var(--card);flex:none}
+.cmpBase .l{font-family:var(--mono);font-size:var(--fs-label);letter-spacing:.06em;
+  color:var(--dim);margin-right:3px}
+.cmpChip{display:flex;align-items:center;gap:6px;border:1px solid var(--cardLine);
+  background:var(--field);border-radius:var(--r-pill);padding:4px 11px;cursor:pointer;
+  font-family:var(--sans);font-size:var(--fs-body);color:var(--sub)}
+.cmpChip[aria-pressed="true"]{background:var(--selBg);border-color:var(--accent);color:var(--accentInk)}
+.cmpChip i{width:9px;height:9px;border-radius:50%;display:block}
+/* the key reads under the plot, where it cannot sit on top of the curves */
+.cmpKey{display:flex;flex-wrap:wrap;gap:6px 18px;padding-top:12px}
+.cmpKeyItem{display:flex;align-items:baseline;gap:7px;font-size:var(--fs-body)}
+.cmpKeyItem b{font-weight:600}
+.cmpKeyItem em{font-family:var(--mono);font-size:var(--fs-label);font-style:normal;
+  color:var(--dim)}
+.cmpBody{flex:1;min-height:0;overflow-y:auto;padding:10px 18px 18px}
+.cmpBody>.rs-card:first-child{margin-top:0}
+/* the curve gets the height the full-width surface can afford: at panel height
+   three schemes on one scale flatten into three near-straight lines */
+.cmpBody>.rs-card:first-child .rs-svg{height:270px}
+.cmpBody>.rs-card:first-child .rs-yax{height:270px}
+/* the schemes sit in one panel and scroll sideways inside it, so however many
+   are saved they stay a single object on the page */
+.cmpPanel{margin-top:10px;border:1px solid var(--cardLine);border-radius:var(--r-shell);
+  background:var(--scene);overflow:hidden}
+.cmpCols{display:grid;grid-auto-flow:column;grid-auto-columns:330px;
+  grid-template-rows:repeat(8,auto);overflow-x:auto;padding:14px 0}
+.cmpCell{padding:0 15px 12px;min-width:0}
+.cmpCell.sep{border-left:1px solid var(--line)}
+.cmpCell.head{padding-bottom:2px}
+/* the charts are drawn for the panel's width; in a column the tick labels run
+   into each other, so every other one steps aside - the gridlines still carry
+   the spacing, and the value sits beside its own bar either way */
+.cmpCell .rs-ticks span:nth-of-type(even){display:none}
+.cmpCell .rs-card{margin-top:0}
+/* the whole heading is the baseline control - the thing it acts on is the column
+   it sits on, so there is no second list of names to keep in step - and it runs
+   the full width of the cards beneath it rather than hugging the words */
+.cmpColH{display:flex;align-items:center;gap:6px;padding:2px 4px;
+  border-radius:var(--r-ctrl)}
+.cmpColH.base{background:var(--selBg)}
+.cmpColH .cmpPick{flex:1;min-width:0;display:flex;align-items:center;gap:8px;border:0;
+  background:none;padding:2px 0;cursor:pointer;font-family:var(--sans);text-align:left}
+.cmpColH:not(.base):hover{background:var(--track)}
+.cmpColH .nm{font-size:var(--fs-card);font-weight:600;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cmpColH .tag{flex:none;font-family:var(--mono);font-size:var(--fs-label);
+  letter-spacing:.06em;color:var(--accentInk)}
+.cmpColH .del{margin-left:auto;border:0;background:none;color:var(--dim);cursor:pointer;
+  font-size:15px;line-height:1;padding:0 3px}
+.cmpColH .del:hover{color:var(--red)}
+.cmpMeta{display:flex;gap:10px;font-family:var(--mono);font-size:var(--fs-label);
+  color:var(--dim);padding:4px 6px 0}
+.cmpDlt{font-family:var(--mono);font-size:var(--fs-meta)}
+.cmpDlt.up{color:var(--red)} .cmpDlt.dn{color:var(--accentText)}
+.cmpShot{width:100%;border-radius:var(--r-surface);border:1px solid var(--cardLine);
+  display:block;background:var(--track)}
+.cmpEmpty{padding:60px 18px;text-align:center;color:var(--dim);font-size:var(--fs-body);
+  line-height:1.7}
+
+/* Save to comparison, at the foot of the Result tab. */
+.saveBar{display:flex;align-items:center;gap:8px;margin-top:12px;padding:11px 13px;
+  border:1px solid var(--cardLine);border-radius:var(--r-surface);background:var(--card)}
+.saveBar input{flex:1;min-width:0;padding:7px 9px;border:1px solid var(--cardLine);
+  border-radius:var(--r-ctrl);background:var(--field);color:var(--text);
+  font-family:var(--sans);font-size:var(--fs-body)}
+.saveBar input:focus{outline:none;border-color:var(--accent)}
+.saveBar button{flex:none;border:0;border-radius:var(--r-ctrl);background:var(--accent);
+  color:#fff;padding:8px 14px;font-family:var(--sans);font-size:var(--fs-body);
+  font-weight:600;cursor:pointer}
+.saveBar button:hover{filter:brightness(1.06)}
 
 /* collapsible blocks */
 .rs-tog{width:100%;display:flex;align-items:center;justify-content:space-between;
@@ -356,10 +429,6 @@ button,input,select{font-family:inherit;color:inherit}
 .rs-asm .q{font-family:var(--mono);font-size:var(--fs-meta);color:var(--sub);margin-top:3px}
 .rs-fix{font-size:var(--fs-meta);color:var(--ochreInk);margin-top:5px;line-height:1.5}
 .rs-note{font-size:var(--fs-meta);color:var(--dim);line-height:1.55;margin-top:9px}
-.rs-key{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:9px;
-  font-family:var(--mono);font-size:var(--fs-label);color:var(--dim)}
-.rs-key i{display:inline-block;width:13px;height:8px;border-radius:2px;
-  background:var(--sub);margin-right:5px;vertical-align:-1px}
 .meta{font-family:var(--mono);font-size:var(--fs-meta);color:var(--dim)}
 .h2{margin-top:14px;font-size:var(--fs-figure);font-weight:700;letter-spacing:-.3px}
 .sub2{font-size:var(--fs-body);color:var(--sub);line-height:1.55;margin-top:4px}
@@ -427,7 +496,7 @@ button,input,select{font-family:inherit;color:inherit}
     <circle cx="12" cy="13" r="3.4"/></svg>
   </button>
   <div class="tb-sep"></div>
-  <button class="tb-btn" id="tbSch" aria-haspopup="true" title="Schemes">
+  <button class="tb-btn" id="tbSch" title="Compare schemes">
     <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor"
          stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
     <path d="m12 3 9 4.5-9 4.5-9-4.5L12 3Z"/><path d="m3 12 9 4.5L21 12"/><path d="m3 16.5 9 4.5 9-4.5"/></svg>
@@ -441,6 +510,8 @@ button,input,select{font-family:inherit;color:inherit}
   </button>
   <div class="tb-pop" id="tbPop" hidden></div>
 </div>
+
+<div class="cmp" id="cmp" hidden></div>
 
 <div class="dm-bar" id="modebar">
   <div class="dm-seg" id="modeSeg"></div>
@@ -742,7 +813,7 @@ function volVal(m3){ var u=U(); return num(m3*u.vol ,u.dp[1]); }
 
 var MODEL={meta:null,groups:[]}, ASSIGN={}, RATE={}, VIS={};
 var UI={tab:'mat',open:{},theme:'light',picker:null,dd:null,mode:'colour',
-        grid:true,pal:'magma',pop:null,res:{}};
+        grid:true,pal:'magma',pop:null,res:{},cmp:false};
 var PROJECT='Untitled project';
 var $=function(s){return document.querySelector(s);};
 function t1(v){return (v/1000).toLocaleString('en-US',{minimumFractionDigits:1,maximumFractionDigits:1});}
@@ -893,7 +964,7 @@ function picker(cg, kind, ref){
 
 function matTab(){
   if(!MODEL.groups.length) return '<div class="empty">No colour groups yet.<br>Add geometry to a <b>CC Group</b> component and toggle <b>Run</b> on <b>CC Sync</b>.</div>';
-  var un=MODEL.groups.filter(function(g){return !ASSIGN[g.color];}).length, grand=0;
+  var un=MODEL.groups.filter(function(g){return !ASSIGN[g.color];}).length;
   var h='<div style="padding:12px 14px 20px">';
   MODEL.groups.forEach(function(cg){
     var ref=ASSIGN[cg.color], open=UI.open[cg.color], q=cg.qty, kind=groupKind(cg);
@@ -909,7 +980,7 @@ function matTab(){
        '<div class="cgq">'+qparts.join(' · ')+'</div>'+
        picker(cg, kind, ref);
     if(ref){
-      var r=resolve(cg), c=carbon(r); grand+=c.me;
+      var r=resolve(cg), c=carbon(r);
       var n=r.items.filter(function(i){return i.qty>0;}).length;
       h+='<div class="cgres"><span class="cgval"'+(c.me<0?' style="color:var(--green)"':'')+'>'+t1(c.me)+' t</span>'+
          '<button class="cgexp" data-exp="'+cg.color+'">'+(open?'hide':n+(n===1?' element':' elements'))+'</button></div>';
@@ -923,11 +994,6 @@ function matTab(){
     }
     h+='</div>';
   });
-  var st=siteTotals();
-  h+='<div class="totrow"><span class="l">Carbon</span><span class="v">'+t1(grand)+' t</span></div>'+
-     '<div class="totrow" style="border-top:0;padding-top:4px;margin-top:4px">'+
-     '<span class="l">Cost</span><span class="v" id="grandCost">'+
-     money(st.cost)+'</span></div>';
   return h+'</div>';
 }
 
@@ -958,16 +1024,6 @@ function breakdown(cg,r){
   });
   return h+'</div>';
 }
-
-/* Published thresholds the result is read against. All are stated per square
-   metre over FIFTY years, while this study runs sixty — so the comparison is
-   indicative, and the panel says so rather than quietly rescaling someone
-   else's number. */
-var BENCHMARKS=[
-  {v:185, n:'Atelier Ten'},
-  {v:500, n:'ILFI Zero Carbon'}
-];
-
 /* Rows for the diverging plot and the account charts: one entry per assigned
    colour group, carrying the group's own Rhino colour so a bar here is the same
    colour as the object in the viewport. */
@@ -989,8 +1045,7 @@ function resRows(){
 }
 
 function colourKey(rows){
-  var h='<div class="rs-card"><div class="rs-cardH"><span class="t">Colour Key</span>'+
-        '<span class="u">'+rows.length+' group'+(rows.length===1?'':'s')+'</span></div>'+
+  var h='<div class="rs-card"><div class="rs-cardH"><span class="t">Colour Key</span></div>'+
         '<div class="rs-body">';
   rows.forEach(function(r){
     h+='<div class="rs-keyRow"><span class="rs-dot" style="background:'+esc(r.color)+
@@ -1036,9 +1091,6 @@ function barSpans(color, parts){
     if(pt.w>0)
       h+='<span class="'+(pt.range?'rs-rng':'rs-line')+'" style="background:'+esc(color)+
          ';left:'+pt.x.toFixed(2)+'%;width:'+pt.w.toFixed(2)+'%"></span>';
-    if(pt.dot!=null)
-      h+='<span class="rs-end'+(pt.range?' hi':'')+'" style="background:'+esc(color)+
-         ';left:'+pt.dot.toFixed(2)+'%"></span>';
   });
   return h;
 }
@@ -1072,9 +1124,9 @@ function divergingPlot(rows){
     var L=50-pct(neg), M=50+pct(me), H=50+pct(hi);
     var bars='<div class="rs-axis" style="left:50%"></div>'+gt.grid+
       barSpans(r.color, [
-        {x:L, w:50-L, dot:L},
-        {x:M, w:H-M, range:true, dot:(H>M?H:null)},
-        {x:50, w:M-50, dot:M}
+        {x:L, w:50-L},
+        {x:M, w:H-M, range:true},
+        {x:50, w:M-50}
       ]);
     h+=chartRow(r, bars, (neg>0?('\u2212'+t1(neg)+' / '):'')+t1(me)+' t');
   });
@@ -1094,31 +1146,34 @@ function divergingPlot(rows){
 /* Each account gets its own scale. A shared one buries the small accounts -
    sequestration is routinely a hundredth of emissions - and the comparison
    between accounts is what the diverging card above is for. */
-function accountCharts(rows){
-  var accs=[
-    {k:'me', n:'Embodied Carbon',    sign:1},
-    {k:'sq', n:'Carbon Sequestered', sign:-1},
-    {k:'st', n:'Carbon Stored',      sign:-1}
-  ];
+var ACCOUNTS=[
+  {k:'me', n:'Embodied Carbon',    sign:1},
+  {k:'sq', n:'Carbon Sequestered', sign:-1},
+  {k:'st', n:'Carbon Stored',      sign:-1}
+];
+/* One card. Returns '' when the scheme has nothing in this account - the
+   comparison grid puts an empty cell there so the row below still lines up. */
+function accountChart(rows, key){
   var h='';
-  accs.forEach(function(a){
+  if(key!=='cost') ACCOUNTS.filter(function(a){ return a.k===key; }).forEach(function(a){
     var live=rows.filter(function(r){ return Math.abs(r[a.k]||0)>0; });
     if(!live.length) return;
     var max=0, tot=0;
     live.forEach(function(r){ var v=Math.abs(r[a.k]||0); if(v>max) max=v; tot+=(r[a.k]||0); });
     var gt=gridAndTicks(0,max,function(v){ return t1(v); });
     h+='<div class="rs-card"><div class="rs-cardH"><span class="t">'+a.n+'</span>'+
-       '<span class="u">t CO\u2082e \u00b7 0\u2013'+t1(max)+'</span></div>'+
+       '<span class="u">t CO₂e · 0–'+t1(max)+'</span></div>'+
        '<div class="rs-body"><div class="rs-grid3">';
     live.forEach(function(r){
       var v=Math.abs(r[a.k]||0), w=(v/max)*100;
-      h+=chartRow(r, gt.grid+barSpans(r.color,[{x:0,w:w,dot:w}]),
-                  (a.sign<0?'\u2212':'')+t1(v)+' t');
+      h+=chartRow(r, gt.grid+barSpans(r.color,[{x:0,w:w}]),
+                  (a.sign<0?'−':'')+t1(v)+' t');
     });
     h+=gt.ticks+'</div></div>'+
        '<div class="rs-tot"><span class="l">Total</span><span class="v">'+
-       (tot<0?'\u2212':'')+t1(Math.abs(tot))+' t</span></div></div>';
+       (tot<0?'−':'')+t1(Math.abs(tot))+' t</span></div></div>';
   });
+  if(key!=='cost') return h;
 
   // cost is money, so it never shared a carbon axis in the first place
   var priced=rows.filter(function(r){ return r.cost!=null; });
@@ -1127,11 +1182,11 @@ function accountCharts(rows){
   if(priced.length){
     var cg=gridAndTicks(0,cmax,function(v){ return money(v).replace('$ ','$'); });
     h+='<div class="rs-card"><div class="rs-cardH"><span class="t">Cost</span>'+
-       '<span class="u">$0\u2013'+money(cmax).replace('$ ','')+'</span></div>'+
+       '<span class="u">$0–'+money(cmax).replace('$ ','')+'</span></div>'+
        '<div class="rs-body"><div class="rs-grid3">';
     priced.forEach(function(r){
       var w=cmax>0?(Math.abs(r.cost)/cmax)*100:0;
-      h+=chartRow(r, cg.grid+barSpans(r.color,[{x:0,w:w,dot:w}]), money(r.cost));
+      h+=chartRow(r, cg.grid+barSpans(r.color,[{x:0,w:w}]), money(r.cost));
     });
     h+=cg.ticks+'</div></div>'+
        '<div class="rs-tot"><span class="l">Total</span><span class="v">'+esc(money(ctot))+'</span>'+
@@ -1143,53 +1198,67 @@ function accountCharts(rows){
   }
   return h;
 }
+function accountCharts(rows){
+  return ACCOUNTS.map(function(a){ return accountChart(rows,a.k); }).join('')+
+         accountChart(rows,'cost');
+}
 
-/* Cumulative net carbon across the study period. */
-function curveChart(t){
+/* Cumulative net carbon across the study period. One series rather than a
+   breakdown, so it carries no colour key - but it wears the same card, grid,
+   tick row and footer band as every other chart on this tab. */
+function curveCard(t){
   var y0=t.me+t.st, cv=curve(t.sq,80), pts=[];
   for(var y=0;y<=60;y++) pts.push(y0+cv[y]);
   var top=Math.max.apply(null,pts), bot=Math.min.apply(null,pts);
   if(top<0) top=0;
   if(bot>0) bot=0;
-  var span=(top-bot)||1;
-  var W=100, H=100, pad=2;
-  var X=function(y){ return (y/60)*W; };
-  var Y=function(v){ return pad+((top-v)/span)*(H-pad*2); };
+  var span=(top-bot)||1, pad=4;
+  var X=function(y){ return (y/60)*100; };
+  var Y=function(v){ return pad+((top-v)/span)*(100-pad*2); };
   var d=pts.map(function(v,y){ return (y?'L':'M')+X(y).toFixed(2)+' '+Y(v).toFixed(2); }).join(' ');
-  var zeroY=Y(0);
-  var ny=null;
-  for(var i=0;i<=60;i++){ if(pts[i]<=0){ ny=i; break; } }
 
-  var h='<div class="rs-chart"><div class="rs-yax">'+
-        '<span>'+t1(top)+' t</span><span>'+t1(bot)+' t</span></div>'+
-        '<svg class="rs-svg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">';
-  h+='<line x1="0" y1="'+zeroY.toFixed(2)+'" x2="100" y2="'+zeroY.toFixed(2)+
-     '" stroke="var(--sub)" stroke-width=".4" stroke-dasharray="2 2" opacity=".6"/>';
-  h+='<path d="'+d+'" fill="none" stroke="var(--accent)" stroke-width="1.4" '+
-     'vector-effect="non-scaling-stroke" stroke-linejoin="round"/>';
-  if(ny!=null)
-    h+='<line x1="'+X(ny).toFixed(2)+'" y1="0" x2="'+X(ny).toFixed(2)+
-       '" y2="100" stroke="var(--ochre)" stroke-width=".4" vector-effect="non-scaling-stroke"/>';
-  h+='</svg></div>';
-  h+='<div class="rs-legend"><span>year 0</span>'+
-     (ny!=null?('<span style="color:var(--ochreInk)">break-even yr '+ny+'</span>'):'')+
-     '<span style="margin-left:auto">year 60</span></div>';
-  return h;
-}
+  /* Break-even falls between two whole years. Reporting the first year the
+     curve happens to be negative turns a crossing at 30.0 into "year 31". */
+  var be=null;
+  for(var i=1;i<=60;i++){
+    if(pts[i-1]>0 && pts[i]<=0){ be=i-1+pts[i-1]/(pts[i-1]-pts[i]); break; }
+  }
 
-function benchmarkStrip(per){
-  var top=Math.max(per*1.15, 560);
-  var pos=function(v){ return Math.min(100,(v/top)*100); };
-  var h='<div class="rs-bm"><div class="rs-bmTrack"></div>'+
-        '<div class="rs-bmFill" style="width:'+pos(per).toFixed(1)+'%"></div>';
-  BENCHMARKS.forEach(function(b){
-    h+='<div class="rs-bmMark" style="left:'+pos(b.v).toFixed(1)+'%"></div>'+
-       '<div class="rs-bmCap" style="left:'+pos(b.v).toFixed(1)+'%">'+b.v+'</div>';
+  var zy=Y(0);
+  var yax='<span style="top:'+Y(top).toFixed(2)+'%">'+t1(top)+'</span>';
+  if(zy>Y(top)+9 && zy<Y(bot)-9) yax+='<span class="z" style="top:'+zy.toFixed(2)+'%">0</span>';
+  yax+='<span style="top:'+Y(bot).toFixed(2)+'%">'+t1(bot)+'</span>';
+
+  var grid='', ticks='';
+  [0,15,30,45,60].forEach(function(y){
+    var x=X(y).toFixed(2);
+    grid+='<line x1="'+x+'" y1="0" x2="'+x+'" y2="100" stroke="var(--line)" '+
+          'stroke-width="1" vector-effect="non-scaling-stroke"/>';
+    ticks+='<span style="'+(y===0?'left:0;transform:none'
+                          :y===60?'right:0;left:auto;transform:none'
+                                 :'left:'+x+'%')+'">'+y+'</span>';
   });
-  h+='</div>';
-  h+='<div class="rs-key"><span style="color:var(--accentText)">this scheme '+perLabel(per)+'</span>'+
-     BENCHMARKS.map(function(b){ return '<span>'+b.v+' '+esc(b.n)+'</span>'; }).join('')+
-     '<span>50-yr thresholds</span></div>';
+
+  var h='<div class="rs-card"><div class="rs-cardH">'+
+        '<span class="t">Cumulative Net Carbon</span>'+
+        '<span class="u">t CO\u2082e \u00b7 60 yr</span></div>'+
+        '<div class="rs-body"><div class="rs-chart">'+
+        '<div class="rs-yax">'+yax+'</div>'+
+        '<div class="rs-plotcol">'+
+        '<svg class="rs-svg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">'+
+        grid+
+        '<line x1="0" y1="'+zy.toFixed(2)+'" x2="100" y2="'+zy.toFixed(2)+'" '+
+          'stroke="var(--sub)" stroke-width="1" opacity=".55" vector-effect="non-scaling-stroke"/>';
+  if(be!=null)
+    h+='<line x1="'+X(be).toFixed(2)+'" y1="0" x2="'+X(be).toFixed(2)+'" y2="100" '+
+       'stroke="var(--ochre)" stroke-width="1" vector-effect="non-scaling-stroke"/>';
+  h+='<path d="'+d+'" fill="none" stroke="var(--accent)" stroke-width="3" '+
+     'vector-effect="non-scaling-stroke" stroke-linejoin="round" stroke-linecap="round"/>'+
+     '</svg><div class="rs-ticks">'+ticks+'</div></div></div></div>'+
+     '<div class="rs-tot"><span class="l">Break-even</span><span class="v">'+
+     (be==null?'not within 60 years':'year '+Math.round(be))+'</span>'+
+     '<span class="l" style="margin-left:auto">net at 60</span>'+
+     '<span class="v">'+t1(pts[60])+' t</span></div></div>';
   return h;
 }
 
@@ -1229,20 +1298,17 @@ function resTab(){
   if(!rows.length) return '<div class="empty">Nothing to report yet.<br>Assign a material to at least one colour in <b>Materials</b>.</div>';
 
   var t=siteTotals();
-  var per=t.area>0?t.me/t.area:0;
 
   var h='<div style="padding:2px 16px 28px">';
   h+=colourKey(rows);
-  h+='<div class="rs-card"><div class="rs-cardH"><span class="t">Cumulative Net Carbon</span>'+
-     '<span class="u">t CO\u2082e \u00b7 60 yr</span></div><div class="rs-body">'+
-     curveChart(t)+'</div></div>';
-
   h+=divergingPlot(rows);
   h+=accountCharts(rows);
 
-  h+='<div class="rs-card"><div class="rs-cardH"><span class="t">Against Published Targets</span>'+
-     '<span class="u">kg CO\u2082e per m\u00b2</span></div><div class="rs-body">'+
-     benchmarkStrip(per)+'</div></div>';
+  h+=curveCard(t);
+
+  h+='<div class="saveBar"><input id="cmpName" type="text" maxlength="40" '+
+     'placeholder="Name this scheme" autocomplete="off">'+
+     '<button id="cmpSave">Save to comparison</button></div>';
 
   return h+'</div>';
 }
@@ -1366,10 +1432,6 @@ function repTab(){
      '<p class="note">The pale extension on each bar is the range to the high carbon factor. '+
      'It is not an error bar. The low end is what this same design reaches if the low-carbon '+
      'option is taken everywhere, which makes it a target rather than a disclaimer.</p>'+
-     '<p class="note">The published thresholds shown against the result \u2014 '+
-     BENCHMARKS.map(function(b){ return b.n+' '+b.v; }).join(', ')+' kg CO\u2082e/m\u00b2 \u2014 '+
-     'cover a whole life cycle over <b>fifty</b> years, while this study reports embodied carbon '+
-     'over sixty. Read that comparison as indicative, not as compliance.</p>'+
      '<p class="note">No \u201Cdo nothing\u201D baseline is drawn on the sixty-year curve. '+
      'It requires the existing-condition account, which is not built. Without it the area '+
      'between the two curves \u2014 the design\u2019s true cost against leaving the site alone '+
@@ -1504,7 +1566,8 @@ function drawModeBar(vals,lo,hi,any){
     b.onclick=function(){ UI.mode=b.dataset.mode; paint(true); };
   });
   var ramp=$('#ramp');
-  if(UI.mode==='colour'){ ramp.hidden=true; return; }
+  // a background poll must not raise the ramp back over an open comparison
+  if(UI.cmp||UI.mode==='colour'){ ramp.hidden=true; return; }
   ramp.hidden=false;
   if(!any){
     ramp.innerHTML='<div class="dm-note">'+(UI.mode==='cost'
@@ -1547,85 +1610,193 @@ function persistSchemes(){
   try{ localStorage.setItem(SKEY, JSON.stringify(SCHEMES)); }
   catch(e){ /* private mode or quota - the session still works in memory */ }
 }
+function thumbnail(){
+  /* A scheme keeps a picture of what it was, because four columns of numbers do
+     not tell you which design you are looking at. 320px wide is enough to
+     recognise a scheme and small enough to sit beside it in storage. */
+  try{
+    renderer.render(scene,camera);
+    var srcC=renderer.domElement, W=320, H=Math.round(W*srcC.height/srcC.width);
+    var c=document.createElement('canvas');
+    c.width=W; c.height=H;
+    var g=c.getContext('2d');
+    g.fillStyle=(UI.theme==='dark')?'#1e2732':'#ffffff';
+    g.fillRect(0,0,W,H);
+    g.drawImage(srcC,0,0,W,H);
+    return c.toDataURL('image/jpeg',0.72);
+  }catch(e){ return null; }
+}
+
+/* A saved scheme is a finished reading, not a recipe. It carries its own rows,
+   its own totals and its own picture, so the comparison never re-runs it against
+   whatever geometry happens to be in Rhino now. Nothing loads a scheme back into
+   the model: changing a material makes a new scheme, it does not edit one. */
 function captureScheme(name){
   var st=siteTotals();
   return {id:String(Date.now()), name:name, ts:new Date().toISOString(),
-          assign:JSON.parse(JSON.stringify(ASSIGN)), rate:JSON.parse(JSON.stringify(RATE)),
-          climate:CLIMATE, carbon:st.me, cost:st.cost, anyCost:st.anyCost};
+          climate:CLIMATE, shot:thumbnail(),
+          rows:JSON.parse(JSON.stringify(resRows())),
+          tot:{lo:st.lo, me:st.me, hi:st.hi, sq:st.sq, st:st.st,
+               area:st.area, cost:st.cost, anyCost:st.anyCost}};
 }
-function applyScheme(sc){
-  ASSIGN=JSON.parse(JSON.stringify(sc.assign||{}));
-  RATE  =JSON.parse(JSON.stringify(sc.rate||{}));
-  if(sc.climate) CLIMATE=sc.climate;
-  UI.pop=null;
+function saveSchemeNamed(name){
+  SCHEMES.push(captureScheme(name));
+  if(!BASELINE) BASELINE=SCHEMES[0].id;
+  persistSchemes();
   paint(true);
 }
-function schemeSig(assign, rate, climate){
-  var norm=function(o){
-    return Object.keys(o||{})
-      .filter(function(k){ return o[k]!=null && o[k]!==''; })
-      .sort()
-      .map(function(k){ return k+'='+o[k]; }).join('|');
-  };
-  return norm(assign)+'//'+norm(rate)+'//'+climate;
+function deleteScheme(id){
+  SCHEMES=SCHEMES.filter(function(s){ return s.id!==id; });
+  if(BASELINE===id) BASELINE=SCHEMES.length?SCHEMES[0].id:null;
+  persistSchemes();
+  drawCompare();
+  paint(true);
 }
-function schemePop(){
-  var st=siteTotals(), now=st.me;
-  var live=schemeSig(ASSIGN, RATE, CLIMATE);
-  var onOne=SCHEMES.some(function(sc){ return schemeSig(sc.assign,sc.rate,sc.climate)===live; });
-  var h='<div class="tb-ttl">SCHEMES</div>';
-  h+='<div class="tb-row'+(onOne?'':' now')+'"><span class="nm">Current'+
-     (onOne?'':' \u00b7 unsaved')+'</span>'+
-     '<span class="fig">'+esc(t1(now))+' t</span>'+
-     '<span class="fig">'+esc(st.anyCost?money(st.cost):'\u2014')+'</span>'+
-     '<span class="dlt"></span></div>';
-  SCHEMES.forEach(function(sc){
-    var active=(schemeSig(sc.assign,sc.rate,sc.climate)===live);
-    var d = now!==0 ? ((sc.carbon-now)/Math.abs(now))*100 : 0;
-    var cls = Math.abs(d)<0.5 ? '' : (d>0?'up':'dn');
-    var txt = Math.abs(d)<0.5 ? '\u2014' : (d>0?'+':'\u2212')+Math.abs(d).toFixed(0)+'%';
-    h+='<div class="tb-row'+(active?' now':'')+'">'+
-       '<button class="nm" data-load="'+sc.id+'" title="Load this scheme">'+
-       esc(sc.name)+'</button>'+
-       '<span class="fig">'+esc(t1(sc.carbon))+' t</span>'+
-       '<span class="fig">'+esc(sc.anyCost?money(sc.cost):'\u2014')+'</span>'+
-       '<span class="dlt '+cls+'">'+txt+'</span>'+
-       '<button class="del" data-del="'+sc.id+'" title="Delete">\u00d7</button></div>';
+
+/* Four schemes get their own hue, validated for colour-vision deficiency on
+   both themes. A fifth is never given a generated colour - it draws neutral and
+   is read by the label at the end of its line. */
+var SCHEME_COLOURS=['#0072B2','#D55E00','#009E73','#9B4F7D'];
+function schemeColour(i){ return i<SCHEME_COLOURS.length?SCHEME_COLOURS[i]:'var(--dim)'; }
+var BASELINE=null;
+
+
+/* -- comparison -------------------------------------------------------------
+   Every saved scheme side by side. The charts are the ones the Result tab
+   draws, fed each scheme's own stored rows, so a column reads exactly as that
+   scheme read when it was saved. Each keeps its own scale, as it does there:
+   the figure beside every bar is what carries across columns, not the length. */
+function compareCurve(list){
+  /* One chart, several series - here a shared scale is the whole point, since
+     these curves are only worth anything drawn against each other. */
+  var series=list.map(function(sc,i){
+    var y0=sc.tot.me+sc.tot.st, cv=curve(sc.tot.sq,80), pts=[];
+    for(var y=0;y<=60;y++) pts.push(y0+cv[y]);
+    var be=null;
+    for(var k=1;k<=60;k++) if(pts[k-1]>0&&pts[k]<=0){ be=k-1+pts[k-1]/(pts[k-1]-pts[k]); break; }
+    return {sc:sc, c:schemeColour(i), pts:pts, be:be};
   });
+  var top=-Infinity, bot=Infinity;
+  series.forEach(function(o){ o.pts.forEach(function(v){ if(v>top)top=v; if(v<bot)bot=v; }); });
+  if(top<0) top=0;
+  if(bot>0) bot=0;
+  var span=(top-bot)||1, pad=4;
+  var X=function(y){ return (y/60)*100; };
+  var Y=function(v){ return pad+((top-v)/span)*(100-pad*2); };
+
+  var grid='', ticks='';
+  [0,15,30,45,60].forEach(function(y){
+    var x=X(y).toFixed(2);
+    grid+='<line x1="'+x+'" y1="0" x2="'+x+'" y2="100" stroke="var(--line)" '+
+          'stroke-width="1" vector-effect="non-scaling-stroke"/>';
+    ticks+='<span style="'+(y===0?'left:0;transform:none'
+                          :y===60?'right:0;left:auto;transform:none'
+                                 :'left:'+x+'%')+'">'+y+'</span>';
+  });
+  var zy=Y(0);
+  var yax='<span style="top:'+Y(top).toFixed(2)+'%">'+t1(top)+'</span>';
+  if(zy>Y(top)+9 && zy<Y(bot)-9) yax+='<span class="z" style="top:'+zy.toFixed(2)+'%">0</span>';
+  yax+='<span style="top:'+Y(bot).toFixed(2)+'%">'+t1(bot)+'</span>';
+
+  var paths='';
+  series.forEach(function(o){
+    var d=o.pts.map(function(v,y){ return (y?'L':'M')+X(y).toFixed(2)+' '+Y(v).toFixed(2); }).join(' ');
+    if(o.be!=null)
+      paths+='<line x1="'+X(o.be).toFixed(2)+'" y1="0" x2="'+X(o.be).toFixed(2)+'" y2="100" '+
+             'stroke="'+o.c+'" stroke-width="1" opacity=".5" vector-effect="non-scaling-stroke"/>';
+    paths+='<path d="'+d+'" fill="none" stroke="'+o.c+'" stroke-width="3" '+
+           'vector-effect="non-scaling-stroke" stroke-linejoin="round" stroke-linecap="round"/>';
+  });
+
+  /* Colour never names a line on its own - four hues is the validated limit and
+     a reader with a colour-vision deficiency needs the words regardless. The key
+     sits under the plot rather than on it: labels at the line ends land exactly
+     where the curves converge, which is the part worth reading. */
+  var key=series.map(function(o){
+    return '<span class="cmpKeyItem">'+
+           '<b style="color:'+o.c+'">'+esc(o.sc.name)+'</b>'+
+           '<em>'+(o.be!=null?'break-even yr '+Math.round(o.be):'no break-even')+'</em></span>';
+  }).join('');
+
+  return '<div class="rs-card"><div class="rs-cardH">'+
+         '<span class="t">Cumulative Net Carbon</span>'+
+         '<span class="u">t CO\u2082e \u00b7 60 yr \u00b7 '+series.length+' schemes</span></div>'+
+         '<div class="rs-body"><div class="rs-chart">'+
+         '<div class="rs-yax">'+yax+'</div><div class="rs-plotcol">'+
+         '<svg class="rs-svg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">'+
+         grid+
+         '<line x1="0" y1="'+zy.toFixed(2)+'" x2="100" y2="'+zy.toFixed(2)+'" '+
+           'stroke="var(--sub)" stroke-width="1" opacity=".55" vector-effect="non-scaling-stroke"/>'+
+         paths+'</svg><div class="rs-ticks">'+ticks+'</div></div></div>'+
+         '<div class="cmpKey">'+key+'</div></div></div>';
+}
+
+function deltaSpan(v, base){
+  if(base==null || base===0 || v==null) return '';
+  var d=((v-base)/Math.abs(base))*100;
+  if(Math.abs(d)<0.5) return '<span class="cmpDlt">\u00b7</span>';
+  return '<span class="cmpDlt '+(d>0?'up':'dn')+'">'+(d>0?'+':'\u2212')+
+         Math.abs(d).toFixed(0)+'%</span>';
+}
+
+function compareView(){
+  var h='<div class="cmpH"><span class="t">Comparison</span>'+
+        '<span class="n">'+SCHEMES.length+' scheme'+(SCHEMES.length===1?'':'s')+'</span>'+
+        '<button class="cmpX" id="cmpClose" title="Close">\u00d7</button></div>';
   if(!SCHEMES.length)
-    h+='<div class="tb-msg">Nothing saved yet. Set the materials you want, name the '+
-       'combination, then change one and compare.</div>';
-  h+='<div class="tb-new"><input id="schName" type="text" placeholder="Name this scheme" '+
-     'maxlength="40"><button id="schSave">Save</button></div>';
-  return h;
+    return h+'<div class="cmpEmpty">Nothing saved yet.<br>'+
+             'Set the materials you want, then save the scheme at the foot of the '+
+             '<b>Result</b> tab.<br>Change a material and save again - that is a '+
+             'second scheme, not an edit to the first.</div>';
+
+  var base=SCHEMES.filter(function(s){ return s.id===BASELINE; })[0]||SCHEMES[0];
+
+  /* A grid rather than a stack of columns: the same chart lands on the same row
+     in every scheme, and a row is as tall as the tallest thing in it. A scheme
+     with nothing to say in one account gets an empty cell, not a shifted one. */
+  h+='<div class="cmpBody">'+compareCurve(SCHEMES)+
+     '<div class="cmpPanel"><div class="cmpCols">';
+  SCHEMES.forEach(function(sc,i){
+    var isBase=(sc.id===base.id), sep=i?' sep':'';
+    var cell=function(inner, extra){
+      return '<div class="cmpCell'+sep+(extra||'')+'">'+inner+'</div>';
+    };
+    h+=cell('<div class="cmpColH'+(isBase?' base':'')+'">'+
+       '<button class="cmpPick" data-base="'+sc.id+'" aria-pressed="'+isBase+'" '+
+         'title="Read every other scheme against this one">'+
+         '<span class="nm" style="color:'+schemeColour(i)+'">'+esc(sc.name)+'</span>'+
+         (isBase?'<span class="tag">BASELINE</span>':'')+'</button>'+
+       '<button class="del" data-delsc="'+sc.id+'" title="Delete this scheme">\u00d7</button>'+
+       '</div>'+
+       '<div class="cmpMeta"><span>'+esc(String(sc.ts).slice(0,10))+'</span>'+
+       '<span>'+t1(sc.tot.me)+' t '+(isBase?'':deltaSpan(sc.tot.me, base.tot.me))+'</span>'+
+       '<span>'+(sc.tot.anyCost?money(sc.tot.cost):'\u2212')+' '+
+         (isBase||!sc.tot.anyCost||!base.tot.anyCost?'':deltaSpan(sc.tot.cost, base.tot.cost))+
+       '</span></div>', ' head');
+    h+=cell(sc.shot?('<img class="cmpShot" src="'+sc.shot+'" alt="">'):'');
+    h+=cell(colourKey(sc.rows));
+    h+=cell(divergingPlot(sc.rows));
+    ACCOUNTS.forEach(function(a){ h+=cell(accountChart(sc.rows,a.k)); });
+    h+=cell(accountChart(sc.rows,'cost'));
+  });
+  return h+'</div></div></div>';
 }
-function wireSchemePop(pop){
-  pop.querySelectorAll('[data-load]').forEach(function(b){
-    b.onclick=function(){
-      var sc=SCHEMES.filter(function(x){return x.id===b.dataset.load;})[0];
-      if(sc) applyScheme(sc);
-    };
+
+function drawCompare(){
+  var el=$('#cmp');
+  el.hidden=!UI.cmp;
+  // the mode switch drives the 3D view, which the comparison is standing over
+  $('#modebar').hidden=UI.cmp;
+  if(UI.cmp) $('#ramp').hidden=true;
+  if(!UI.cmp){ el.innerHTML=''; return; }
+  el.innerHTML=compareView();
+  $('#cmpClose').onclick=function(){ UI.cmp=false; drawCompare(); drawToolbar(); };
+  el.querySelectorAll('[data-base]').forEach(function(b){
+    b.onclick=function(){ BASELINE=b.dataset.base; drawCompare(); };
   });
-  pop.querySelectorAll('[data-del]').forEach(function(b){
-    b.onclick=function(e){
-      e.stopPropagation();
-      SCHEMES=SCHEMES.filter(function(x){return x.id!==b.dataset.del;});
-      persistSchemes();
-      drawToolbar();
-    };
+  el.querySelectorAll('[data-delsc]').forEach(function(b){
+    b.onclick=function(){ deleteScheme(b.dataset.delsc); };
   });
-  var inp=pop.querySelector('#schName'), btn=pop.querySelector('#schSave');
-  function save(){
-    var n=(inp.value||'').trim();
-    if(!n){ inp.focus(); return; }
-    SCHEMES.push(captureScheme(n));
-    persistSchemes();
-    inp.value='';
-    drawToolbar();
-  }
-  btn.onclick=save;
-  inp.onkeydown=function(e){ if(e.key==='Enter') save(); };
-  inp.onclick=function(e){ e.stopPropagation(); };
 }
 
 function drawToolbar(){
@@ -1640,30 +1811,27 @@ function drawToolbar(){
   $('#tbShot').onclick=saveImage;
 
   var pop=$('#tbPop');
-  [['#tbSch','sch'],['#tbPal','pal']].forEach(function(pair){
+  var cs=$('#tbSch');
+  cs.setAttribute('aria-pressed', String(UI.cmp));
+  cs.onclick=function(e){ e.stopPropagation(); UI.cmp=!UI.cmp; drawCompare(); drawToolbar(); };
+  [['#tbPal','pal']].forEach(function(pair){
     var b=$(pair[0]);
     b.setAttribute('aria-pressed', String(UI.pop===pair[1]));
     b.onclick=function(e){ e.stopPropagation(); UI.pop=(UI.pop===pair[1])?null:pair[1]; drawToolbar(); };
   });
 
   pop.hidden=!UI.pop;
-  pop.classList.toggle('wide', UI.pop==='sch');
   if(UI.pop){
-    var owner=$(UI.pop==='sch'?'#tbSch':'#tbPal');
+    var owner=$('#tbPal');
     pop.style.top=owner.offsetTop+'px';      // open beside the button that owns it
-    if(UI.pop==='pal'){
-      pop.innerHTML='<div class="tb-ttl">LEGEND COLOURS</div>'+PALETTES.map(function(p){
-        return '<button class="tb-opt" data-pal="'+p.id+'" aria-pressed="'+(UI.pal===p.id)+'">'+
-          '<span class="tb-sw" style="background:linear-gradient(90deg,'+p.c.join(',')+')"></span>'+
-          esc(p.name)+'</button>';
-      }).join('');
-      pop.querySelectorAll('[data-pal]').forEach(function(b){
-        b.onclick=function(){ UI.pal=b.dataset.pal; UI.pop=null; paint(true); };
-      });
-    } else {
-      pop.innerHTML=schemePop();
-      wireSchemePop(pop);
-    }
+    pop.innerHTML='<div class="tb-ttl">LEGEND COLOURS</div>'+PALETTES.map(function(p){
+      return '<button class="tb-opt" data-pal="'+p.id+'" aria-pressed="'+(UI.pal===p.id)+'">'+
+        '<span class="tb-sw" style="background:linear-gradient(90deg,'+p.c.join(',')+')"></span>'+
+        esc(p.name)+'</button>';
+    }).join('');
+    pop.querySelectorAll('[data-pal]').forEach(function(b){
+      b.onclick=function(){ UI.pal=b.dataset.pal; UI.pop=null; paint(true); };
+    });
   }
 }
 document.addEventListener('click',function(e){
@@ -1745,6 +1913,14 @@ function paint(force){
   document.querySelectorAll('[data-res]').forEach(function(b){
     b.onclick=function(){ UI.res[b.dataset.res]=!UI.res[b.dataset.res]; paint(true); };
   });
+  var sn=$('#cmpName'), sb=$('#cmpSave');
+  if(sb){
+    var saveSc=function(){
+      saveSchemeNamed((sn.value||'').trim() || ('Scheme '+(SCHEMES.length+1)));
+    };
+    sb.onclick=saveSc;
+    sn.onkeydown=function(e){ if(e.key==='Enter') saveSc(); };
+  }
 
 
   var cw=$('#climateWarn');
@@ -1827,11 +2003,14 @@ function wire(){
       var A=g?(solid?g.qty.volume:g.qty.surfArea):0;
       var cell=document.getElementById('ct-'+c.slice(1));
       if(cell){ cell.textContent=costLabel(RATE[c],A); }
-      var st=siteTotals(), gc=$('#grandCost');
-      if(gc) gc.textContent=money(st.cost);
     };
   });
 }
+/* Click-away, the same as the toolbar popovers and the account menu above: the
+   button and the list are siblings rather than one element, so both are named. */
+document.addEventListener('click',function(e){
+  if(UI.picker && !e.target.closest('.pick,.pickbox')){ UI.picker=null; paint(true); }
+});
 function applyVis(){
   contentGroup.children.forEach(function(ch){
     ch.visible = VIS[ch.userData.groupColor]!==false;
@@ -1912,7 +2091,12 @@ $('#avatar').onclick=function(e){
 document.addEventListener('click',function(e){
   if(!$('#acctMenu').hidden && !e.target.closest('.acct')) closeMenu();
 });
-document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeMenu(); });
+document.addEventListener('keydown',function(e){
+  if(e.key!=='Escape') return;
+  closeMenu();
+  if(UI.cmp){ UI.cmp=false; drawCompare(); drawToolbar(); }
+  if(UI.picker){ UI.picker=null; paint(true); }
+});
 function syncTheme(){
   document.querySelectorAll('[data-theme-set]').forEach(function(b){
     b.setAttribute('aria-pressed', String(UI.theme===b.dataset.themeSet));

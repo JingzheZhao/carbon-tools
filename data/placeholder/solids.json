@@ -1,0 +1,16 @@
+{
+"_meta": {
+  "placeholder": true,
+  "basis": "volume",
+  "unit": "m3",
+  "carbon": "kg CO2e per m3",
+  "cost": "USD per m3",
+  "note": "Invented figures. Structure is real, numbers are not. Only materials a designer would model as a solid appear here."
+},
+"items": {
+  "concrete": {"n":"Concrete", "lo":845,   "me":1117,  "hi":1540,  "sq":0, "st":0,    "cost":420},
+  "brick":    {"n":"Brick",    "lo":2355,  "me":2706,  "hi":3067,  "sq":0, "st":0,    "cost":900},
+  "wood":     {"n":"Wood",     "lo":895,   "me":931,   "hi":968,   "sq":0, "st":-742, "cost":1100},
+  "steel":    {"n":"Steel",    "lo":13499, "me":28919, "hi":47119, "sq":0, "st":0,    "cost":7800}
+}
+}

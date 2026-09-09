@@ -1,0 +1,22 @@
+{
+"_meta": {
+  "placeholder": true,
+  "basis": "area",
+  "unit": "m2",
+  "carbon": "kg CO2e per m2",
+  "cost": "USD per m2",
+  "t": "implied build-up thickness in metres, shown so the per-m2 figure can be checked against the per-m3 one",
+  "note": "Invented figures. Structure is real, numbers are not."
+},
+"items": {
+  "concrete": {"n":"Concrete", "t":0.100, "lo":105, "me":131,  "hi":168,  "sq":0,    "st":0,    "cost":95},
+  "asphalt":  {"n":"Asphalt",  "t":0.050, "lo":15,  "me":19,   "hi":24,   "sq":0,    "st":0,    "cost":55},
+  "brick":    {"n":"Brick",    "t":0.050, "lo":118, "me":135,  "hi":153,  "sq":0,    "st":0,    "cost":180},
+  "wood":     {"n":"Wood",     "t":0.050, "lo":45,  "me":58,   "hi":74,   "sq":0,    "st":-31,  "cost":260},
+  "steel":    {"n":"Steel",    "t":0.010, "lo":135, "me":289,  "hi":471,  "sq":0,    "st":0,    "cost":900},
+  "glass":    {"n":"Glass",    "t":0.012, "lo":34,  "me":41,   "hi":49,   "sq":0,    "st":0,    "cost":400},
+  "soil":     {"n":"Soil",     "t":0.300, "lo":5.4, "me":8.1,  "hi":11.4, "sq":0,    "st":-4.2, "cost":21},
+  "mulch":    {"n":"Mulch",    "t":0.075, "lo":4.8, "me":6.0,  "hi":7.3,  "sq":0,    "st":-3.3, "cost":5},
+  "grass":    {"n":"Grass",    "t":0.150, "lo":2.2, "me":3.0,  "hi":4.1,  "sq":-4.2, "st":-1.5, "cost":18}
+}
+}
