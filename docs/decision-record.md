@@ -2,13 +2,13 @@
 
 > A carbon assessment tool for landscape and urban design, linking Grasshopper to
 > a web front end.
-> Updated 2026-08-28.
+> Updated 2026-09-13.
 
 > Companion documents: `system-design.md` (the seven-layer architecture and the
 > provenance mechanism) and `ui-design.md` (interface and interaction spec).
 >
 > **Major update 2026-08-28**: the complete Carbon Conscience dataset has been
-> obtained and verified, closing all four open items in §20 (dataset, scenario
+> obtained and verified, closing all four open items in §22 (dataset, scenario
 > entry points, maintenance carbon, individual trees). The central change is §9 —
 > the "20 scenario entry points" plan is cancelled in favour of the **provenance
 > mechanism** (measured / inferred / assumed). See the system design document.
@@ -710,7 +710,183 @@ the user to guess at.
 | White paper page images | `_research/_pages/` | 92 JPGs for reference (outside the repository) |
 | White paper source | `_research/ISSUU PDF Downloader.pdf` | 92 pages, images only, no text layer (outside the repository) |
 
-## 20. Open items
+## 20. Project storage (settled 2026-09-13)
+
+### The problem this solves
+
+Design work is not continuous. A designer creates a project, saves one scheme,
+and returns a week later to try a second. If the first scheme has to be set up
+again before the two can be compared, the comparison feature is worthless in
+the only situation it was built for.
+
+Schemes already survive a restart — they live in browser local storage, and §17
+pinned the server port so that storage is no longer orphaned on every launch.
+What does not exist is a **project**. `PROJECT` is a text label, not a
+container, so:
+
+- every project's schemes pile into one flat list, and opening a second project
+  shows the first one's schemes
+- local storage is not a file: clearing browser data erases it, a second machine
+  has none of it, and it can neither be backed up nor sent to a colleague
+- there is nowhere to put the screenshots that cross-model comparison needs
+  (§21); base64 in local storage would hit its few-megabyte ceiling quickly
+
+This is a data-model gap, not a hosting gap. It does not need a back end.
+
+### Decision: a project folder chosen by the user
+
+The user picks a directory. Everything about the project lives in it:
+
+```
+Park1/
+├─ project.json      name, climate zone, display units, geometry fingerprint
+├─ schemes/
+│  ├─ 001.json       material assignment, rates, quantities as measured
+│  └─ 002.json
+├─ thumbs/
+│  └─ 001.jpg        the viewport as it looked when the scheme was saved
+└─ reports/
+```
+
+One file per scheme rather than one large document: a save rewrites one small
+file instead of the whole project, and the folder stays readable in a diff if
+anyone version-controls it.
+
+**Why a folder and not a single file**: thumbnails. Cross-model comparison (§21)
+needs an image per scheme, and a folder lets an image be an image.
+
+### How a browser writes to disk: it does not
+
+A page in a browser cannot freely read or write a directory. The alternatives
+open to an ordinary web application are all poor — the File System Access API is
+Chrome and Edge only, `<input webkitdirectory>` can read but never write, and
+download prompts on every save are unusable.
+
+**We are not an ordinary web application.** The plugin already runs a local HTTP
+server in C#, with full file system access. The browser therefore needs no file
+permission at all:
+
+```
+page  ──POST /project/new──▶  server
+                              ├─ native folder dialog
+                              ├─ create the directory, write project.json
+                              └─ return the project
+```
+
+`CarbonTools.csproj` already sets `UseWindowsForms`, so `FolderBrowserDialog`
+needs no new dependency. This beats the File System Access API on every count:
+it works in any browser, uses the operating system's own dialog, and raises no
+permission prompt.
+
+### The welcome screen
+
+Opening the viewer always lands on a welcome screen offering exactly two
+choices: **Open Project** and **Create New Project**. There is no third
+"look around without a project" mode — it would create a state in which saving
+silently does nothing, which needs explaining every time it is entered.
+
+**The project is never chosen automatically.** Remembering the last project and
+going straight in was considered and rejected: open `Riverside.gh` while the
+viewer silently restores `Park1`, and you are reading one project's schemes
+against another's geometry, with nothing on screen saying so. Guessing the
+context wrongly and in silence is worse than one deliberate click — the same
+principle that governs §21's refusal to load a scheme across models.
+
+To keep that deliberate click cheap, the welcome screen shows:
+
+- **what Rhino has sent** — document name, object count, colour groups — so the
+  geometry can be checked before a project is picked. When nothing has synced
+  yet it says so and the project choice still works; the two are independent.
+- **recent projects**, each with its scheme count and last-opened date, so
+  reopening is one click rather than a walk through a folder dialog. A project
+  whose name matches the Rhino document sorts first, as a suggestion only.
+
+### Known limits
+
+- A folder the user moves, renames or deletes leaves a dangling recent entry.
+  The screen must offer to locate it again rather than fail silently.
+- Two people opening the same folder on a network share will overwrite each
+  other, last write winning. Acceptable for phase one, but real.
+
+### Relationship to the back end
+
+§17 stands: no back end in phase one. This decision does not reopen it, because
+the folder's contents are precisely what a sync layer would upload. Building it
+is the shared prerequisite of both paths, not an alternative to one of them. If
+remote access is wanted later, the question narrows to "also sync this folder",
+which is a much smaller decision than designing storage from nothing.
+
+## 21. Comparing schemes (settled 2026-09-13)
+
+### Two comparisons, not one
+
+They answer different questions, run on different data, and should not share an
+interface.
+
+| | Live switching | Comparison tab |
+|---|---|---|
+| Question | what changes if this material changes? | how do these design options differ? |
+| Geometry | the model loaded now | each scheme's own, as a screenshot |
+| Data | recomputed live | frozen at save time |
+| Where | the toolbar's scheme list | a tab between Result and Report |
+
+The Comparison tab lays schemes out as columns: name, screenshot, charts, then
+aligned rows of detail, so the eye reads across. Report export selects which
+schemes to include — one, several, or all.
+
+### A scheme records the specification, not the design
+
+A scheme stores material assignment, cost rates, climate zone, and the
+quantities measured at the moment it was saved. It does not store geometry.
+
+This is what makes "same model, different materials" work: change the model and
+a scheme's materials reapply to the new geometry by colour, and the totals
+recompute. It is also why the second comparison exists at all — geometry
+variants are invisible to a specification.
+
+### A scheme from a different model cannot be loaded
+
+**Settled: refused, not recomputed.** Where the geometry has moved on, the
+scheme is archive-only — visible in the Comparison tab with its screenshot and
+its frozen figures, but not loadable onto the current model.
+
+This was chosen over the alternative of silently reapplying it, and it removes
+a whole class of fault rather than patching one. Two schemes saved against
+different models hold identical specifications and differ only in their stored
+numbers; loading either produces the same live result, while the list shows two
+different figures side by side as though they were a comparison. Under this
+rule that situation cannot arise: a scheme that matches loads, and its stored
+figures are still correct because the model and specification are unchanged;
+one that does not match never claims to be current.
+
+**The live assignment is not cleared when the model changes.** Only saved
+schemes lock. Clearing `ASSIGN` on every geometry edit would mean reassigning
+every colour after nudging a bench, and the colour key exists precisely so that
+assignment survives geometry edits (§13).
+
+### What counts as the same model
+
+Per-colour-group quantities — area, volume, count — not vertex positions. Carbon
+depends on those quantities and nothing else, so moving a bench 100 mm changes
+no number and must not lock anything.
+
+- any change to the **set of colours** — one added or removed — locks the scheme;
+  that is structural, not a nudge
+- a group's quantity changing by **more than 1%** locks it
+- **1% or less** counts as the same model
+
+The 1% threshold is a judgement, not a derivation: far below any deliberate
+design change, far above modelling jitter.
+
+### The screenshot's camera is permanent
+
+A scheme's thumbnail is taken at save time and cannot be retaken — the geometry
+it showed is gone. A row of thumbnails shot from different angles is actively
+misleading, since volumes appear to differ when only the camera moved. The save
+flow therefore records the camera alongside the image, and the fixed Top and
+Axonometric view buttons exist partly to make a consistent angle easy to choose.
+
+## 22. Open items
 
 **Three closed on 2026-08-28:**
 
@@ -735,7 +911,13 @@ the user to guess at.
 - [ ] the web 3D skeleton (three.js)
 - [ ] AI agent tool calling design and the what-if mechanism — the slots are
       already defined by the provenance labels
-- [ ] report generation and export
+- [ ] report generation and export, with per-scheme selection (§21)
+- [ ] **project folder and welcome screen** (§20) — server-side folder dialog,
+      `project.json`, per-scheme files, recent list
+- [ ] **Comparison tab** (§21) — columns of schemes with thumbnails, feeding the
+      report
+- [ ] geometry fingerprint and the 1% rule (§21); until it exists, a scheme
+      saved against a different model still loads and misreports
 - [x] ~~back-end selection (accounts + scheme snapshots)~~ → **no back end in phase
       one**, fully local (§17, redecided 2026-08-30)
 - [x] ~~change `FindFreePort()` to prefer a fixed port~~ → **done**; fixed 51275,

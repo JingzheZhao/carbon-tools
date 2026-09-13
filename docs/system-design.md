@@ -485,7 +485,7 @@ part.
 | §9 taxonomy | "build 20 scenario entry points" | **Cancelled.** Replaced by the provenance mechanism and a single-axis material picker |
 | §2 data strategy | "email sent, awaiting reply" | data obtained and verified; still need to pursue the **Zotero bibliography** |
 | §15 protocol | area / count / length / volume | add **vertical face area** and **mean height** |
-| §20 open items | three open | three resolved |
+| §22 open items | three open | three resolved |
 
 ---
 
