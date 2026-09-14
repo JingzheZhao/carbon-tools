@@ -2,7 +2,7 @@ using System.Drawing;
 
 using Grasshopper.Kernel.Types;
 
-namespace CarbonTools.Components
+namespace Sitewise.Components
 {
     /// <summary>
     /// Plain payload carried by "Tagged Objects": one piece of geometry plus the

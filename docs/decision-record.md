@@ -1,4 +1,4 @@
-# Carbon Tools — decision record
+# Sitewise — decision record
 
 > A carbon assessment tool for landscape and urban design, linking Grasshopper to
 > a web front end.
@@ -589,7 +589,7 @@ write to it directly.
 
 **Saving schemes**: phase one uses browser local storage (implemented; see
 `SCHEMES` in `viewer.html`).
-**Fixed 2026-08-30**: `CarbonSyncServer` now claims fixed port **51275**, falling
+**Fixed 2026-08-30**: `SyncServer` now claims fixed port **51275**, falling
 back to a random port only if it is taken. Local storage is scoped to origin
 including port, so only a stable port lets schemes survive between Rhino
 sessions.
@@ -773,7 +773,7 @@ page  ──POST /project/new──▶  server
                               └─ return the project
 ```
 
-`CarbonTools.csproj` already sets `UseWindowsForms`, so `FolderBrowserDialog`
+`Sitewise.csproj` already sets `UseWindowsForms`, so `FolderBrowserDialog`
 needs no new dependency. This beats the File System Access API on every count:
 it works in any browser, uses the operating system's own dialog, and raises no
 permission prompt.

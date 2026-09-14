@@ -2,37 +2,36 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Carbon Tools</title>
+<title>Sitewise</title>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --card:#ffffff; --cardLine:#d6dde3; --track:#eef2f6; --field:#ffffff; --knob:#fff;
+  --card:#ffffff; --cardLine:#d6dde3; --track:#eef2f6; --field:#ffffff;
   --bar:rgba(252,253,254,.92); --shadow:0 2px 10px rgba(22,32,42,.08),0 1px 3px rgba(22,32,42,.05);
   --text:#1c2530; --sub:#5a6875; --dim:#8c98a5; --accentText:#0a6f6a; --line:#e2e9f0; --selBg:#dcf0ee; --ochreBg:#f6efe0;
   --scrollThumb:rgba(13,140,134,.62); --scrollThumbHover:rgba(13,140,134,.88);
-  --accent:#0d8c86; --accentInk:#0a6f6a; --green:#2f7d5b; --ochre:#b8862b; --ochreInk:#8a6a2b; --red:#a4344e;
+  --accent:#0d8c86; --accentInk:#0a6f6a; --accentFill:#0a6f6a; --green:#2f7d5b; --ochre:#b8862b; --ochreInk:#8a6a2b; --red:#a4344e;
   --scene:#ffffff; --grid1:#ccd5dd; --grid2:#e3e9ee;
+  --railW:52px;
   --r-shell:12px; --r-surface:9px; --r-ctrl:6px; --r-pill:999px;
   --fs-display:22px; --fs-figure:19px; --fs-card:14.5px; --fs-tab:13.5px; --fs-strong:13px;
   --fs-body:12px; --fs-meta:10.5px; --fs-label:9px;
-  --tabLift:0 -2px 6px rgba(22,32,42,.07);
   --cardLift:0 1px 2px rgba(22,32,42,.055);
   --cardLiftHover:0 3px 10px rgba(22,32,42,.10),0 1px 3px rgba(22,32,42,.06);
   --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
   --sans:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
 }
 [data-t="dark"]{
-  --card:#161e25; --cardLine:#28323b; --track:#1c252d; --field:#111920; --knob:#2c3841;
+  --card:#161e25; --cardLine:#28323b; --track:#1c252d; --field:#111920;
   --bar:rgba(13,20,26,.92); --shadow:0 4px 16px rgba(0,0,0,.5),0 1px 3px rgba(0,0,0,.35);
   --text:#e4e9ef; --sub:#9aa7b5; --dim:#6f7d8b; --accentText:#55e8d6; --line:#222e3a; --selBg:#123330; --ochreBg:#3a2f18;
   --scrollThumb:rgba(51,204,189,.38); --scrollThumbHover:rgba(51,204,189,.62);
-  --accent:#33ccbd; --accentInk:#6ff0e2; --green:#4aa87c; --ochre:#e6b35c; --ochreInk:#f2ca80; --red:#d4707f;
+  --accent:#33ccbd; --accentInk:#6ff0e2; --accentFill:#10847b; --green:#4aa87c; --ochre:#e6b35c; --ochreInk:#f2ca80; --red:#d4707f;
   --scene:#1e2732; --grid1:#4a5a6e; --grid2:#384555;
-  --tabLift:0 -2px 7px rgba(0,0,0,.42);
   --cardLift:0 1px 2px rgba(0,0,0,.38);
   --cardLiftHover:0 3px 12px rgba(0,0,0,.52),0 1px 3px rgba(0,0,0,.38);
 }
@@ -53,45 +52,57 @@ button,input,select{font-family:inherit;color:inherit}
 
 .bar{position:fixed;left:0;right:0;top:0;height:46px;z-index:40;display:flex;align-items:center;gap:16px;
   padding:0 14px;background:var(--bar);border-bottom:1px solid var(--cardLine);backdrop-filter:blur(6px)}
-.wm{font-family:var(--mono);font-size:var(--fs-strong);font-weight:600;letter-spacing:.14em}
+.wm{font-family:var(--mono);font-size:16px;font-weight:700;letter-spacing:.16em;color:var(--accentText)}
 .wmv{font-family:var(--mono);font-size:var(--fs-label);letter-spacing:.1em;color:var(--dim)}
 .spacer{flex:1}
-.syncerr{font-family:var(--mono);font-size:var(--fs-meta);color:var(--red);display:flex;align-items:center;gap:7px}
-.syncerr[hidden]{display:none}   /* an author display rule beats the hidden attribute */
-.syncerr::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--red);flex:none}
 .themeseg{display:flex;gap:2px;background:var(--track);border-radius:var(--r-ctrl);padding:2px}
 .themeseg button{width:26px;height:24px;border:0;background:none;border-radius:var(--r-ctrl);cursor:pointer;
   color:var(--dim);display:flex;align-items:center;justify-content:center}
 .themeseg button:hover{color:var(--sub)}
 .themeseg button[aria-pressed="true"]{background:var(--card);color:var(--accent);box-shadow:var(--shadow)}
-.acct{position:relative}
-.avatar{width:28px;height:28px;border-radius:50%;border:1px solid var(--cardLine);background:var(--track);
-  font-family:var(--mono);font-size:var(--fs-meta);font-weight:600;color:var(--sub);cursor:pointer;
-  display:flex;align-items:center;justify-content:center;letter-spacing:.04em}
-.avatar:hover{border-color:var(--accent);color:var(--accentInk)}
-.menu{position:absolute;right:0;top:36px;min-width:186px;background:var(--card);
-  border:1px solid var(--cardLine);border-radius:var(--r-surface);box-shadow:var(--shadow);padding:6px;z-index:50}
-.mhead{font-family:var(--mono);font-size:var(--fs-label);letter-spacing:.06em;color:var(--dim);
-  padding:6px 8px 8px;border-bottom:1px solid var(--line)}
-.msec{padding:9px 8px;display:flex;align-items:center;justify-content:space-between;gap:10px;
-  border-bottom:1px solid var(--line)}
-.mlabel{font-family:var(--mono);font-size:var(--fs-label);letter-spacing:.06em;color:var(--dim)}
-.mseg{display:flex;background:var(--track);border-radius:var(--r-ctrl);padding:2px;gap:2px}
-.mseg button{border:0;background:none;padding:4px 9px;border-radius:var(--r-pill);font-size:var(--fs-meta);
-  color:var(--sub);cursor:pointer;font-family:var(--sans)}
-.mseg button[aria-pressed="true"]{background:var(--card);color:var(--text);box-shadow:var(--shadow)}
-.mitem{width:100%;text-align:left;border:0;background:none;padding:8px;border-radius:var(--r-ctrl);
-  font-size:var(--fs-body);color:var(--text);cursor:pointer;font-family:var(--sans);margin-top:4px}
-.mitem:hover{background:var(--track)}
 
-.tb{position:fixed;right:14px;top:58px;z-index:35;display:flex;flex-direction:column;gap:3px;
+/* Welcome screen. Shown until a project is open, and never skipped: silently
+   restoring the last project would let you read one project's schemes against
+   another's geometry with nothing on screen saying so. */
+.wel{position:fixed;left:0;right:0;top:46px;bottom:0;z-index:38;background:var(--scene);
+  display:flex;align-items:center;justify-content:center;padding:24px}
+.wel[hidden]{display:none}
+.welCard{width:100%;max-width:560px;background:var(--card);border:1px solid var(--cardLine);
+  border-radius:var(--r-shell);box-shadow:var(--cardLiftHover);padding:34px 36px 30px}
+.welHi{font-size:26px;font-weight:700;letter-spacing:-.5px;color:var(--text)}
+.welBtns{display:flex;gap:12px;margin-top:22px}
+.welBtns button{flex:1;padding:11px 14px;border-radius:var(--r-surface);cursor:pointer;
+  font-family:var(--sans);font-size:var(--fs-strong);font-weight:600}
+.welNew{border:1px solid var(--accent);background:var(--accent);color:#fff}
+.welOpen{border:1px solid var(--cardLine);background:var(--field);color:var(--text)}
+.welBtns button:disabled{opacity:.45;cursor:not-allowed}
+.welH{font-family:var(--mono);font-size:var(--fs-label);letter-spacing:.09em;color:var(--dim);
+  margin:22px 0 2px}
+/* three rows plus the heading, held whether the list is full, short or empty */
+.welRecWrap{height:138px;overflow:hidden}
+.welNone{font-size:var(--fs-body);color:var(--dim);padding:9px 4px}
+.welRec{width:100%;display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+  padding:9px 4px;border:0;border-bottom:1px solid var(--line);background:none;cursor:pointer;
+  text-align:left;color:var(--text);font-family:var(--sans);font-size:var(--fs-body)}
+.welRec:hover{background:var(--track)}
+.welRec .welMeta{font-family:var(--mono);font-size:var(--fs-label);color:var(--dim);white-space:nowrap}
+.welErr{margin-top:14px;padding:10px 12px;border-radius:var(--r-ctrl);
+  border:1px dashed var(--ochre);background:var(--ochreBg);
+  font-size:var(--fs-meta);color:var(--ochreInk);line-height:1.55}
+.welErr[hidden]{display:none}
+
+/* One group per kind of control: where you are looking, what the scene shows,
+   what you take away. A gap between cards separates them better than a rule
+   inside one card did. */
+.tbStack{position:fixed;right:14px;top:58px;z-index:35;
+  display:flex;flex-direction:column;gap:9px}
+.tb-grp{display:flex;flex-direction:column;gap:3px;
   background:var(--card);border:1px solid var(--cardLine);border-radius:var(--r-ctrl);
   padding:3px;box-shadow:var(--cardLift)}
 .tb-btn{width:30px;height:30px;border:0;background:none;border-radius:var(--r-ctrl);cursor:pointer;
   color:var(--dim);display:flex;align-items:center;justify-content:center}
 .tb-btn:hover{background:var(--track);color:var(--sub)}
 .tb-btn[aria-pressed="true"]{background:var(--selBg);color:var(--accentText)}
-.tb-sep{height:1px;background:var(--line);margin:2px 4px}
 .tb-pop{position:absolute;right:calc(100% + 6px);width:180px;background:var(--card);
   border:1px solid var(--cardLine);border-radius:var(--r-surface);box-shadow:var(--cardLiftHover);
   padding:7px;display:flex;flex-direction:column;gap:2px}
@@ -105,29 +116,6 @@ button,input,select{font-family:inherit;color:inherit}
 .tb-opt[aria-pressed="true"]{background:var(--selBg);color:var(--accentText);font-weight:600}
 .tb-sw{width:46px;height:10px;border-radius:var(--r-pill);flex:none}
 .tb-pop.wide{width:342px}
-.tb-row{display:flex;align-items:center;gap:8px;padding:5px 4px 5px 6px;border-radius:var(--r-ctrl)}
-.tb-row:hover{background:var(--track)}
-.tb-row.now{background:var(--selBg)}
-.tb-row .nm{flex:1;min-width:96px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
-  font-family:var(--sans);font-size:var(--fs-body);color:var(--text);text-align:left;
-  border:0;background:none;cursor:pointer;padding:0}
-.tb-row.now .nm{color:var(--accentText);font-weight:600}
-.tb-row .fig{font-family:var(--mono);font-size:var(--fs-meta);color:var(--sub);white-space:nowrap}
-.tb-row .dlt{font-family:var(--mono);font-size:var(--fs-label);white-space:nowrap;width:44px;text-align:right}
-.tb-row .up{color:var(--ochreInk)} .tb-row .dn{color:var(--green)}
-.tb-row .del{border:0;background:none;color:var(--dim);cursor:pointer;font-size:14px;
-  line-height:1;padding:0 2px;opacity:0}
-.tb-row:hover .del{opacity:1}
-.tb-row .del:hover{color:var(--red)}
-.tb-new{display:flex;gap:5px;padding:7px 4px 2px;border-top:1px solid var(--line);margin-top:5px}
-.tb-new input{flex:1;min-width:0;background:var(--field);border:1px solid var(--cardLine);
-  border-radius:var(--r-ctrl);padding:5px 7px;font-family:var(--sans);font-size:var(--fs-body);
-  color:var(--text)}
-.tb-new button{border:1px solid var(--accent);background:var(--accent);color:#fff;cursor:pointer;
-  border-radius:var(--r-ctrl);padding:5px 10px;font-family:var(--sans);font-size:var(--fs-body);
-  font-weight:600}
-.tb-msg{font-family:var(--sans);font-size:var(--fs-meta);color:var(--dim);padding:2px 4px 6px;
-  line-height:1.5}
 .dm-bar{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);z-index:35;width:max-content}
 .dm-seg{display:flex;gap:2px;background:var(--card);border:1px solid var(--cardLine);
   border-radius:var(--r-ctrl);padding:3px;box-shadow:var(--shadow)}
@@ -151,49 +139,39 @@ button,input,select{font-family:inherit;color:inherit}
 
 .project{background:var(--card);border:1px solid var(--cardLine);border-radius:var(--r-shell);
   box-shadow:var(--shadow);padding:9px 12px 10px;flex:none;position:relative;z-index:30}
-.setup .fld .pickbox.ms{position:absolute;left:0;right:0;top:calc(100% + 5px);z-index:40}
-.prow{display:flex;align-items:baseline;gap:10px}
+.prow{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
 .period{font-family:var(--mono);font-size:var(--fs-label);color:var(--dim);white-space:nowrap}
-.setup{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:7px}
-.setup .fld{min-width:0;position:relative}
-.setup label{font-family:var(--mono);font-size:var(--fs-label);letter-spacing:.11em;color:var(--dim);display:block;margin-bottom:3px;text-transform:uppercase}
 
-.panel{flex:1;min-width:0;min-height:0;display:flex;flex-direction:column;
-  background:var(--card);border:1px solid var(--cardLine);border-radius:var(--r-shell);box-shadow:var(--shadow);overflow:hidden}
-/* folder tabs: the strip is a recessed trough, and the active tab rises out of
-   it in the body's own colour so the two read as one continuous surface */
-.tabs{display:flex;justify-content:space-between;gap:6px;padding:6px 14px 0;background:var(--track);
-  border-bottom:1px solid var(--cardLine)}
-.tabs button{flex:1 1 0;max-width:112px;position:relative;padding:7px 8px 9px;cursor:pointer;
-  border:0;border-radius:var(--r-surface) var(--r-surface) 0 0;
-  background:transparent;
-  font-size:var(--fs-tab);font-weight:600;letter-spacing:-.005em;color:var(--dim);
-  display:flex;align-items:center;justify-content:center;gap:6px}
+/* The rail chooses a module; the tabs belong to the module it chose. One card
+   holds both: they are two parts of a single surface, not two objects. */
+.work{flex:1;min-height:0;display:flex;flex-direction:column;background:var(--card);
+  border:1px solid var(--cardLine);border-radius:var(--r-shell);
+  box-shadow:var(--shadow);overflow:hidden}
+.workRow{flex:1;min-height:0;display:flex}
+.rail{flex:none;width:var(--railW);display:flex;flex-direction:column;gap:6px;padding:12px 8px;
+  background:var(--card);border-right:1px solid var(--line)}
+.rail-btn{width:36px;height:36px;border:0;background:none;border-radius:var(--r-surface);
+  cursor:pointer;color:var(--dim);display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:11.5px;font-weight:700;letter-spacing:.02em}
+.rail-btn:hover{background:var(--track);color:var(--sub)}
+.rail-btn[aria-pressed="true"]{background:var(--accentFill);color:#fff}
+.panel{flex:1;min-width:0;min-height:0;display:flex;flex-direction:column;overflow:hidden}
+/* One line marks the active tab. The strip shares the body's colour, so the
+   card reads as a single sheet with a rule across it. */
+.tabs{flex:none;display:flex;gap:0;background:var(--card);
+  padding:0 25px 0 calc(var(--railW) + 15px);
+  border-bottom:1px solid var(--line)}
+.tabs button{flex:1 1 0;position:relative;padding:14px 6px 12px;
+  cursor:pointer;border:0;background:none;
+  font-size:var(--fs-tab);font-weight:500;letter-spacing:-.005em;color:var(--dim);
+  display:flex;align-items:center;justify-content:center;gap:7px}
 .tabs button:hover{color:var(--sub)}
-.tabs button[aria-pressed="true"]{background:var(--card);color:var(--accentText);font-weight:700;z-index:2;
-  margin-bottom:-1px;box-shadow:var(--tabLift)}
-
-/* the bottom corners flare outward with a concave sweep, the way a real folder
-   tab meets its baseline. border-radius only curves inward, so each corner is a
-   small square of card colour with a quarter disc masked out of it. */
-.tabs button[aria-pressed="true"]::before,
+.tabs button[aria-pressed="true"]{color:var(--text);font-weight:600}
 .tabs button[aria-pressed="true"]::after{
-  content:"";position:absolute;bottom:0;width:var(--r-surface);height:var(--r-surface);
-  background:var(--card);pointer-events:none}
-.tabs button[aria-pressed="true"]::before{
-  left:calc(var(--r-surface) * -1);
-  -webkit-mask:radial-gradient(circle var(--r-surface) at 0 0,transparent var(--r-surface),#000 var(--r-surface));
-          mask:radial-gradient(circle var(--r-surface) at 0 0,transparent var(--r-surface),#000 var(--r-surface))}
-.tabs button[aria-pressed="true"]::after{
-  right:calc(var(--r-surface) * -1);
-  -webkit-mask:radial-gradient(circle var(--r-surface) at 100% 0,transparent var(--r-surface),#000 var(--r-surface));
-          mask:radial-gradient(circle var(--r-surface) at 100% 0,transparent var(--r-surface),#000 var(--r-surface))}
-.badge{font-family:var(--mono);font-size:var(--fs-label);background:var(--selBg);color:var(--accent);border-radius:var(--r-pill);padding:1px 7px}
+  content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;
+  background:var(--accentText);border-radius:1px}
 .body{flex:1;overflow-y:auto}
 
-.syncnote{font-size:var(--fs-body);color:var(--sub);line-height:1.6;background:var(--track);border:1px solid var(--line);
-  border-radius:var(--r-surface);padding:10px 12px;margin-bottom:12px}
-.syncnote b{color:var(--text);font-weight:600}
 .cg{border:1px solid var(--cardLine);border-radius:var(--r-surface);padding:11px 12px;margin-bottom:10px;
   background:var(--card);box-shadow:var(--cardLift);transition:box-shadow .16s ease}
 .cg:hover{box-shadow:var(--cardLiftHover)}
@@ -204,7 +182,6 @@ button,input,select{font-family:inherit;color:inherit}
 .cgvis{margin-left:auto;font-size:var(--fs-meta);color:var(--dim);cursor:pointer;background:none;border:0;text-decoration:underline;text-underline-offset:2px}
 .cgq{font-family:var(--mono);font-size:var(--fs-body);color:var(--sub);margin-bottom:8px;line-height:1.55}
 .cgq b{color:var(--sub);font-weight:500}
-.cgsel{width:100%;padding:7px 9px;border:1px solid var(--cardLine);border-radius:var(--r-ctrl);background:var(--field);font-size:var(--fs-body)}
 .pick{width:100%;display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid var(--cardLine);
   border-radius:var(--r-ctrl);background:var(--field);font-size:var(--fs-body);cursor:pointer;text-align:left;color:var(--text)}
 .pick span:first-child{flex:1;line-height:1.35;text-align:left}
@@ -255,16 +232,10 @@ button,input,select{font-family:inherit;color:inherit}
 .detail{background:var(--track);border-radius:var(--r-surface);padding:10px 11px;margin:0 2px 9px;font-size:var(--fs-meta);color:var(--sub);line-height:1.55}
 .upg{margin-top:8px;padding:7px 9px;border:1px dashed var(--ochre);background:var(--ochreBg);
   border-radius:var(--r-ctrl);font-size:var(--fs-meta);color:var(--ochreInk);line-height:1.5}
-.totnote{font-size:var(--fs-meta);color:var(--dim);margin-top:5px;line-height:1.5}
 .empty{padding:24px 16px;text-align:center;color:var(--dim);font-size:var(--fs-body);line-height:1.7}
 
 /* Result tab. Every class here is prefixed rs- : this document has one global
    class pool, and short names have collided four times already. */
-.rs-sec{margin-top:22px}
-.rs-h{display:flex;align-items:baseline;justify-content:space-between;gap:10px;
-  padding-bottom:7px;border-bottom:1px solid var(--line)}
-.rs-h .l{font-size:var(--fs-strong);font-weight:600}
-.rs-h .r{font-family:var(--mono);font-size:var(--fs-label);color:var(--dim)}
 
 /* diverging plot: one shared scale either side of zero, so a bar on the left is
    directly comparable with one on the right */
@@ -281,8 +252,6 @@ button,input,select{font-family:inherit;color:inherit}
 .rs-grid3.wide{grid-template-columns:1fr 116px}
 .rs-val{font-family:var(--mono);font-size:var(--fs-meta);color:var(--text);text-align:right;
   white-space:nowrap}
-.rs-ends{display:flex;justify-content:space-between;
-  font-family:var(--mono);font-size:var(--fs-label);color:var(--dim)}
 
 /* the diverging card keeps its two headings and its reconciliation footer */
 .rs-dvH{display:flex;justify-content:space-between;gap:12px;padding:12px 13px 9px;
@@ -320,10 +289,6 @@ button,input,select{font-family:inherit;color:inherit}
 .rs-tot .l{font-size:var(--fs-body);font-weight:600;color:var(--text)}
 .rs-tot .v{font-family:var(--mono);font-size:var(--fs-body);color:var(--sub)}
 /* the summary line under the diverging card */
-.rs-sum{margin-top:10px;padding:4px 12px 6px;border-radius:var(--r-surface);
-  background:var(--track);font-family:var(--mono);font-size:var(--fs-meta);color:var(--sub)}
-.rs-sum div{display:flex;justify-content:space-between;gap:12px;padding:4px 0}
-.rs-sum b{color:var(--text);font-weight:600}
 
 /* the sixty-year curve */
 .rs-chart{display:flex;gap:9px;margin-top:2px}
@@ -348,15 +313,6 @@ button,input,select{font-family:inherit;color:inherit}
   font-size:18px;line-height:1;padding:4px 8px;border-radius:var(--r-ctrl)}
 .cmpX:hover{background:var(--track);color:var(--text)}
 /* the baseline every other column is read against */
-.cmpBase{display:flex;align-items:center;gap:7px;flex-wrap:wrap;
-  padding:9px 18px;border-bottom:1px solid var(--line);background:var(--card);flex:none}
-.cmpBase .l{font-family:var(--mono);font-size:var(--fs-label);letter-spacing:.06em;
-  color:var(--dim);margin-right:3px}
-.cmpChip{display:flex;align-items:center;gap:6px;border:1px solid var(--cardLine);
-  background:var(--field);border-radius:var(--r-pill);padding:4px 11px;cursor:pointer;
-  font-family:var(--sans);font-size:var(--fs-body);color:var(--sub)}
-.cmpChip[aria-pressed="true"]{background:var(--selBg);border-color:var(--accent);color:var(--accentInk)}
-.cmpChip i{width:9px;height:9px;border-radius:50%;display:block}
 /* the key reads under the plot, where it cannot sit on top of the curves */
 .cmpKey{display:flex;flex-wrap:wrap;gap:6px 18px;padding-top:12px}
 .cmpKeyItem{display:flex;align-items:baseline;gap:7px;font-size:var(--fs-body)}
@@ -421,9 +377,6 @@ button,input,select{font-family:inherit;color:inherit}
 .saveBar button:hover{filter:brightness(1.06)}
 
 /* collapsible blocks */
-.rs-tog{width:100%;display:flex;align-items:center;justify-content:space-between;
-  border:0;background:none;cursor:pointer;padding:0;color:var(--text);text-align:left}
-.rs-tog .c{font-family:var(--mono);font-size:var(--fs-label);color:var(--dim)}
 .rs-asm{border-bottom:1px solid var(--line);padding:9px 2px}
 .rs-asm .t{font-size:var(--fs-body);line-height:1.4}
 .rs-asm .q{font-family:var(--mono);font-size:var(--fs-meta);color:var(--sub);margin-top:3px}
@@ -443,11 +396,8 @@ button,input,select{font-family:inherit;color:inherit}
 
 .project .warn{margin-top:8px;padding:8px 10px;border-radius:var(--r-ctrl);border:1px solid var(--red);
   color:var(--red);font-size:var(--fs-meta);line-height:1.5}
-.projname{flex:1;min-width:0;border:1px solid transparent;border-radius:var(--r-ctrl);background:transparent;
-  font-family:var(--sans);font-size:var(--fs-figure);font-weight:700;letter-spacing:-.4px;color:var(--accentText);
-  padding:3px 6px;margin:-3px -6px 0}
-.projname:hover{border-color:var(--cardLine);background:var(--track)}
-.projname:focus{outline:none;border-color:var(--accent);background:var(--track)}
+.projname{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  font-size:var(--fs-figure);font-weight:700;letter-spacing:-.3px;color:var(--accentText)}
 .card .warn{margin-top:8px;padding:8px 10px;border-radius:var(--r-ctrl);border:1px solid var(--red);
   color:var(--red);font-size:var(--fs-meta);line-height:1.5}
 .advise{margin-top:6px;padding:6px 9px;border-radius:var(--r-ctrl);border:1px dashed var(--ochre);
@@ -456,18 +406,27 @@ button,input,select{font-family:inherit;color:inherit}
 .card .t{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
 .card .t b{font-size:var(--fs-strong);font-weight:700}
 .card .t span{font-family:var(--mono);font-size:var(--fs-meta);color:var(--sub)}
-.card .loc{font-family:var(--mono);font-size:var(--fs-meta);color:var(--dim);margin-top:2px}
-.card .fld{margin-top:10px}
-.card .fld label{font-family:var(--mono);font-size:var(--fs-label);letter-spacing:.08em;color:var(--dim);display:block;margin-bottom:4px}
-.card .fld select,.card .fld input{width:100%;padding:6px 8px;border:1px solid var(--cardLine);
-  border-radius:var(--r-ctrl);background:var(--field);font-size:var(--fs-body)}
 </style>
 </head>
 <body>
 
 <div id="viewport"></div>
 
-<div class="tb" id="toolbar">
+<div class="wel" id="welcome">
+  <div class="welCard">
+    <div class="welHi">Start a project</div>
+    <div class="welBtns">
+      <button class="welNew" id="welNew">Create New Project</button>
+      <button class="welOpen" id="welOpen">Open Project</button>
+    </div>
+    <div class="welErr" id="welErr" hidden></div>
+    <div class="welRecWrap" id="welRecWrap"></div>
+  </div>
+</div>
+
+<div class="tbStack" id="toolbar">
+
+ <div class="tb-grp">
   <button class="tb-btn" id="tbFit" title="Zoom to fit">
     <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor"
          stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
@@ -483,23 +442,18 @@ button,input,select{font-family:inherit;color:inherit}
          stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
     <path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z"/><path d="M12 12v9m0-9 8-4.5M12 12 4 7.5"/></svg>
   </button>
-  <div class="tb-sep"></div>
+ </div>
+
+ <div class="tb-grp">
   <button class="tb-btn" id="tbGrid" aria-pressed="true" title="Ground grid">
     <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor"
          stroke-width="1.7" stroke-linecap="round"><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/>
     <rect x="3" y="3" width="18" height="18" rx="2"/></svg>
   </button>
-  <button class="tb-btn" id="tbShot" title="Save image">
+  <button class="tb-btn" id="tbUnits" aria-haspopup="true" title="Display units">
     <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor"
          stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z"/>
-    <circle cx="12" cy="13" r="3.4"/></svg>
-  </button>
-  <div class="tb-sep"></div>
-  <button class="tb-btn" id="tbSch" title="Compare schemes">
-    <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor"
-         stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-    <path d="m12 3 9 4.5-9 4.5-9-4.5L12 3Z"/><path d="m3 12 9 4.5L21 12"/><path d="m3 16.5 9 4.5 9-4.5"/></svg>
+    <path d="M2 9.5h20v5H2z"/><path d="M6 9.5v3M10 9.5v3M14 9.5v3M18 9.5v3"/></svg>
   </button>
   <button class="tb-btn" id="tbPal" aria-haspopup="true" title="Legend colours">
     <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor"
@@ -508,10 +462,33 @@ button,input,select{font-family:inherit;color:inherit}
              0-1 .8-1.7 1.7-1.7H16a5 5 0 0 0 5-5c0-4-4-7.3-9-7.3Z"/>
     <circle cx="7.5" cy="12" r="1"/><circle cx="10" cy="7.8" r="1"/><circle cx="15" cy="8.5" r="1"/></svg>
   </button>
-  <div class="tb-pop" id="tbPop" hidden></div>
+ </div>
+
+ <div class="tb-grp">
+  <button class="tb-btn" id="tbShot" title="Save image">
+    <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor"
+         stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z"/>
+    <circle cx="12" cy="13" r="3.4"/></svg>
+  </button>
+  <button class="tb-btn" id="tbSch" title="Compare schemes">
+    <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor"
+         stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="m12 3 9 4.5-9 4.5-9-4.5L12 3Z"/><path d="m3 12 9 4.5L21 12"/><path d="m3 16.5 9 4.5 9-4.5"/></svg>
+  </button>
+  <button class="tb-btn" id="tbRep" title="Report">
+    <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor"
+         stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M6 2.5h8l4 4v15H6Z"/><path d="M14 2.5v4h4"/>
+    <path d="M9 12h6M9 15.5h6M9 8.5h2"/></svg>
+  </button>
+ </div>
+
+ <div class="tb-pop" id="tbPop" hidden></div>
 </div>
 
 <div class="cmp" id="cmp" hidden></div>
+<div class="cmp" id="rep" hidden></div>
 
 <div class="dm-bar" id="modebar">
   <div class="dm-seg" id="modeSeg"></div>
@@ -519,9 +496,8 @@ button,input,select{font-family:inherit;color:inherit}
 <div class="dm-ramp" id="ramp" hidden></div>
 
 <div class="bar">
-  <span class="wm">CARBON</span><span class="wmv">CONCEPT STAGE</span>
+  <span class="wm">SITEWISE</span><span class="wmv">CONCEPT-STAGE ENVIRONMENTAL PERFORMANCE PLATFORM</span>
   <div class="spacer"></div>
-  <span class="syncerr" id="syncErr" hidden></span>
   <div class="themeseg" id="themeSeg">
     <button data-theme-set="light" title="Light" aria-label="Light">
       <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor"
@@ -534,35 +510,40 @@ button,input,select{font-family:inherit;color:inherit}
       <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
     </button>
   </div>
-  <div class="acct">
-    <button class="avatar" id="avatar" aria-haspopup="true" aria-expanded="false" title="Account">JZ</button>
-    <div class="menu" id="acctMenu" hidden>
-      <div class="mhead">Not signed in</div>
-      <button class="mitem" id="signOut">Sign out</button>
-    </div>
-  </div>
 </div>
 
 <div class="leftcol">
 
   <section class="project">
     <div class="prow">
-      <input id="projName" class="projname" type="text" value="Untitled project"
-             aria-label="Project name" spellcheck="false">
-      <span class="period">60-year study</span>
+      <span class="projname" id="projName">Untitled project</span>
+      <span class="period" id="projDate"></span>
     </div>
     <div class="warn" id="unitWarn" hidden></div>
-    <div class="setup">
-      <div class="fld"><label>CLIMATE ZONE</label><div id="ddClimate"></div></div>
-      <div class="fld"><label>DISPLAY UNITS</label><div id="ddUnits"></div></div>
-    </div>
-    <div class="advise" id="climateWarn" hidden></div>
   </section>
 
-  <section class="panel">
+  <div class="work">
     <div class="tabs" id="tabs"></div>
-    <div class="body" id="panelBody"><div class="empty">Waiting for the first sync from Grasshopper.<br>Toggle <b>Run</b> on the CC&nbsp;Sync component.</div></div>
-  </section>
+    <div class="workRow">
+    <nav class="rail" aria-label="Analysis modules">
+      <button class="rail-btn" id="modCarbon" aria-pressed="true" title="Carbon">
+        <svg viewBox="-1.5 -1.3 27.4 27.4" width="24" height="24" aria-hidden="true">
+          <path d="M19.4 10A7.5 7.5 0 0 0 5.4 8 6 6 0 0 0 6 20h13a5 5 0 0 0 .4-10Z"
+                fill="none" stroke="currentColor" stroke-width="1.7"
+                stroke-linejoin="round"/>
+          <text x="11.4" y="17.1" text-anchor="middle" fill="currentColor"
+                font-family="var(--sans)" font-size="7.2" font-weight="700">CO</text>
+          <text x="16.9" y="18.4" fill="currentColor"
+                font-family="var(--sans)" font-size="5" font-weight="700">2</text>
+        </svg>
+      </button>
+    </nav>
+
+    <section class="panel">
+      <div class="body" id="panelBody"><div class="empty">Waiting for the first sync from Grasshopper.<br>Toggle <b>Run</b> on the CC&nbsp;Sync component.</div></div>
+    </section>
+    </div>
+  </div>
 
 </div>
 
@@ -579,7 +560,14 @@ button,input,select{font-family:inherit;color:inherit}
    ═══════════════════════════════════════════════════════════════ */
 var viewport = document.getElementById('viewport');
 var scene = new THREE.Scene();
-scene.background = new THREE.Color(0xffffff);
+/* Theme colours live in the stylesheet and nowhere else. three.js wants a
+   number, so the token is read and converted rather than repeated here. */
+function themeColor(token){
+  var v=getComputedStyle(document.documentElement).getPropertyValue(token).trim();
+  var n=parseInt(v.replace('#',''),16);
+  return isNaN(n)?0xffffff:n;
+}
+scene.background = new THREE.Color(themeColor('--scene'));
 
 var camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.01, 100000);
 camera.position.set(20, 20, 20);
@@ -601,7 +589,7 @@ scene.add(new THREE.AmbientLight(0xffffff, 0.6));
 var sun = new THREE.DirectionalLight(0xffffff, 0.8);
 sun.position.set(10, 20, 10);
 scene.add(sun);
-var grid = new THREE.GridHelper(200, 40, 0xccd5dd, 0xe3e9ee);
+var grid = new THREE.GridHelper(200, 40, themeColor('--grid1'), themeColor('--grid2'));
 scene.add(grid);
 
 var contentGroup = new THREE.Group();
@@ -657,7 +645,110 @@ function frameView(kind){
   controls.target.copy(center);
   controls.update();
 }
-function fitCameraToObject(){ frameView('axo'); }
+
+
+/* ══════════════════════════════════════════════════════════════
+   PROJECT STORE
+   A project is a folder the user picks:
+
+     Park1/
+       project.json      name, climate zone, display units
+       schemes/001.json  one file per scheme
+       thumbs/           screenshots
+
+   The page does not touch the folder itself. Chrome's File System Access API
+   refuses protected directories outright - the desktop among them - and asks
+   permission again every session for the rest, so the dialog is opened by the
+   plugin instead. The user still starts it from the button below: the page
+   asks the server, the server asks Windows.
+   ══════════════════════════════════════════════════════════════ */
+var PROJ=null;                       // {name, path} once open
+var SCHEMES=[];                      // this project's schemes, read from its folder
+var RECENT=[];
+
+function api(route, body){
+  return fetch(route, {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify(body||{})
+  }).then(function(r){ return r.json(); });
+}
+
+/* Dismissing the dialog is a decision, not a fault: it must leave no trace. */
+function cancelled(res){ return !!res && res.cancelled; }
+
+function adopt(res){
+  if(!res || !res.ok) return res;
+  var meta=res.project||{};
+  PROJ={name:res.name, path:res.path, created:meta.created};
+  if(meta.disp) DISP=meta.disp;
+  PROJECT=meta.projectName||res.name;
+  SCHEMES=(res.schemes||[]).sort(function(x,y){
+    return String(x.ts).localeCompare(String(y.ts));
+  });
+  BASELINE=SCHEMES.length?SCHEMES[0].id:null;
+  $('#welcome').hidden=true;
+  paint(true);
+  return res;
+}
+
+function createProject(){ return api('/project/new').then(adopt); }
+function openProject(){ return api('/project/open').then(adopt); }
+function openRecent(path){ return api('/project/open-recent',{path:path}).then(adopt); }
+
+function loadRecent(){
+  return api('/project/recent').then(function(r){ RECENT=(r&&r.recent)||[]; })
+                               .catch(function(){ RECENT=[]; });
+}
+
+/* Saving writes project.json and one file per scheme, and removes the file of
+   any scheme the page no longer holds. */
+function persistSchemes(){
+  if(!PROJ) return Promise.resolve();
+  return api('/project/save',{
+    project:{name:PROJ.name, projectName:PROJECT, disp:DISP, format:1},
+    schemes:SCHEMES
+  }).then(function(r){
+    if(r && !r.ok) welError(r.error||'Could not write to the project folder.');
+  }).catch(function(){});
+}
+
+/* ---- the welcome screen ---- */
+function welError(msg){
+  var e=$('#welErr');
+  if(!e) return;
+  e.hidden=!msg;
+  e.textContent=msg||'';
+}
+
+function drawWelcome(){
+  var wrap=$('#welRecWrap');
+  if(wrap){
+    wrap.innerHTML = '<div class="welH">RECENT</div>' + (RECENT.length
+      ? RECENT.map(function(r,i){
+          var d=new Date(r.opened);
+          // the year is noise for this year's projects and essential for last
+          // year's, so it appears only when it differs from today
+          var fmt={day:'numeric',month:'short'};
+          if(d.getFullYear()!==new Date().getFullYear()) fmt.year='numeric';
+          return '<button class="welRec" data-rec="'+i+'" title="'+esc(r.path)+'">'+
+                 '<span>'+esc(r.name)+'</span>'+
+                 '<span class="welMeta">'+r.schemes+' scheme'+(r.schemes===1?'':'s')+' · '+
+                 d.toLocaleDateString('en-GB',fmt)+'</span></button>';
+        }).join('')
+      : '<div class="welNone">No projects opened yet</div>');
+    wrap.querySelectorAll('[data-rec]').forEach(function(b){
+      b.onclick=function(){
+        welError('');
+        var r=RECENT[+b.dataset.rec];
+        openRecent(r.path).then(function(res){
+          if(res && !res.ok && !cancelled(res)) welError(res.error||'Could not open that project.');
+        });
+      };
+    });
+  }
+}
+
 
 /* ═══════════════════════════════════════════════════════════════
    PART 2 — quantities.
@@ -673,7 +764,6 @@ function fitCameraToObject(){ frameView('axo'); }
    across 100/150/200 mm, and its "1M retaining wall + 1M footer" is exactly
    1116.8 × 2.0 m³ — so volume maps onto them directly.
    ═══════════════════════════════════════════════════════════════ */
-var CONCRETE_KG_M3 = 1116.8;   // verified against 033001.01/.02/.03
 var WALL_M3_PER_UNIT = 2.0;    // 033001.04 = 1 m³ wall + 1 m³ spread footing
 
 /* ═══════════════════════════════════════════════════════════════
@@ -681,8 +771,6 @@ var WALL_M3_PER_UNIT = 2.0;    // 033001.04 = 1 m³ wall + 1 m³ spread footing
    Carbon Conscience V2 set (192 assemblies / 214 elements).
    ═══════════════════════════════════════════════════════════════ */
 var WALL_1M='033001.04', WALL_1M_RB='033001.22', WALL_2M='033001.05', WALL_2M_RB='033001.23';
-var PAVING={'033001.01':1,'033001.21':1,'321100.01':1,'321440.01':1,'321416.02':1,
-            '321216.01':1,'321313.01':1,'323913.01':1,'321540.01':1,'321100.02':1};
 var TREEPLANT={'329300.07':1,'329300.08':1};
 var CANOPY={'329300.28':144,'329300.29':36,'329300.30':16};
 var TREE_CURVE=[[144,-383.2],[36,-202.8],[16,-136.2]];
@@ -807,13 +895,12 @@ function U(){ return UNITS[DISP]||UNITS.m; }
 function num(v,dp){ return v.toLocaleString('en-US',{minimumFractionDigits:dp,maximumFractionDigits:dp}); }
 function fmtA(m2){ var u=U(); return num(m2*u.area,u.dp[0])+' '+u.A; }        // area
 function fmtV(m3){ var u=U(); return num(m3*u.vol ,u.dp[1])+' '+u.V; }        // volume
-function fmtL(m ){ var u=U(); return num(m *u.len ,u.dp[0])+' '+u.L; }        // length
 function areaVal(m2){ var u=U(); return num(m2*u.area,u.dp[0]); }
 function volVal(m3){ var u=U(); return num(m3*u.vol ,u.dp[1]); }
 
 var MODEL={meta:null,groups:[]}, ASSIGN={}, RATE={}, VIS={};
-var UI={tab:'mat',open:{},theme:'light',picker:null,dd:null,mode:'colour',
-        grid:true,pal:'magma',pop:null,res:{},cmp:false};
+var UI={tab:'mat',open:{},theme:'light',picker:null,mode:'colour',
+        grid:true,pal:'magma',pop:null,res:{},cmp:false,rep:false};
 var PROJECT='Untitled project';
 var $=function(s){return document.querySelector(s);};
 function t1(v){return (v/1000).toLocaleString('en-US',{minimumFractionDigits:1,maximumFractionDigits:1});}
@@ -841,48 +928,11 @@ var ECOSYSTEMS=['Tropical Rainforest','Tropical Moist Deciduous','Tropical Dry D
   'Boreal Forest','Prairie Grassland','Dry Meadows','Temperate Mixed Shrub and Forb Landscape',
   'Temperate Wetland and Salt Marsh','Turf'];
 
-var CLIMATE_ECO={
-  tropical:      ['Tropical Rainforest','Tropical Moist Deciduous','Tropical Dry Deciduous',
-                  'Tropical Shrublands','Mangrove','Peat Swamp','Turf'],
-  subtropical:   ['Subtropical Humid Forest','Mangrove','Peat Swamp','Tropical Moist Deciduous',
-                  'Tropical Dry Deciduous','Turf'],
-  mediterranean: ['Dry Forest (Mediterranean)','Dry Meadows','Prairie Grassland',
-                  'Temperate Mixed Shrub and Forb Landscape','Turf'],
-  oceanic:       ['Temperate Oceanic Rainforest','Temperate Continental Forest',
-                  'Temperate Mixed Shrub and Forb Landscape','Temperate Wetland and Salt Marsh',
-                  'Prairie Grassland','Dry Meadows','Turf'],
-  continental:   ['Temperate Continental Forest','Boreal Forest','Prairie Grassland','Dry Meadows',
-                  'Temperate Mixed Shrub and Forb Landscape','Temperate Wetland and Salt Marsh','Turf'],
-  boreal:        ['Boreal Forest','Temperate Wetland and Salt Marsh','Turf']
-};
-var CLIMATE='continental';
 
 /* the ecosystem an assembly describes, or null if it is not an ecosystem */
-function ecoOf(name){
-  var best=null;
-  ECOSYSTEMS.forEach(function(e){
-    if(name.indexOf(e)>=0 && (!best||e.length>best.length)) best=e;
-  });
-  return best;
-}
 /* assigned assemblies whose ecosystem does not belong in the chosen zone —
    changing the zone does not silently rewrite a choice the user already made,
    so the mismatch has to be surfaced instead */
-function offClimate(){
-  var out=[];
-  MODEL.groups.forEach(function(cg){
-    var ref=ASSIGN[cg.color];
-    if(!ref||ref.indexOf('mat:')===0) return;
-    var lu=CC.landuses[ref];
-    if(lu && ecoOf(lu.n) && !ecoFits(lu.n)) out.push(cg.color);
-  });
-  return out;
-}
-function ecoFits(name){
-  var e=ecoOf(name);
-  if(!e) return true;                       // not an ecosystem: always relevant
-  return (CLIMATE_ECO[CLIMATE]||[]).indexOf(e)>=0;
-}
 
 var FAMLIST=(function(){
   var tiers={}, out=[];
@@ -895,7 +945,7 @@ var FAMLIST=(function(){
     .forEach(function(t){
       tiers[t].forEach(function(ref){
         var nm=CC.landuses[ref].n;
-        out.push({v:ref, label:nm, meta:'', group:t, eco:ecoOf(nm)});
+        out.push({v:ref, label:nm, meta:'', group:t});
       });
     });
   return out;
@@ -937,13 +987,7 @@ function picker(cg, kind, ref){
         '<span class="chev">'+(open?'\u25b4':'\u25be')+'</span></button>';
   if(!open) return h;
 
-  var list=(kind==='solid')?MATLIST:FAMLIST.slice().sort(function(a,b){
-    var af=ecoFits(a.label)?0:1, bf=ecoFits(b.label)?0:1;
-    return af-bf;                            // climate-appropriate first
-  }).map(function(o){
-    return ecoFits(o.label) ? o
-      : {v:o.v, label:o.label, meta:o.meta, group:'Other climates', eco:o.eco};
-  });
+  var list=(kind==='solid')?MATLIST:FAMLIST;
   h+='<div class="pickbox">'+
      '<input class="picksearch" type="text" data-search="'+cg.color+'" placeholder="Search '+
      list.length+' options" autocomplete="off">'+
@@ -1447,51 +1491,27 @@ function repTab(){
 /* One card, three tabs. Nothing nests inside a view, so there is still never
    a tab row within a tab — the earlier icon rail was a second navigation
    layer for the same three destinations. */
-var VIEWS=[{id:'mat',name:'Materials'},{id:'res',name:'Result'},{id:'rep',name:'Report'}];
+var VIEWS=[{id:'mat',name:'Materials'},{id:'res',name:'Result'}];
 
 
 /* A native <select> renders its popup through the operating system, which is
    why that list keeps square corners and a heavy border however the element is
    styled. These two use the same markup as the material picker so every
    dropdown in the panel looks and behaves alike. */
-var CLIMATE_OPTS=[
-  {v:'tropical',label:'Tropical'},{v:'subtropical',label:'Subtropical'},
-  {v:'mediterranean',label:'Mediterranean / dry'},{v:'oceanic',label:'Temperate oceanic'},
-  {v:'continental',label:'Temperate continental'},{v:'boreal',label:'Boreal'}];
 var UNIT_OPTS=[
   {v:'m',label:'Meters (m)'},{v:'cm',label:'Centimeters (cm)'},{v:'mm',label:'Millimeters (mm)'},
   {v:'ft',label:'Feet (ft)'},{v:'in',label:'Inches (in)'},{v:'yd',label:'Yards (yd)'}];
 
-function miniSelect(key, opts, current, onPick){
-  var open=(UI.dd===key);
-  var cur=opts.filter(function(o){return o.v===current;})[0];
-  var h='<button class="pick" data-dd="'+key+'"><span>'+esc(cur?cur.label:'\u2014')+
-        '</span><span class="chev">'+(open?'\u25b4':'\u25be')+'</span></button>';
-  if(open){
-    h+='<div class="pickbox ms"><div class="picklist">'+opts.map(function(o){
-      return '<button class="pickopt'+(o.v===current?' sel':'')+'" data-ddopt="'+key+'|'+o.v+'">'+
-             '<span class="lbl">'+esc(o.label)+'</span></button>';}).join('')+'</div></div>';
-  }
-  return h;
-}
 function drawSelects(){
-  $('#ddClimate').innerHTML=miniSelect('climate', CLIMATE_OPTS, CLIMATE);
-  $('#ddUnits').innerHTML  =miniSelect('units',   UNIT_OPTS,    DISP);
-  document.querySelectorAll('[data-dd]').forEach(function(b){
-    b.onclick=function(e){ e.stopPropagation();
-      UI.dd=(UI.dd===b.dataset.dd)?null:b.dataset.dd; paint(true); };
-  });
-  document.querySelectorAll('[data-ddopt]').forEach(function(b){
-    b.onclick=function(){
-      var parts=b.dataset.ddopt.split('|');
-      if(parts[0]==='climate') CLIMATE=parts[1]; else DISP=parts[1];
-      UI.dd=null; paint(true);
-    };
-  });
+  // the two settings live on the toolbar now; the popup renders them on demand
+  var d=$('#projDate');
+  if(d) d.textContent = (PROJ && PROJ.created)
+    ? new Date(PROJ.created).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})
+    : '';
+  var n=$('#projName');
+  if(n) n.textContent = PROJECT;
 }
-document.addEventListener('click',function(e){
-  if(UI.dd && !e.target.closest('.fld')){ UI.dd=null; paint(true); }
-});
+
 
 
 /* Three readings of the same geometry: as Rhino coloured it, by carbon, by
@@ -1567,7 +1587,7 @@ function drawModeBar(vals,lo,hi,any){
   });
   var ramp=$('#ramp');
   // a background poll must not raise the ramp back over an open comparison
-  if(UI.cmp||UI.mode==='colour'){ ramp.hidden=true; return; }
+  if(UI.cmp||UI.rep||UI.mode==='colour'){ ramp.hidden=true; return; }
   ramp.hidden=false;
   if(!any){
     ramp.innerHTML='<div class="dm-note">'+(UI.mode==='cost'
@@ -1603,18 +1623,23 @@ function drawModeBar(vals,lo,hi,any){
    what it costs, and the climate the assemblies are read against. The geometry
    is deliberately not part of it - the point is to hold the model still and
    vary the specification. */
-var SKEY='carbontools.schemes.v1';
-var SCHEMES=[];
-(function(){ try{ SCHEMES=JSON.parse(localStorage.getItem(SKEY))||[]; }catch(e){ SCHEMES=[]; } })();
-function persistSchemes(){
-  try{ localStorage.setItem(SKEY, JSON.stringify(SCHEMES)); }
-  catch(e){ /* private mode or quota - the session still works in memory */ }
-}
+/* SCHEMES and persistSchemes belong to the project store above: a scheme is
+   written into the open project's folder, one file each. */
 function thumbnail(){
   /* A scheme keeps a picture of what it was, because four columns of numbers do
      not tell you which design you are looking at. 320px wide is enough to
-     recognise a scheme and small enough to sit beside it in storage. */
+     recognise a scheme and small enough to sit beside it in storage.
+
+     The shot is always taken from the same framed axonometric, never from the
+     working camera. Thumbnails from different angles cannot be compared - a
+     scheme reads as smaller when only the camera moved, and a panned view cuts
+     the model in half. The camera is put back before the frame is presented, so
+     none of this is visible. */
+  var pos=camera.position.clone(),
+      up=camera.up.clone(),
+      target=controls.target.clone();
   try{
+    frameView('axo');
     renderer.render(scene,camera);
     var srcC=renderer.domElement, W=320, H=Math.round(W*srcC.height/srcC.width);
     var c=document.createElement('canvas');
@@ -1625,6 +1650,13 @@ function thumbnail(){
     g.drawImage(srcC,0,0,W,H);
     return c.toDataURL('image/jpeg',0.72);
   }catch(e){ return null; }
+  finally{
+    camera.position.copy(pos);
+    camera.up.copy(up);
+    controls.target.copy(target);
+    controls.update();
+    renderer.render(scene,camera);
+  }
 }
 
 /* A saved scheme is a finished reading, not a recipe. It carries its own rows,
@@ -1634,7 +1666,7 @@ function thumbnail(){
 function captureScheme(name){
   var st=siteTotals();
   return {id:String(Date.now()), name:name, ts:new Date().toISOString(),
-          climate:CLIMATE, shot:thumbnail(),
+          shot:thumbnail(),
           rows:JSON.parse(JSON.stringify(resRows())),
           tot:{lo:st.lo, me:st.me, hi:st.hi, sq:st.sq, st:st.st,
                area:st.area, cost:st.cost, anyCost:st.anyCost}};
@@ -1646,6 +1678,8 @@ function saveSchemeNamed(name){
   paint(true);
 }
 function deleteScheme(id){
+  // persistSchemes writes what remains and deletes the file of what does not,
+  // so removing the entry is the whole of the deletion
   SCHEMES=SCHEMES.filter(function(s){ return s.id!==id; });
   if(BASELINE===id) BASELINE=SCHEMES.length?SCHEMES[0].id:null;
   persistSchemes();
@@ -1782,11 +1816,26 @@ function compareView(){
   return h+'</div></div></div>';
 }
 
+/* Report: the same overlay frame as the comparison, holding the document the
+   Report tab used to render in the side panel. */
+function drawReport(){
+  var el=$('#rep');
+  el.hidden=!UI.rep;
+  $('#modebar').hidden=UI.rep||UI.cmp;
+  if(UI.rep) $('#ramp').hidden=true;
+  if(!UI.rep){ el.innerHTML=''; return; }
+  el.innerHTML='<div class="cmpH"><span class="t">Report</span>'+
+    '<span class="n">'+esc(PROJECT)+'</span>'+
+    '<button class="cmpX" id="repClose" title="Close">\u00d7</button></div>'+
+    '<div class="cmpBody">'+repTab()+'</div>';
+  $('#repClose').onclick=function(){ UI.rep=false; drawReport(); drawToolbar(); };
+}
+
 function drawCompare(){
   var el=$('#cmp');
   el.hidden=!UI.cmp;
   // the mode switch drives the 3D view, which the comparison is standing over
-  $('#modebar').hidden=UI.cmp;
+  $('#modebar').hidden=UI.cmp||UI.rep;
   if(UI.cmp) $('#ramp').hidden=true;
   if(!UI.cmp){ el.innerHTML=''; return; }
   el.innerHTML=compareView();
@@ -1813,8 +1862,22 @@ function drawToolbar(){
   var pop=$('#tbPop');
   var cs=$('#tbSch');
   cs.setAttribute('aria-pressed', String(UI.cmp));
-  cs.onclick=function(e){ e.stopPropagation(); UI.cmp=!UI.cmp; drawCompare(); drawToolbar(); };
-  [['#tbPal','pal']].forEach(function(pair){
+  cs.onclick=function(e){
+    e.stopPropagation();
+    UI.cmp=!UI.cmp;
+    if(UI.cmp) UI.rep=false;          // one overlay at a time
+    drawReport(); drawCompare(); drawToolbar();
+  };
+
+  var rp=$('#tbRep');
+  rp.setAttribute('aria-pressed', String(UI.rep));
+  rp.onclick=function(e){
+    e.stopPropagation();
+    UI.rep=!UI.rep;
+    if(UI.rep) UI.cmp=false;
+    drawCompare(); drawReport(); drawToolbar();
+  };
+  [['#tbUnits','units'],['#tbPal','pal']].forEach(function(pair){
     var b=$(pair[0]);
     b.setAttribute('aria-pressed', String(UI.pop===pair[1]));
     b.onclick=function(e){ e.stopPropagation(); UI.pop=(UI.pop===pair[1])?null:pair[1]; drawToolbar(); };
@@ -1822,16 +1885,29 @@ function drawToolbar(){
 
   pop.hidden=!UI.pop;
   if(UI.pop){
-    var owner=$('#tbPal');
-    pop.style.top=owner.offsetTop+'px';      // open beside the button that owns it
-    pop.innerHTML='<div class="tb-ttl">LEGEND COLOURS</div>'+PALETTES.map(function(p){
-      return '<button class="tb-opt" data-pal="'+p.id+'" aria-pressed="'+(UI.pal===p.id)+'">'+
-        '<span class="tb-sw" style="background:linear-gradient(90deg,'+p.c.join(',')+')"></span>'+
-        esc(p.name)+'</button>';
-    }).join('');
-    pop.querySelectorAll('[data-pal]').forEach(function(b){
-      b.onclick=function(){ UI.pal=b.dataset.pal; UI.pop=null; paint(true); };
-    });
+    var owners={units:'#tbUnits', pal:'#tbPal'};
+    pop.style.top=$(owners[UI.pop]).offsetTop+'px';   // open beside the button that owns it
+
+    if(UI.pop==='pal'){
+      pop.innerHTML='<div class="tb-ttl">LEGEND COLOURS</div>'+PALETTES.map(function(p){
+        return '<button class="tb-opt" data-pal="'+p.id+'" aria-pressed="'+(UI.pal===p.id)+'">'+
+          '<span class="tb-sw" style="background:linear-gradient(90deg,'+p.c.join(',')+')"></span>'+
+          esc(p.name)+'</button>';
+      }).join('');
+      pop.querySelectorAll('[data-pal]').forEach(function(b){
+        b.onclick=function(){ UI.pal=b.dataset.pal; UI.pop=null; paint(true); };
+      });
+
+    } else if(UI.pop==='units'){
+      pop.innerHTML='<div class="tb-ttl">DISPLAY UNITS</div>'+UNIT_OPTS.map(function(o){
+        return '<button class="tb-opt" data-unit="'+o.v+'" aria-pressed="'+(DISP===o.v)+'">'+
+          esc(o.label)+'</button>';
+      }).join('');
+      pop.querySelectorAll('[data-unit]').forEach(function(b){
+        // a display unit changes how a number reads, never what it is
+        b.onclick=function(){ DISP=b.dataset.unit; UI.pop=null; persistSchemes(); paint(true); };
+      });
+    }
   }
 }
 document.addEventListener('click',function(e){
@@ -1898,16 +1974,18 @@ function paint(force){
   document.documentElement.dataset.t=UI.theme;
   syncTheme();                       // keep the sun/moon highlight on the active theme
   var dark=(UI.theme==='dark');
-  scene.background=new THREE.Color(dark?0x1e2732:0xffffff);
+  // documentElement.dataset.t was set above, so the tokens already hold the
+  // colours of the theme being painted
+  scene.background=new THREE.Color(themeColor('--scene'));
   scene.remove(grid);
-  grid = new THREE.GridHelper(200, 40, dark?0x4a5a6e:0xccd5dd, dark?0x384555:0xe3e9ee);
+  grid = new THREE.GridHelper(200, 40, themeColor('--grid1'), themeColor('--grid2'));
   grid.visible = UI.grid;
   scene.add(grid);
   drawTabs();
   drawSelects();
   drawToolbar();
   applyMode();
-  $('#panelBody').innerHTML = UI.tab==='mat' ? matTab() : UI.tab==='res' ? resTab() : repTab();
+  $('#panelBody').innerHTML = UI.tab==='mat' ? matTab() : resTab();
   if(UI.tab==='mat') wire();
   // the Result tab has its own collapsibles, and wire() never runs there
   document.querySelectorAll('[data-res]').forEach(function(b){
@@ -1922,14 +2000,6 @@ function paint(force){
     sn.onkeydown=function(e){ if(e.key==='Enter') saveSc(); };
   }
 
-
-  var cw=$('#climateWarn');
-  if(cw){
-    var off=offClimate();
-    cw.hidden=!off.length;
-    if(off.length) cw.innerHTML='<b>'+off.length+'</b> assigned assembl'+
-      (off.length===1?'y is':'ies are')+' outside this zone: '+off.join(', ');
-  }
 
   var st=siteTotals();
 
@@ -2045,8 +2115,7 @@ function ingest(data){
     return {color:group.color,qty:q};
   });
   applyVis();
-  $('#syncErr').hidden=true;
-  if(firstLoad && contentGroup.children.length>0){ fitCameraToObject(contentGroup); firstLoad=false; }
+  if(firstLoad && contentGroup.children.length>0){ frameView('axo'); firstLoad=false; }
   paint();
 }
 
@@ -2055,17 +2124,12 @@ function poll(){
   fetch('/data.json',{cache:'no-store'})
     .then(function(r){return r.text();})
     .then(function(txt){
-      if(txt===lastRaw){          // nothing changed in Rhino — leave the DOM alone
-        $('#syncErr').hidden=true;
-        return;
-      }
+      if(txt===lastRaw) return;   // nothing changed in Rhino — leave the DOM alone
       lastRaw=txt;
       ingest(JSON.parse(txt));
     })
     .catch(function(){
-      var e=$('#syncErr');
-      e.hidden=false;
-      e.textContent='Rhino disconnected';
+      // the server is gone; keep polling so the page recovers when it returns
     })
     .then(function(){ setTimeout(poll,1500); });
 }
@@ -2075,26 +2139,11 @@ document.addEventListener('focusout',function(){
 });
 /* view switching lives on the tabs — see drawTabs() */
 
-$('#projName').oninput=function(e){ PROJECT=e.target.value; };
 
-function closeMenu(){
-  $('#acctMenu').hidden=true;
-  $('#avatar').setAttribute('aria-expanded','false');
-}
-$('#avatar').onclick=function(e){
-  e.stopPropagation();
-  var m=$('#acctMenu'), open=m.hidden;
-  m.hidden=!open;
-  $('#avatar').setAttribute('aria-expanded',String(open));
-
-};
-document.addEventListener('click',function(e){
-  if(!$('#acctMenu').hidden && !e.target.closest('.acct')) closeMenu();
-});
 document.addEventListener('keydown',function(e){
   if(e.key!=='Escape') return;
-  closeMenu();
   if(UI.cmp){ UI.cmp=false; drawCompare(); drawToolbar(); }
+  if(UI.rep){ UI.rep=false; drawReport(); drawToolbar(); }
   if(UI.picker){ UI.picker=null; paint(true); }
 });
 function syncTheme(){
@@ -2104,11 +2153,21 @@ function syncTheme(){
   });
 }
 syncTheme();
-$('#signOut').onclick=function(){
-  closeMenu();
-  // no account layer yet — the backend in §17 of the decision record is not built
-  alert('Accounts are not connected yet. This viewer runs entirely on your machine and stores nothing.');
-};
+/* Wired here rather than beside the project store: `$` is assigned further
+   down the file, so binding earlier silently left the buttons dead. */
+function initWelcome(){
+  function attempt(run){
+    welError('');
+    run().then(function(res){
+      if(res && !res.ok && !cancelled(res)) welError(res.error||'Something went wrong.');
+      if(res && res.ok) loadRecent();
+    }).catch(function(e){ welError('The plugin did not answer: '+(e&&e.message||e)); });
+  }
+  $('#welNew').onclick=function(){ attempt(createProject); };
+  $('#welOpen').onclick=function(){ attempt(openProject); };
+  loadRecent().then(drawWelcome);
+}
+initWelcome();
 paint();
 poll();
 </script>

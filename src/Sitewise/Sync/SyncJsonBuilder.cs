@@ -8,9 +8,9 @@ using Newtonsoft.Json.Linq;
 using Rhino;
 using Rhino.Geometry;
 
-using CarbonTools.Components;
+using Sitewise.Components;
 
-namespace CarbonTools.Sync
+namespace Sitewise.Sync
 {
     /// <summary>
     /// Builds the JSON payload described in the sync protocol

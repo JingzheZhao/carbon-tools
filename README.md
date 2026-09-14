@@ -1,4 +1,4 @@
-# Carbon Tools
+# Sitewise
 
 A free, open-source carbon and cost calculator for landscape and urban design at
 concept stage. It is a Grasshopper plugin that streams Rhino geometry to a local
@@ -22,7 +22,7 @@ specification — and that is exactly when the decisions that dominate a project
 carbon footprint get made. Tools that demand a full bill of quantities arrive too
 late to change anything.
 
-Carbon Tools asks for the one thing a concept model already has: **colour**. You
+Sitewise asks for the one thing a concept model already has: **colour**. You
 group surfaces and solids by colour in Rhino, tell the viewer what each colour is
 made of, and get a number you can argue with.
 
@@ -59,7 +59,7 @@ say which parts are real and which are assumed is not evidence, it is decoration
 
 ## Installing
 
-1. Download the latest `CarbonTools.gha` from Releases.
+1. Download the latest `Sitewise.gha` from Releases.
 2. Drop it into `%APPDATA%\Grasshopper\Libraries`.
 3. Right-click the file → Properties → **Unblock**, then restart Rhino.
 
@@ -93,7 +93,7 @@ saved schemes are still there after a Rhino restart.
 ## Repository layout
 
 ```
-src/CarbonTools/     the Grasshopper plugin (C#, net48)
+src/Sitewise/     the Grasshopper plugin (C#, net48)
   Components/        the Grasshopper components
   Sync/              geometry export, quantities, and the localhost server
   WebAssets/         viewer.html — the single-page viewer, embedded in the .gha
@@ -116,7 +116,7 @@ assemblies by absolute path; adjust the `HintPath` entries if your Rhino is not
 at `D:\Softwares\Rhino`.
 
 ```bash
-dotnet build src/CarbonTools/CarbonTools.csproj
+dotnet build src/Sitewise/Sitewise.csproj
 ```
 
 The build copies the resulting `.gha` into `%APPDATA%\Grasshopper\Libraries`.
@@ -128,14 +128,14 @@ normally mean a rebuild and a Rhino restart. To avoid that, set an environment
 variable pointing at the file on disk and the server will serve it live:
 
 ```bash
-setx CARBONTOOLS_VIEWER "E:\Carbon\carbon-tools\src\CarbonTools\WebAssets\viewer.html"
+setx CARBONTOOLS_VIEWER "E:\Carbon\sitewise\src\Sitewise\WebAssets\viewer.html"
 ```
 
 `CARBONTOOLS_DATA` does the same for the dataset — point it at the repository's
 `data/` folder to edit carbon factors and see the result on a refresh:
 
 ```bash
-setx CARBONTOOLS_DATA "E:\Carbon\carbon-tools\data"
+setx CARBONTOOLS_DATA "E:\Carbon\sitewise\data"
 ```
 
 Restart Rhino once after setting either, since a process reads its environment at

@@ -7,7 +7,7 @@ using Grasshopper.Kernel;
 using Grasshopper.Kernel.Types;
 using Rhino.Display;
 
-namespace CarbonTools.Components
+namespace Sitewise.Components
 {
     /// <summary>
     /// CC Group: user picks a color via the swatch on the component body and

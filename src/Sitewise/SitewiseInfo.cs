@@ -2,11 +2,11 @@ using System;
 using System.Drawing;
 using Grasshopper.Kernel;
 
-namespace CarbonTools
+namespace Sitewise
 {
-    public class CarbonToolsInfo : GH_AssemblyInfo
+    public class SitewiseInfo : GH_AssemblyInfo
     {
-        public override string Name => "Carbon Tools";
+        public override string Name => "Sitewise";
 
         public override Bitmap Icon => null;
 
@@ -15,7 +15,7 @@ namespace CarbonTools
 
         public override Guid Id => new Guid("6a5c9f2e-6f4d-4b3a-9e7a-1f2c3d4e5a6b");
 
-        public override string AuthorName => "Carbon Tools";
+        public override string AuthorName => "Sitewise";
 
         public override string AuthorContact => "";
     }

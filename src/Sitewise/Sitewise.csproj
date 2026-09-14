@@ -5,9 +5,9 @@
     <OutputType>Library</OutputType>
     <UseWindowsForms>true</UseWindowsForms>
     <LangVersion>latest</LangVersion>
-    <AssemblyName>CarbonTools</AssemblyName>
+    <AssemblyName>Sitewise</AssemblyName>
     <TargetExt>.gha</TargetExt>
-    <RootNamespace>CarbonTools</RootNamespace>
+    <RootNamespace>Sitewise</RootNamespace>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
 
@@ -15,8 +15,8 @@
     <EmbeddedResource Include="WebAssets\viewer.html" />
     <!-- The dataset is versioned once, at the repository root, and embedded from
          there so the .gha and the repository can never disagree about it. -->
-    <EmbeddedResource Include="..\..\data\cc_dataset.json" LogicalName="CarbonTools.Data.cc_dataset.json" />
-    <EmbeddedResource Include="..\..\data\materials.json" LogicalName="CarbonTools.Data.materials.json" />
+    <EmbeddedResource Include="..\..\data\cc_dataset.json" LogicalName="Sitewise.Data.cc_dataset.json" />
+    <EmbeddedResource Include="..\..\data\materials.json" LogicalName="Sitewise.Data.materials.json" />
   </ItemGroup>
 
   <ItemGroup>

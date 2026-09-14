@@ -4,7 +4,7 @@ using System.Text;
 
 using Rhino.Geometry;
 
-namespace CarbonTools.Sync
+namespace Sitewise.Sync
 {
     /// <summary>
     /// Computes area / length / volume / count for a single piece of geometry and

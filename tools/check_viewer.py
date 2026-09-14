@@ -9,7 +9,7 @@ it loud instead.
 import io, re, sys, subprocess, os
 
 P = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-                 'src', 'CarbonTools', 'WebAssets', 'viewer.html')
+                 'src', 'Sitewise', 'WebAssets', 'viewer.html')
 s = io.open(P, encoding='utf-8').read()
 fail = []
 
@@ -42,7 +42,9 @@ for m in re.finditer(r'class="([^"]+)"', s):
         used[cls] += 1
 
 # deliberate shared utilities: reused on purpose, styled in exactly one place
-SHARED = {'empty', 'h2', 'kpi', 'kpis', 'meta', 'pv', 'sub2'}
+SHARED = {'empty', 'h2', 'kpi', 'kpis', 'meta', 'pv', 'sub2',
+          # the report overlay deliberately reuses the comparison's frame
+          'cmp', 'cmpH', 'cmpX'}
 
 risky = sorted(c for c in bare
                if used.get(c, 0) > 1 and '-' not in c and len(c) <= 5

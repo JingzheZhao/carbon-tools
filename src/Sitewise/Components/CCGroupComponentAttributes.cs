@@ -6,7 +6,7 @@ using Grasshopper.GUI.Canvas;
 using Grasshopper.Kernel;
 using Grasshopper.Kernel.Attributes;
 
-namespace CarbonTools.Components
+namespace Sitewise.Components
 {
     /// <summary>
     /// Adds a persistent swatch to the component body: a single click opens

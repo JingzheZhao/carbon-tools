@@ -22,7 +22,7 @@ the source data, not new measurement.
 - **NonCommercial** — you may not use the dataset, or this tool while it carries
   the dataset, for commercial purposes.
 
-Because Carbon Tools bundles this dataset, **the project as distributed is
+Because Sitewise bundles this dataset, **the project as distributed is
 non-commercial**. This holds regardless of how the project's own source code is
 licensed. Anyone wishing to use the software commercially would need to remove
 the bundled dataset and supply their own carbon factors.

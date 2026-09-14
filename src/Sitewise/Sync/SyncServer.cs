@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 
-namespace CarbonTools.Sync
+namespace Sitewise.Sync
 {
     /// <summary>
     /// Minimal local HTTP server embedded in the CC Sync component
@@ -16,7 +16,7 @@ namespace CarbonTools.Sync
     /// and the viewer at /.
     /// The transport can later be swapped for WebSocket without touching the protocol.
     /// </summary>
-    public class CarbonSyncServer : IDisposable
+    public class SyncServer : IDisposable
     {
         private HttpListener _listener;
         private Thread _thread;
@@ -111,7 +111,11 @@ namespace CarbonTools.Sync
         {
             var path = context.Request.Url.AbsolutePath;
 
-            if (path == "/data.json")
+            if (path.StartsWith("/project/"))
+            {
+                HandleProject(context, path);
+            }
+            else if (path == "/data.json")
             {
                 // the live sync payload from Rhino, not the carbon dataset
                 WriteResponse(context, "application/json", _json);
@@ -136,6 +140,73 @@ namespace CarbonTools.Sync
             else
             {
                 WriteResponse(context, "text/html", DevViewerHtml() ?? _viewerHtml);
+            }
+        }
+
+        /// <summary>
+        /// The project routes. Everything the page asks for happens inside the
+        /// folder the user picked in a native dialog; the browser never names a
+        /// path, so it cannot reach anywhere it was not sent.
+        /// </summary>
+        private void HandleProject(HttpListenerContext context, string path)
+        {
+            Newtonsoft.Json.Linq.JObject result;
+
+            switch (path)
+            {
+                case "/project/new":
+                    result = ProjectStore.Create();
+                    break;
+
+                case "/project/open":
+                    result = ProjectStore.Open();
+                    break;
+
+                case "/project/open-recent":
+                    result = ProjectStore.OpenRecent((string)ReadBody(context)?["path"]);
+                    break;
+
+                case "/project/save":
+                    result = ProjectStore.Save(ReadBody(context));
+                    break;
+
+                case "/project/recent":
+                    result = new Newtonsoft.Json.Linq.JObject
+                    {
+                        ["ok"] = true,
+                        ["recent"] = ProjectStore.Recent()
+                    };
+                    break;
+
+                default:
+                    result = new Newtonsoft.Json.Linq.JObject
+                    {
+                        ["ok"] = false,
+                        ["error"] = "Unknown project route."
+                    };
+                    break;
+            }
+
+            WriteResponse(context, "application/json",
+                          result.ToString(Newtonsoft.Json.Formatting.None));
+        }
+
+        private static Newtonsoft.Json.Linq.JObject ReadBody(HttpListenerContext context)
+        {
+            try
+            {
+                using (var reader = new StreamReader(context.Request.InputStream,
+                                                     context.Request.ContentEncoding ?? Encoding.UTF8))
+                {
+                    string text = reader.ReadToEnd();
+                    return string.IsNullOrWhiteSpace(text)
+                        ? new Newtonsoft.Json.Linq.JObject()
+                        : Newtonsoft.Json.Linq.JObject.Parse(text);
+                }
+            }
+            catch (Exception)
+            {
+                return new Newtonsoft.Json.Linq.JObject();
             }
         }
 
@@ -194,7 +265,7 @@ namespace CarbonTools.Sync
         private static string LoadResource(string suffix)
         {
             var assembly = Assembly.GetExecutingAssembly();
-            var resourceName = "CarbonTools." + suffix;
+            var resourceName = "Sitewise." + suffix;
 
             using (var stream = assembly.GetManifestResourceStream(resourceName))
             {

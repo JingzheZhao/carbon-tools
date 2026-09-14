@@ -1,4 +1,4 @@
-# Carbon Tools — UI and interaction design
+# Sitewise — UI and interaction design
 
 > Interface skeleton, interaction mechanics, and result presentation specs.
 > Main references: the infrared.city Platform (studied hands-on, 2026-08-28), and

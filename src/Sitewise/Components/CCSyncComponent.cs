@@ -9,23 +9,24 @@ using Grasshopper.Kernel;
 using Grasshopper.Kernel.Types;
 using Newtonsoft.Json.Linq;
 
-using CarbonTools.Sync;
+using Sitewise.Sync;
 
-namespace CarbonTools.Components
+namespace Sitewise.Components
 {
     /// <summary>
     /// CC Sync: collects Tagged Objects from one or more CC Group components and
     /// serves them as JSON over a local HTTP server, per the sync protocol
     /// (docs/decision-record.md sections 15-16).
-    /// Run keeps the server alive and refreshed every solve; Open launches the
-    /// browser once per click, so dragging a slider doesn't spawn dozens of tabs.
+    /// Run keeps the server alive and refreshed every solve, and opens the browser
+    /// once on the off-to-on edge. Detecting that edge is what stops a slider drag
+    /// from spawning a tab per recompute, which is why a second input is not needed.
     /// </summary>
     public class CCSyncComponent : GH_Component, IDisposable
     {
         private static readonly Bitmap _icon = CreateIcon();
 
-        private readonly CarbonSyncServer _server = new CarbonSyncServer();
-        private bool _previousOpen;
+        private readonly SyncServer _server = new SyncServer();
+        private bool _previousRun;
 
         public CCSyncComponent()
             : base(
@@ -40,8 +41,7 @@ namespace CarbonTools.Components
         protected override void RegisterInputParams(GH_InputParamManager pManager)
         {
             pManager.AddGenericParameter("Objects", "O", "Tagged Objects from one or more CC Group components", GH_ParamAccess.list);
-            pManager.AddBooleanParameter("Run", "R", "While true, keep the local sync server running and refreshed every solve", GH_ParamAccess.item, false);
-            pManager.AddBooleanParameter("Open", "Op", "Open the sync page in the default browser (fires once per click)", GH_ParamAccess.item, false);
+            pManager.AddBooleanParameter("Run", "R", "While true, keep the local sync server running and refreshed every solve. Switching it on opens the viewer once.", GH_ParamAccess.item, false);
         }
 
         protected override void RegisterOutputParams(GH_OutputParamManager pManager)
@@ -57,9 +57,6 @@ namespace CarbonTools.Components
 
             bool run = false;
             DA.GetData(1, ref run);
-
-            bool open = false;
-            DA.GetData(2, ref open);
 
             var tagged = new List<TaggedGeometry>();
             foreach (var goo in wrapped)
@@ -92,7 +89,9 @@ namespace CarbonTools.Components
                 status = "Idle (Run is off)";
             }
 
-            if (open && !_previousOpen && _server.IsRunning)
+            // only on the off-to-on edge: while Run stays true the solve repeats on
+            // every slider tick, and opening a tab each time would be unusable
+            if (run && !_previousRun && _server.IsRunning)
             {
                 Process.Start(new ProcessStartInfo
                 {
@@ -101,7 +100,7 @@ namespace CarbonTools.Components
                 });
             }
 
-            _previousOpen = open;
+            _previousRun = run;
 
             DA.SetData(0, status);
             DA.SetData(1, port);

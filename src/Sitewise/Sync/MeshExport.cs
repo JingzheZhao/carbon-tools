@@ -4,7 +4,7 @@ using Newtonsoft.Json.Linq;
 
 using Rhino.Geometry;
 
-namespace CarbonTools.Sync
+namespace Sitewise.Sync
 {
     /// <summary>
     /// Converts geometry to the { vertices, faces } mesh block of the sync protocol.
