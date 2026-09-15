@@ -8,7 +8,7 @@
 > provenance mechanism) and `ui-design.md` (interface and interaction spec).
 >
 > **Major update 2026-08-28**: the complete Carbon Conscience dataset has been
-> obtained and verified, closing all four open items in §22 (dataset, scenario
+> obtained and verified, closing all four open items in §24 (dataset, scenario
 > entry points, maintenance carbon, individual trees). The central change is §9 —
 > the "20 scenario entry points" plan is cancelled in favour of the **provenance
 > mechanism** (measured / inferred / assumed). See the system design document.
@@ -886,7 +886,132 @@ misleading, since volumes appear to differ when only the camera moved. The save
 flow therefore records the camera alongside the image, and the fixed Top and
 Axonometric view buttons exist partly to make a consistent angle easy to choose.
 
-## 22. Open items
+## 22. What a colour group is, and when it cannot be priced (settled 2026-09-14)
+
+### The test is closure, not the kind of object
+
+A piece of geometry is priced by volume if it has one, and by area otherwise.
+The plugin decides with `Brep.IsSolid`, which asks whether the brep is closed —
+not whether it is a polysurface, and not how many surfaces were joined to make
+it.
+
+- Several open surfaces joined into an open polysurface → area
+- Surfaces joined into something closed → volume
+
+Joining changes nothing on its own; closing does. A designer who joins six
+surfaces into a box has, as far as this tool is concerned, modelled a solid.
+
+Once an object reports a volume its area is discarded. The area of a closed
+solid is its whole skin — six faces of a box, not its footprint — and
+multiplying that by a per-square-metre paving assembly would be meaningless.
+
+This is why the landuse assemblies (defined per m² of ground, bundling paving,
+base, drainage and lighting) are offered only to surface groups, and the
+per-m³ materials only to solid groups.
+
+### A mixed group is refused, not guessed
+
+A colour holding both closed solids and open surfaces has no single basis. It
+is not a question the tool can answer by picking one: the two are priced in
+different units.
+
+Until 2026-09-14 the code pretended otherwise. `groupKind` returned `'mixed'`
+and **nothing ever read that value** — every consumer asked `=== 'solid'` and
+otherwise used surface area, so the solids' volume left the totals without a
+word, while the card went on displaying both an area and a volume as though
+both were counted.
+
+A mixed group is now reported as unassigned everywhere, through a single gate
+(`priced()`), and the card says why. The stored material choice is kept rather
+than deleted: split the geometry in Grasshopper and the material comes back.
+
+### An object may only wear one colour
+
+Wiring the same geometry into two CC Group components sends it twice. If both
+groups get a material, its area or volume is added to the total twice, and
+nothing about either card looks wrong.
+
+Every object carries a content hash, so the payload is scanned for ids
+appearing under more than one colour and the Materials tab reports it above
+the cards — the fault belongs to a pair of groups, not to either one.
+
+The hash had to be strengthened to carry this. Type plus bounding box let a
+cylinder and a box collide; it now also carries the area, volume and length
+already computed, plus whatever topology counts are free to read. Two objects
+must agree on all of it to collide, which means they are the same object or an
+exact duplicate in the same place — and counting *that* twice is also wrong.
+
+## 23. Sync performance (settled 2026-09-14)
+
+A 1,230-object model took 11.2 seconds to reach the viewer. It now takes about
+0.7, and the payload fell from 12.8 MB to 6.9 MB.
+
+Every step came from measuring, not guessing. The first guess — that
+tessellation dominated — was wrong, and the CC Sync component grew a **Timing**
+output precisely so the next question could be answered the same way. Keep it.
+
+| | Waited |
+|---|---|
+| as found | 11.24 s |
+| asking for area without the moments | 3.40 s |
+| running the per-object work in parallel | 1.02 s |
+| writing meshes as text instead of JSON nodes | ~0.7 s |
+
+- **`AreaMassProperties.Compute(brep)` also integrates the centroid and the
+  second and product moments.** None of them reach the payload. That unused
+  integration was 78% of the sync. The four-flag overload asks for area alone,
+  with no loss of precision — it is still the exact NURBS integral.
+
+- **Objects are independent**, so unwrapping, tessellating and measuring run
+  across all cores. Writing the coordinates has to wait: the origin offset
+  comes from the bounding box of the whole model, so it is not known until
+  every object has been unwrapped. Hence two passes.
+
+- **A JObject per vertex and per face** meant roughly 1.7 million short-lived
+  objects per build. Once the rest was cheap, that garbage was 96% of what
+  remained — every thread doing nothing but allocating. Meshes are now written
+  as text and handed to Newtonsoft as one `JRaw`.
+
+### Mesh format 2
+
+Both arrays are flat: vertices as `x,y,z` triples, faces as groups of **four**
+indices. A triangle repeats the third index, which is what Rhino's own
+`MeshFace` does (`IsQuad` is `C != D`), so no per-face bracket or marker is
+needed. Coordinates are fixed-point decimals to 0.1 mm — finer than a concept
+model means, and far shorter than the seventeen significant digits
+`double.ToString` emits by default.
+
+`meta.mesh_format` records the version. A page left open across a plugin
+upgrade says so rather than drawing an empty scene.
+
+### Why there is no geometry cache
+
+One was built and removed the same day. It kept each object's tessellation and
+mass properties, keyed on the Grasshopper goo instance, on the reasoning that
+reference identity can only ever miss — never be wrong.
+
+**That reasoning does not hold for Grasshopper goo.** `IGH_GeometricGoo`
+reloads referenced geometry *into the existing instance*. Edit the model in
+Rhino and the key is unchanged, so the cache returns the reading from before
+the edit. The viewer then shows a stale model with no error, no warning and no
+slowdown — it simply lies.
+
+It bought roughly 400 ms. Do not rebuild it on the same key. If it is ever
+worth revisiting, the invalidation has to come from the Rhino document itself
+(`ReplaceRhinoObject`, `AddRhinoObject`, `DeleteRhinoObject`,
+`AfterTransformObjects`), not from the identity of what Grasshopper hands over.
+
+### Still costing something
+
+The viewer re-fetches the whole payload every 1.5 s and compares the entire
+string. While nothing changes in Rhino, the server keeps serialising and
+sending several megabytes a second for no reason. A `/version` endpoint
+returning a counter would end that and allow faster polling.
+
+The build also runs synchronously inside `SolveInstance`, so Rhino is frozen
+for its duration.
+
+## 24. Open items
 
 **Three closed on 2026-08-28:**
 
@@ -929,6 +1054,11 @@ Axonometric view buttons exist partly to make a consistent angle easy to choose.
       **done**; `data/cc_dataset.json` and `data/materials.json`, served by the
       plugin at `/data/cc.js` and `/data/materials.js`; viewer.html dropped from
       200 KB to 77 KB (2026-08-30)
+- [ ] **`/version` endpoint** (§23) — the viewer re-fetches the whole payload every
+      1.5 s and compares the whole string, so an idle model still costs several
+      megabytes a second of serialising and sending
+- [ ] **build off the Grasshopper UI thread** (§23) — it runs inside
+      `SolveInstance`, so Rhino is frozen for its duration
 - [ ] three.js is loaded from a CDN, so the first open needs network access.
       Genuine offline use requires inlining roughly 600 KB
 - [ ] split viewer.html into modules once the UI has settled
