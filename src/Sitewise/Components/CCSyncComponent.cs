@@ -28,6 +28,9 @@ namespace Sitewise.Components
         private readonly SyncServer _server = new SyncServer();
         private bool _previousRun;
 
+        /// <summary>Where the last build spent its time. Reported on the Timing output.</summary>
+        private BuildStats _lastStats;
+
         public CCSyncComponent()
             : base(
                 "CC Sync",
@@ -48,6 +51,7 @@ namespace Sitewise.Components
         {
             pManager.AddTextParameter("Status", "S", "Current sync status", GH_ParamAccess.item);
             pManager.AddIntegerParameter("Port", "P", "Local server port (-1 when not running)", GH_ParamAccess.item);
+            pManager.AddTextParameter("Timing", "T", "Where the last build spent its time, for diagnosing a slow sync", GH_ParamAccess.item);
         }
 
         protected override void SolveInstance(IGH_DataAccess DA)
@@ -74,18 +78,32 @@ namespace Sitewise.Components
             {
                 _server.Start();
 
-                JObject payload = SyncJsonBuilder.Build(tagged);
+                var stats = new BuildStats();
+
+                // the buckets add up to CPU time once the build runs in parallel,
+                // so elapsed time has to be measured out here
+                long wallStart = BuildStats.Now;
+                JObject payload = SyncJsonBuilder.Build(tagged, stats);
+
+                long serializeStart = BuildStats.Now;
+                string json = payload.ToString(Newtonsoft.Json.Formatting.None);
+                stats.SerializeTicks = BuildStats.Now - serializeStart;
+                stats.WallTicks = BuildStats.Now - wallStart;
+                stats.PayloadBytes = json.Length;
+
                 int groupCount = tagged.Select(t => t.Color.ToArgb()).Distinct().Count();
                 string statusLine = $"{tagged.Count} objects across {groupCount} groups";
 
-                _server.UpdateData(payload.ToString(Newtonsoft.Json.Formatting.None), statusLine);
+                _server.UpdateData(json, statusLine);
 
+                _lastStats = stats;
                 port = _server.Port;
                 status = $"Running on http://localhost:{port}/ - {statusLine}";
             }
             else
             {
                 _server.Stop();
+                _lastStats = null;
                 status = "Idle (Run is off)";
             }
 
@@ -104,6 +122,7 @@ namespace Sitewise.Components
 
             DA.SetData(0, status);
             DA.SetData(1, port);
+            DA.SetData(2, _lastStats == null ? "Idle" : _lastStats.Report());
         }
 
         public override void RemovedFromDocument(GH_Document document)

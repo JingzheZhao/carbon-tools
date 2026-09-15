@@ -12,7 +12,7 @@
 :root{
   --card:#ffffff; --cardLine:#d6dde3; --track:#eef2f6; --field:#ffffff;
   --bar:rgba(252,253,254,.92); --shadow:0 2px 10px rgba(22,32,42,.08),0 1px 3px rgba(22,32,42,.05);
-  --text:#1c2530; --sub:#5a6875; --dim:#8c98a5; --accentText:#0a6f6a; --line:#e2e9f0; --selBg:#dcf0ee; --ochreBg:#f6efe0;
+  --text:#1c2530; --sub:#5a6875; --dim:#8c98a5; --accentText:#0a6f6a; --line:#e2e9f0; --selBg:#dcf0ee; --ochreBg:#f6efe0; --redBg:#fdeef1; --redInk:#8e2a40;
   --scrollThumb:rgba(13,140,134,.62); --scrollThumbHover:rgba(13,140,134,.88);
   --accent:#0d8c86; --accentInk:#0a6f6a; --accentFill:#0a6f6a; --green:#2f7d5b; --ochre:#b8862b; --ochreInk:#8a6a2b; --red:#a4344e;
   --scene:#ffffff; --grid1:#ccd5dd; --grid2:#e3e9ee;
@@ -28,7 +28,7 @@
 [data-t="dark"]{
   --card:#161e25; --cardLine:#28323b; --track:#1c252d; --field:#111920;
   --bar:rgba(13,20,26,.92); --shadow:0 4px 16px rgba(0,0,0,.5),0 1px 3px rgba(0,0,0,.35);
-  --text:#e4e9ef; --sub:#9aa7b5; --dim:#6f7d8b; --accentText:#55e8d6; --line:#222e3a; --selBg:#123330; --ochreBg:#3a2f18;
+  --text:#e4e9ef; --sub:#9aa7b5; --dim:#6f7d8b; --accentText:#55e8d6; --line:#222e3a; --selBg:#123330; --ochreBg:#3a2f18; --redBg:#3a1c23; --redInk:#f0a7b3;
   --scrollThumb:rgba(51,204,189,.38); --scrollThumbHover:rgba(51,204,189,.62);
   --accent:#33ccbd; --accentInk:#6ff0e2; --accentFill:#10847b; --green:#4aa87c; --ochre:#e6b35c; --ochreInk:#f2ca80; --red:#d4707f;
   --scene:#1e2732; --grid1:#4a5a6e; --grid2:#384555;
@@ -230,6 +230,13 @@ button,input,select{font-family:inherit;color:inherit}
 .itemrow .q{font-family:var(--mono);font-size:var(--fs-meta);color:var(--sub);margin-top:3px}
 .itemrow .v{font-family:var(--mono);font-size:var(--fs-body);text-align:right}
 .detail{background:var(--track);border-radius:var(--r-surface);padding:10px 11px;margin:0 2px 9px;font-size:var(--fs-meta);color:var(--sub);line-height:1.55}
+.dupes{margin:0 0 14px;padding:10px 12px;border-radius:var(--r-surface);
+  border:1px solid var(--red);background:var(--redBg);
+  font-size:var(--fs-meta);color:var(--redInk);line-height:1.55}
+.dupes-row{margin-top:6px;font-family:var(--mono);font-size:11.5px}
+.cgerr{margin-top:9px;padding:9px 11px;border-radius:var(--r-surface);
+  border:1px solid var(--red);background:var(--redBg);
+  font-size:var(--fs-meta);color:var(--redInk);line-height:1.55}
 .upg{margin-top:8px;padding:7px 9px;border:1px dashed var(--ochre);background:var(--ochreBg);
   border-radius:var(--r-ctrl);font-size:var(--fs-meta);color:var(--ochreInk);line-height:1.5}
 .empty{padding:24px 16px;text-align:center;color:var(--dim);font-size:var(--fs-body);line-height:1.7}
@@ -603,22 +610,27 @@ window.addEventListener('resize', function () {
 
 (function animate(){ requestAnimationFrame(animate); controls.update(); renderer.render(scene, camera); })();
 
-// Rhino is Z-up, right-handed. three.js is Y-up, right-handed.
-function toThree(p){ return new THREE.Vector3(p[0], p[2], -p[1]); }
-
+/* Both arrays arrive flat: vertices as x,y,z triples and faces as groups of
+   four indices, where the fourth repeating the third marks a triangle - the
+   same shape Rhino's own MeshFace uses. Reading them in place avoids building
+   an object per vertex, which is what the plugin stopped doing too. */
 function buildGeometry(meshData){
+  var V=meshData.vertices, F=meshData.faces;
   var geometry = new THREE.BufferGeometry(), positions = [];
-  meshData.faces.forEach(function(face){
-    var a=meshData.vertices[face[0]], b=meshData.vertices[face[1]], c=meshData.vertices[face[2]];
-    pushTriangle(positions,a,b,c);
-    if(face.length===4) pushTriangle(positions,a,c,meshData.vertices[face[3]]);
-  });
+  for(var i=0;i<F.length;i+=4){
+    var a=F[i], b=F[i+1], c=F[i+2], d=F[i+3];
+    pushTriangle(positions,V,a,b,c);
+    if(d!==c) pushTriangle(positions,V,a,c,d);
+  }
   geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions,3));
   geometry.computeVertexNormals();
   return geometry;
 }
-function pushTriangle(positions,a,b,c){
-  [a,b,c].forEach(function(v){ var p=toThree(v); positions.push(p.x,p.y,p.z); });
+/* Rhino is Z-up, three.js is Y-up: (x,y,z) becomes (x,z,-y), applied as the
+   coordinates are copied rather than through a Vector3 per corner. */
+function pushTriangle(out,V,a,b,c){
+  var i=a*3, j=b*3, k=c*3;
+  out.push(V[i],V[i+2],-V[i+1], V[j],V[j+2],-V[j+1], V[k],V[k+2],-V[k+1]);
 }
 /* Two option studies are only comparable if they are photographed from the same
    place, which a free orbit camera cannot promise. 'top' and 'axo' are fixed
@@ -786,7 +798,7 @@ function perTree(m2){
 }
 
 function resolve(cg){
-  var ref=ASSIGN[cg.color];
+  var ref=priced(cg);
   if(!ref) return {ref:null,items:[],notes:[]};
 
   if(ref.indexOf('mat:')===0){                 // solid priced by its own volume
@@ -870,6 +882,12 @@ var DISP='m';
    A landuse assembly ("Pedestrian Concrete Hardscape") is defined per m2 of
    ground and bundles paving + base + drainage + lighting. Applying that to a
    pile of solids is meaningless, so solids get a per-m3 material instead. */
+/* Read an assignment through here, never from ASSIGN directly: a mixed group
+   has no basis to price on, so it reports as unassigned everywhere until the
+   model is split. The stored choice is kept, not deleted - fix the geometry
+   and the material comes back. */
+function priced(cg){ return groupKind(cg)==='mixed' ? null : ASSIGN[cg.color]; }
+
 function groupKind(cg){
   if(cg.qty.solids>0 && cg.qty.surfaces===0) return 'solid';
   if(cg.qty.surfaces>0 && cg.qty.solids===0) return 'surface';
@@ -1006,12 +1024,28 @@ function picker(cg, kind, ref){
   return h+'</div></div>';
 }
 
+/* Shown above the colour cards rather than on one of them: the fault belongs to
+   a pair of groups, not to either one. */
+function dupeNote(){
+  var d=MODEL.dupes;
+  if(!d) return '';
+  var rows=Object.keys(d.combos).map(function(k){
+    var c=d.combos[k], bits=[];
+    if(c.area>0)   bits.push(areaVal(c.area)+' '+U().A);
+    if(c.volume>0) bits.push(volVal(c.volume)+' '+U().V);
+    return '<div class="dupes-row">'+esc(k)+' \u2014 '+c.count+
+           (c.count===1?' object':' objects')+(bits.length?' ('+bits.join(', ')+')':'')+'</div>';
+  }).join('');
+  return '<div class="dupes"><b>'+d.total+(d.total===1?' object reaches':' objects reach')+
+    ' the viewer more than once.</b> Anything priced on both sides is added to the '+
+    'total twice. Give each object one colour in Grasshopper.'+rows+'</div>';
+}
+
 function matTab(){
   if(!MODEL.groups.length) return '<div class="empty">No colour groups yet.<br>Add geometry to a <b>CC Group</b> component and toggle <b>Run</b> on <b>CC Sync</b>.</div>';
-  var un=MODEL.groups.filter(function(g){return !ASSIGN[g.color];}).length;
-  var h='<div style="padding:12px 14px 20px">';
+  var h='<div style="padding:12px 14px 20px">'+dupeNote();
   MODEL.groups.forEach(function(cg){
-    var ref=ASSIGN[cg.color], open=UI.open[cg.color], q=cg.qty, kind=groupKind(cg);
+    var ref=priced(cg), open=UI.open[cg.color], q=cg.qty, kind=groupKind(cg);
     var A=q.surfArea;   // ground area only — a solid's boundary skin is not a plot area
     var qparts=[];
     if(q.surfaces>0) qparts.push('<b>'+areaVal(q.surfArea)+'</b> '+U().A);
@@ -1021,8 +1055,18 @@ function matTab(){
        '<div class="cghead"><span class="cgsw" style="background:'+cg.color+'" data-iso="'+cg.color+'" title="Isolate"></span>'+
        '<span class="cgid">'+cg.color+'</span>'+
        '<button class="cgvis" data-vis="'+cg.color+'">'+(VIS[cg.color]===false?'show':'hide')+'</button></div>'+
-       '<div class="cgq">'+qparts.join(' · ')+'</div>'+
-       picker(cg, kind, ref);
+       '<div class="cgq">'+qparts.join(' · ')+'</div>';
+    if(kind==='mixed'){
+      h+='<div class="cgerr"><b>Mixed group — not counted.</b> '+
+         q.solids+' closed '+(q.solids===1?'solid':'solids')+' and '+
+         q.surfaces+' open '+(q.surfaces===1?'surface':'surfaces')+
+         ' share this colour. A solid is priced per '+U().V+' and a surface per '+
+         U().A+', so this group has no single basis. Give them two colours in '+
+         'Grasshopper.</div>';
+      h+='</div>';
+      return;
+    }
+    h+=picker(cg, kind, ref);
     if(ref){
       var r=resolve(cg), c=carbon(r);
       var n=r.items.filter(function(i){return i.qty>0;}).length;
@@ -1075,8 +1119,8 @@ function breakdown(cg,r){
    in that same order everywhere: with the names living in the colour key rather
    than on each bar, a row's position is how you know which group it is. */
 function resRows(){
-  return MODEL.groups.filter(function(cg){ return ASSIGN[cg.color]; }).map(function(cg){
-    var r=resolve(cg), c=carbon(r), ref=ASSIGN[cg.color];
+  return MODEL.groups.filter(function(cg){ return priced(cg); }).map(function(cg){
+    var r=resolve(cg), c=carbon(r), ref=priced(cg);
     var rate=RATE[cg.color];
     var basis=(groupKind(cg)==='solid')?cg.qty.volume:cg.qty.surfArea;
     return {
@@ -1310,7 +1354,7 @@ function curveCard(t){
 function assumptionList(){
   var by={};
   MODEL.groups.forEach(function(cg){
-    if(!ASSIGN[cg.color]) return;
+    if(!priced(cg)) return;
     resolve(cg).items.forEach(function(it){
       if(it.prov!=='a' || it.qty<=0) return;
       var k=it.e.d;
@@ -1371,7 +1415,7 @@ function panelBusy(){
    which figures came from the model versus Carbon Conscience defaults. */
 function repTab(){
   if(!MODEL.groups.length) return '<div class="empty">No model yet.</div>';
-  var assigned=MODEL.groups.filter(function(g){return ASSIGN[g.color];});
+  var assigned=MODEL.groups.filter(function(g){return priced(g);});
   if(!assigned.length) return '<div class="empty">Nothing to report yet.<br>Assign a material in <b>Materials</b> first.</div>';
 
   var t=siteTotals(), net=t.me+t.sq+t.st;
@@ -1426,7 +1470,7 @@ function repTab(){
   h+='<div class="sec" style="margin-top:20px"><div class="sechead"><span class="l">Schedule</span>'+
      '<span class="r">median \u00b7 t CO\u2082e</span></div>';
   MODEL.groups.forEach(function(cg){
-    var ref=ASSIGN[cg.color]; if(!ref) return;
+    var ref=priced(cg); if(!ref) return;
     var r=resolve(cg), c=carbon(r), kind=groupKind(cg);
     var name=r.material?r.material:((CC.landuses[ref]||{}).n||ref);
     var basis=kind==='solid'?fmtV(cg.qty.volume):fmtA(cg.qty.surfArea);
@@ -2087,11 +2131,39 @@ function applyVis(){
   });
 }
 
+/* The same geometry wired into two CC Group components arrives under two
+   colours, and anything priced on both sides lands in the total twice. Nothing
+   on a colour card shows it, so the payload is scanned for it directly: every
+   object carries a content hash, and an id that turns up under more than one
+   colour is the same object arriving more than once. */
+function findDuplicates(groups){
+  var seen={};
+  groups.forEach(function(g){
+    (g.objects||[]).forEach(function(o){
+      if(!o.id) return;
+      var e=seen[o.id]||(seen[o.id]={colors:[],q:o.quantity||{}});
+      e.colors.push(g.color);
+    });
+  });
+  var combos={}, total=0;
+  Object.keys(seen).forEach(function(id){
+    var e=seen[id];
+    if(e.colors.length<2) return;      // once is what we expect
+    total++;
+    var uniq=e.colors.filter(function(c,i){ return e.colors.indexOf(c)===i; }).sort();
+    var key=uniq.length>1 ? uniq.join(' + ') : uniq[0]+' (twice in one group)';
+    var c=combos[key]||(combos[key]={count:0,area:0,volume:0});
+    c.count++; c.area+=e.q.area||0; c.volume+=e.q.volume||0;
+  });
+  return total ? {total:total, combos:combos} : null;
+}
+
 /* ── ingest one sync payload ── */
 var firstLoad=true;
 function ingest(data){
   contentGroup.clear();
   MODEL.meta=data.meta;
+  MODEL.dupes=findDuplicates(data.groups||[]);
   MODEL.groups=(data.groups||[]).map(function(group){
     var color=new THREE.Color(group.color);
     var material=new THREE.MeshStandardMaterial({color:color,side:THREE.DoubleSide});
@@ -2106,7 +2178,7 @@ function ingest(data){
       q.area+=Q.area||0; q.length+=Q.length||0;
       if(vol>0){ q.volume+=vol; q.solids++; }
       else { q.surfArea+=Q.area||0; q.surfaces++; }
-      if(obj.mesh&&obj.mesh.vertices&&obj.mesh.vertices.length){
+      if(obj.mesh&&obj.mesh.vertices&&obj.mesh.vertices.length&&obj.mesh.faces){
         var mesh=new THREE.Mesh(buildGeometry(obj.mesh),material);
         mesh.userData.groupColor=group.color;
         contentGroup.add(mesh);
@@ -2120,16 +2192,34 @@ function ingest(data){
 }
 
 var lastRaw=null;
+function syncFault(msg){
+  $('#panelBody').innerHTML='<div class="empty">'+esc(msg)+'</div>';
+}
 function poll(){
   fetch('/data.json',{cache:'no-store'})
     .then(function(r){return r.text();})
+    .catch(function(){ return null; })   // server gone: stay quiet, keep polling
     .then(function(txt){
-      if(txt===lastRaw) return;   // nothing changed in Rhino — leave the DOM alone
-      lastRaw=txt;
-      ingest(JSON.parse(txt));
-    })
-    .catch(function(){
-      // the server is gone; keep polling so the page recovers when it returns
+      if(txt===null || txt===lastRaw) return;   // nothing new — leave the DOM alone
+      try{
+        var data=JSON.parse(txt);
+        /* A page left open across a plugin upgrade would otherwise read the new
+           flat arrays with the old nested reader and draw nothing at all. */
+        if(data.meta && data.meta.mesh_format!==2){
+          syncFault('This page is older than the plugin sending the data. '+
+                    'Reload the page to update it.');
+          lastRaw=txt;
+          return;
+        }
+        ingest(data);
+        lastRaw=txt;   // only once it is actually on screen
+      }catch(err){
+        /* Do not set lastRaw: the next tick retries rather than sitting on a
+           cleared scene forever. */
+        console.error('sync payload could not be read', err, txt&&txt.slice(0,400));
+        syncFault('The sync data could not be read: '+(err&&err.message||err)+
+                  '  See the browser console for the payload.');
+      }
     })
     .then(function(){ setTimeout(poll,1500); });
 }

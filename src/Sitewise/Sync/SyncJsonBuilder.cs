@@ -2,8 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 
 using Newtonsoft.Json.Linq;
+
+using Grasshopper.Kernel.Types;
 
 using Rhino;
 using Rhino.Geometry;
@@ -21,33 +24,52 @@ namespace Sitewise.Sync
     /// </summary>
     public static class SyncJsonBuilder
     {
-        public static JObject Build(IReadOnlyList<TaggedGeometry> items)
+        public static JObject Build(IReadOnlyList<TaggedGeometry> items, BuildStats stats)
         {
+            stats.Objects = items.Count;
+
             var doc = RhinoDoc.ActiveDoc;
             var sourceUnits = doc?.ModelUnitSystem ?? UnitSystem.None;
             double unitScale = ResolveUnitScale(sourceUnits);
             double tolerance = (doc?.ModelAbsoluteTolerance ?? 0.01) * unitScale;
 
-            var rawGeometries = items
-                .Select(i => i.Geometry?.ScriptVariable() as GeometryBase)
-                .Where(g => g != null)
-                .ToList();
+            // Pass one: unwrap, tessellate, measure, hash. Each object is independent
+            // of the others, so the whole pass runs across all cores. One
+            // MeshingParameters is shared: the build only reads it.
+            var meshing = MeshingParameters.Default;
+            var prepared = new Prepared[items.Count];
+            Parallel.For(0, items.Count, i =>
+            {
+                prepared[i] = Prepare(items[i].Geometry, meshing, stats);
+            });
 
-            var origin = ComputeOrigin(rawGeometries, unitScale);
+            long originStart = BuildStats.Now;
+            var origin = ComputeOrigin(prepared, unitScale);
+            stats.AddOrigin(BuildStats.Now - originStart);
 
+            // Pass two: the coordinates, which could not be written earlier - the
+            // origin offset comes from the bounding box of the whole model, so it is
+            // not known until pass one has unwrapped everything.
+            var built = new JObject[items.Count];
+            Parallel.For(0, items.Count, i =>
+            {
+                if (prepared[i] != null && prepared[i].Geometry != null)
+                {
+                    built[i] = BuildObject(prepared[i], unitScale, origin, stats);
+                }
+            });
+
+            // Grouping happens afterwards so the payload keeps the input order,
+            // which Parallel.For does not promise.
             var groups = new JArray();
-            foreach (var group in items.GroupBy(i => ColorToHex(i.Color)))
+            foreach (var group in Enumerable.Range(0, items.Count)
+                         .Where(i => built[i] != null)
+                         .GroupBy(i => ColorToHex(items[i].Color)))
             {
                 var objects = new JArray();
-                foreach (var item in group)
+                foreach (int i in group)
                 {
-                    var geometry = item.Geometry?.ScriptVariable() as GeometryBase;
-                    if (geometry == null)
-                    {
-                        continue;
-                    }
-
-                    objects.Add(BuildObject(geometry, unitScale, origin));
+                    objects.Add(built[i]);
                 }
 
                 groups.Add(new JObject
@@ -67,7 +89,9 @@ namespace Sitewise.Sync
                     ["units_trusted"] = sourceUnits != UnitSystem.None,
                     ["origin_offset"] = new JArray(origin.X, origin.Y, origin.Z),
                     ["timestamp"] = DateTime.UtcNow.ToString("o", CultureInfo.InvariantCulture),
-                    ["mesh_tolerance"] = tolerance
+                    ["mesh_tolerance"] = tolerance,
+                    // flat vertex and face arrays; 1 was a node per vertex
+                    ["mesh_format"] = 2
                 },
                 ["groups"] = groups
             };
@@ -98,14 +122,64 @@ namespace Sitewise.Sync
             return scale;
         }
 
-        private static JObject BuildObject(GeometryBase geometry, double unitScale, Point3d origin)
+        /// <summary>One object, unwrapped and measured. Lives for one build.</summary>
+        private sealed class Prepared
         {
-            var quantity = GeometryQuantities.Compute(geometry, unitScale);
-            var mesh = MeshExport.ToMeshData(geometry, unitScale, origin);
+            public GeometryBase Geometry;
+            public Mesh Mesh;
+            public GeometryQuantities.Quantity Raw;
+            public string Id;
+        }
 
+        /// <summary>
+        /// Pass one, on a worker thread: everything that depends on the object alone.
+        /// </summary>
+        private static Prepared Prepare(IGH_GeometricGoo goo,
+            MeshingParameters meshing, BuildStats stats)
+        {
+            var made = new Prepared();
+            made.Geometry = goo?.ScriptVariable() as GeometryBase;
+            if (made.Geometry == null)
+            {
+                return made;
+            }
+
+            long quantityStart = BuildStats.Now;
+            made.Raw = GeometryQuantities.Compute(made.Geometry);
+            stats.AddQuantity(BuildStats.Now - quantityStart);
+
+            long tessellateStart = BuildStats.Now;
+            made.Mesh = MeshExport.Tessellate(made.Geometry, meshing);
+            stats.AddTessellate(BuildStats.Now - tessellateStart);
+
+            long idStart = BuildStats.Now;
+            made.Id = GeometryQuantities.StableId(made.Geometry, made.Raw);
+            stats.AddId(BuildStats.Now - idStart);
+
+            return made;
+        }
+
+        /// <summary>
+        /// Pass two, on a worker thread: place the prepared object in the payload.
+        /// </summary>
+        private static JObject BuildObject(Prepared entry,
+            double unitScale, Point3d origin, BuildStats stats)
+        {
+            var quantity = entry.Raw.Scaled(unitScale);
+
+            long meshJsonStart = BuildStats.Now;
+            var mesh = MeshExport.ToMeshData(entry.Mesh, unitScale, origin);
+            stats.AddMeshJson(BuildStats.Now - meshJsonStart);
+
+            if (entry.Mesh != null)
+            {
+                stats.CountMesh(entry.Mesh.Vertices.Count, entry.Mesh.Faces.Count);
+            }
+
+            long assembleStart = BuildStats.Now;
             var jObject = new JObject
             {
-                ["id"] = GeometryQuantities.StableId(geometry),
+                ["id"] = entry.Id,
                 ["quantity"] = new JObject
                 {
                     ["area"] = quantity.Area,
@@ -120,20 +194,24 @@ namespace Sitewise.Sync
                 jObject["mesh"] = mesh;
             }
 
+            stats.AddAssemble(BuildStats.Now - assembleStart);
             return jObject;
         }
 
-        private static Point3d ComputeOrigin(IReadOnlyList<GeometryBase> geometries, double unitScale)
+        private static Point3d ComputeOrigin(IReadOnlyList<Prepared> prepared, double unitScale)
         {
-            if (geometries.Count == 0)
+            if (prepared.Count == 0)
             {
                 return Point3d.Origin;
             }
 
             var box = BoundingBox.Empty;
-            foreach (var geometry in geometries)
+            foreach (var entry in prepared)
             {
-                box.Union(geometry.GetBoundingBox(true));
+                if (entry != null && entry.Geometry != null)
+                {
+                    box.Union(entry.Geometry.GetBoundingBox(true));
+                }
             }
 
             if (!box.IsValid)
