@@ -72,11 +72,26 @@ namespace Sitewise.Sync
                     objects.Add(built[i]);
                 }
 
-                groups.Add(new JObject
+                /* The colour is still the key; the name is a label carried alongside
+                   it. Colours are unique per CC Group, so every object in a group
+                   comes from one component and agrees on the name - the first one
+                   that has it answers for all of them. */
+                string name = group
+                    .Select(i => items[i].Name)
+                    .FirstOrDefault(n => !string.IsNullOrWhiteSpace(n));
+
+                var entry = new JObject
                 {
                     ["color"] = group.Key,
                     ["objects"] = objects
-                });
+                };
+
+                if (name != null)
+                {
+                    entry["name"] = name;
+                }
+
+                groups.Add(entry);
             }
 
             return new JObject
