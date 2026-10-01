@@ -178,7 +178,8 @@ button,input,select{font-family:inherit;color:inherit}
 @media (prefers-reduced-motion:reduce){.cg{transition:none}}
 .cghead{display:flex;align-items:center;gap:9px;margin-bottom:9px}
 .cgsw{width:15px;height:15px;border-radius:var(--r-pill);border:1px solid rgba(0,0,0,.2);flex:none;cursor:pointer}
-.cgid{font-size:var(--fs-strong);font-weight:600;letter-spacing:.02em;font-family:var(--mono);color:var(--accentText)}
+.cgid{font-size:var(--fs-strong);font-weight:600;letter-spacing:-.005em;color:var(--accentText)}
+.cghex{font-family:var(--mono);font-size:var(--fs-label);color:var(--dim);letter-spacing:.02em}
 .cgvis{margin-left:auto;font-size:var(--fs-meta);color:var(--dim);cursor:pointer;background:none;border:0;text-decoration:underline;text-underline-offset:2px}
 .cgq{font-family:var(--mono);font-size:var(--fs-body);color:var(--sub);margin-bottom:8px;line-height:1.55}
 .cgq b{color:var(--sub);font-weight:500}
@@ -256,23 +257,13 @@ button,input,select{font-family:inherit;color:inherit}
 
 /* a chart row: dot, plot, value - three columns that cannot overlap */
 .rs-grid3{display:grid;grid-template-columns:1fr 96px;gap:7px 9px;align-items:center}
-.rs-grid3.wide{grid-template-columns:1fr 116px}
 .rs-val{font-family:var(--mono);font-size:var(--fs-meta);color:var(--text);text-align:right;
   white-space:nowrap}
-
-/* the diverging card keeps its two headings and its reconciliation footer */
-.rs-dvH{display:flex;justify-content:space-between;gap:12px;padding:12px 13px 9px;
-  border-bottom:1px solid var(--line)}
-.rs-dvH span{font-size:var(--fs-card);font-weight:600;color:var(--text);letter-spacing:-.01em}
-.rs-dvFoot{padding:6px 13px 8px;border-top:1px solid var(--line);background:var(--track);
-  font-family:var(--mono);font-size:var(--fs-meta);color:var(--sub)}
-.rs-dvFoot div{display:flex;justify-content:space-between;gap:12px;padding:3px 0}
-.rs-dvFoot b{color:var(--text);font-weight:600}
 
 .rs-plot{position:relative;height:14px}
 .rs-grid{position:absolute;inset:0;pointer-events:none}
 .rs-grid i{position:absolute;top:-5px;bottom:-5px;width:1px;background:var(--line)}
-.rs-axis{position:absolute;top:-5px;bottom:-5px;width:1px;background:var(--sub);opacity:.45}
+.rs-none{padding:10px 13px 12px;font-size:var(--fs-meta);color:var(--dim);line-height:1.5}
 .rs-ticks{position:relative;height:13px;
   font-family:var(--mono);font-size:var(--fs-label);color:var(--dim)}
 .rs-ticks span{position:absolute;transform:translateX(-50%);white-space:nowrap}
@@ -316,6 +307,12 @@ button,input,select{font-family:inherit;color:inherit}
   border-bottom:1px solid var(--line);background:var(--card);flex:none}
 .cmpH .t{font-size:var(--fs-tab);font-weight:600;color:var(--text);letter-spacing:-.01em}
 .cmpH .n{font-family:var(--mono);font-size:var(--fs-label);color:var(--dim)}
+/* Export takes the gap, so Close sits beside it rather than across the bar */
+.cmpH .repExp+.cmpX{margin-left:0}
+.repExp{margin-left:auto;display:flex;align-items:center;gap:6px;cursor:pointer;
+  padding:5px 11px;border:1px solid var(--cardLine);border-radius:var(--r-ctrl);
+  background:var(--card);color:var(--sub);font-size:var(--fs-meta);font-weight:500}
+.repExp:hover{background:var(--track);color:var(--text)}
 .cmpX{margin-left:auto;border:0;background:none;color:var(--sub);cursor:pointer;
   font-size:18px;line-height:1;padding:4px 8px;border-radius:var(--r-ctrl)}
 .cmpX:hover{background:var(--track);color:var(--text)}
@@ -337,7 +334,7 @@ button,input,select{font-family:inherit;color:inherit}
 .cmpPanel{margin-top:10px;border:1px solid var(--cardLine);border-radius:var(--r-shell);
   background:var(--scene);overflow:hidden}
 .cmpCols{display:grid;grid-auto-flow:column;grid-auto-columns:330px;
-  grid-template-rows:repeat(8,auto);overflow-x:auto;padding:14px 0}
+  grid-template-rows:repeat(7,auto);overflow-x:auto;padding:14px 0}
 .cmpCell{padding:0 15px 12px;min-width:0}
 .cmpCell.sep{border-left:1px solid var(--line)}
 .cmpCell.head{padding-bottom:2px}
@@ -413,6 +410,49 @@ button,input,select{font-family:inherit;color:inherit}
 .card .t{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
 .card .t b{font-size:var(--fs-strong);font-weight:700}
 .card .t span{font-family:var(--mono);font-size:var(--fs-meta);color:var(--sub)}
+
+/* ---------------------------------------------------------------- print ---
+   Only the report goes on paper. Everything else on screen is apparatus for
+   working rather than for reading, and the report already carries its own
+   title block, so the overlay chrome goes too. */
+@media print{
+  /* Paper is white whatever the screen was. All three ways of being dark are
+     named because each matches with the same weight as the rule it overrides,
+     and this block is last. */
+  :root,
+  :root[data-theme="dark"],
+  :root:not([data-theme="light"]){
+    --scene:#fff; --card:#fff; --track:#f5f7f8; --field:#fff; --selBg:#eaf4f3;
+    --text:#14181c; --sub:#3c4650; --dim:#6b7681;
+    --line:#dde3e9; --cardLine:#ccd5dd;
+    --accentText:#0a6f6a; --accentFill:#0a6f6a; --green:#2f7d5b; --red:#a4344e;
+    --ochre:#b8862b; --ochreBg:#f8f2e6; --ochreInk:#7d5f22;
+    --redBg:#fdeef1; --redInk:#8e2a40;
+    --shadow:none; --cardLift:none; --cardLiftHover:none;
+  }
+
+  body{background:#fff}
+  body>*{display:none !important}
+  body>#rep{display:block !important}
+
+  /* the panel stops being a panel: no frame, no scroll, no fixed corner */
+  #rep{position:static;inset:auto;width:auto;height:auto;z-index:auto;
+    border:0;border-radius:0;box-shadow:none;overflow:visible;background:#fff}
+  #rep .cmpH{display:none}
+  #rep .cmpBody{overflow:visible;height:auto;max-height:none;padding:0}
+  #rep .cmpBody>div{padding:0 !important}
+
+  @page{margin:16mm 14mm}
+
+  /* A chart split across two sheets is unreadable on both. */
+  .rs-card,.pv,.findings,.rs-keyRow,.rs-asm,.upg{
+    break-inside:avoid;page-break-inside:avoid}
+  .h2{break-after:avoid;page-break-after:avoid}
+
+  /* Backgrounds carry meaning here - the provenance tags and the bars are read
+     by colour - so they must survive the browser's ink-saving default. */
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
 </style>
 </head>
 <body>
@@ -805,9 +845,15 @@ function resolve(cg){
     var key=ref.slice(4), m=MAT[key];
     if(!m) return {ref:null,items:[],notes:[]};
     var V0=cg.qty.volume;
+    /* A material carries its own stored and sequestered figures. These were
+       hard-coded to zero, which silently discarded the biogenic carbon in
+       timber: Carbon Conscience counts half the dry biomass of sustainably
+       sourced wood as stored carbon, so a timber deck modelled as a solid was
+       being shown as pure emission. A material with nothing to store simply
+       has no figure, which is the honest answer for steel or concrete. */
     return {ref:ref, lu:null, material:key, items:[{
       id:'mat:'+key, e:{d:key, csi:'by volume',
-      lo:m.lo, me:m.me, hi:m.hi, sq:0, st:0}, pct:1, qty:V0, prov:'m', u:'V'}],
+      lo:m.lo, me:m.me, hi:m.hi, sq:m.sq||0, st:m.st||0}, pct:1, qty:V0, prov:'m', u:'V'}],
       treeSeq:0, treeInfo:null,
       notes:[]};
   }
@@ -1053,7 +1099,8 @@ function matTab(){
     if(q.length>0)   qparts.push('<b>'+num(q.length*U().len,U().dp[0])+'</b> '+U().L);
     h+='<div class="cg">'+
        '<div class="cghead"><span class="cgsw" style="background:'+cg.color+'" data-iso="'+cg.color+'" title="Isolate"></span>'+
-       '<span class="cgid">'+cg.color+'</span>'+
+       '<span class="cgid">'+esc(cg.label||cg.color)+'</span>'+
+       (cg.label?'<span class="cghex">'+esc(cg.color)+'</span>':'')+
        '<button class="cgvis" data-vis="'+cg.color+'">'+(VIS[cg.color]===false?'show':'hide')+'</button></div>'+
        '<div class="cgq">'+qparts.join(' · ')+'</div>';
     if(kind==='mixed'){
@@ -1183,69 +1230,34 @@ function barSpans(color, parts){
   return h;
 }
 
-function divergingPlot(rows){
-  // The axis is fixed at the middle and both halves share one scale, so a bar
-  // of a given length means the same number whichever side of zero it is on.
-  var half=0;
-  rows.forEach(function(r){
-    var neg=Math.abs(Math.min(0,r.sq)+Math.min(0,r.st));
-    var pos=Math.max(0, r.hi>0?r.hi:r.me);
-    if(neg>half) half=neg;
-    if(pos>half) half=pos;
-  });
-  if(half<=0) return '';
-  var pct=function(v){ return (Math.abs(v)/half)*50; };
-  var gt=gridAndTicks(half,half,function(v){ return t1(v); });
-  // a group that neither emits nor stores anything is not a reading
-  rows=rows.filter(function(r){
-    return Math.max(0,r.me)>0 || Math.abs(Math.min(0,r.sq)+Math.min(0,r.st))>0;
-  });
-  if(!rows.length) return '';
-
-  var h='<div class="rs-card"><div class="rs-dvH">'+
-        '<span>Stored &amp; Sequestered</span><span>Emitted</span></div>'+
-        '<div class="rs-body"><div class="rs-grid3 wide">';
-
-  rows.forEach(function(r){
-    var neg=Math.abs(Math.min(0,r.sq)+Math.min(0,r.st));
-    var me=Math.max(0,r.me), hi=Math.max(me,r.hi);
-    var L=50-pct(neg), M=50+pct(me), H=50+pct(hi);
-    var bars='<div class="rs-axis" style="left:50%"></div>'+gt.grid+
-      barSpans(r.color, [
-        {x:L, w:50-L},
-        {x:M, w:H-M, range:true},
-        {x:50, w:M-50}
-      ]);
-    h+=chartRow(r, bars, (neg>0?('\u2212'+t1(neg)+' / '):'')+t1(me)+' t');
-  });
-  h+=gt.ticks+'</div></div>';
-
-  var sq=0, st=0, me=0, hi=0, lo=0;
-  rows.forEach(function(r){ sq+=Math.min(0,r.sq); st+=Math.min(0,r.st);
-                            me+=Math.max(0,r.me); lo+=Math.max(0,r.lo); hi+=Math.max(0,r.hi); });
-  h+='<div class="rs-dvFoot">'+
-     '<div><span>sequestered + stored</span><b>'+t1(Math.abs(sq))+' + '+t1(Math.abs(st))+
-       ' = '+t1(Math.abs(sq+st))+' t</b></div>'+
-     '<div><span>emitted</span><b>'+t1(lo)+'\u2013'+t1(hi)+' t</b></div>'+
-     '<div><span>net</span><b>'+t1(me+sq+st)+' t</b></div></div></div>';
-  return h;
-}
-
 /* Each account gets its own scale. A shared one buries the small accounts -
    sequestration is routinely a hundredth of emissions - and the comparison
    between accounts is what the diverging card above is for. */
 var ACCOUNTS=[
-  {k:'me', n:'Embodied Carbon',    sign:1},
-  {k:'sq', n:'Carbon Sequestered', sign:-1},
-  {k:'st', n:'Carbon Stored',      sign:-1}
+  {k:'me', n:'Embodied Carbon',    sign:1,
+   none:'Nothing here emits carbon.'},
+  {k:'sq', n:'Carbon Sequestered', sign:-1,
+   none:'Nothing here takes carbon back out of the air over the study period.'},
+  {k:'st', n:'Carbon Stored',      sign:-1,
+   none:'Nothing here holds carbon from day one — no timber, no retained planting.'}
 ];
+
+/* An account with nothing in it still gets a card, shorter and without a plot.
+   Dropping it would leave the reader with no way to tell "this scheme does not
+   touch that account" from "this tool does not have that account", and those
+   are very different facts. */
+function emptyAccountCard(title, unit, why){
+  return '<div class="rs-card"><div class="rs-cardH"><span class="t">'+esc(title)+'</span>'+
+         '<span class="u">'+unit+'</span></div>'+
+         '<div class="rs-none">'+esc(why)+'</div></div>';
+}
 /* One card. Returns '' when the scheme has nothing in this account - the
    comparison grid puts an empty cell there so the row below still lines up. */
 function accountChart(rows, key){
   var h='';
   if(key!=='cost') ACCOUNTS.filter(function(a){ return a.k===key; }).forEach(function(a){
     var live=rows.filter(function(r){ return Math.abs(r[a.k]||0)>0; });
-    if(!live.length) return;
+    if(!live.length){ h+=emptyAccountCard(a.n, 't CO₂e', a.none); return; }
     var max=0, tot=0;
     live.forEach(function(r){ var v=Math.abs(r[a.k]||0); if(v>max) max=v; tot+=(r[a.k]||0); });
     var gt=gridAndTicks(0,max,function(v){ return t1(v); });
@@ -1265,6 +1277,10 @@ function accountChart(rows, key){
 
   // cost is money, so it never shared a carbon axis in the first place
   var priced=rows.filter(function(r){ return r.cost!=null; });
+  if(!priced.length){
+    return h+emptyAccountCard('Cost', '$',
+      'No rate entered yet. Type one under a material in the Materials tab.');
+  }
   var cmax=0, ctot=0;
   priced.forEach(function(r){ ctot+=r.cost; if(Math.abs(r.cost)>cmax) cmax=Math.abs(r.cost); });
   if(priced.length){
@@ -1389,7 +1405,6 @@ function resTab(){
 
   var h='<div style="padding:2px 16px 28px">';
   h+=colourKey(rows);
-  h+=divergingPlot(rows);
   h+=accountCharts(rows);
 
   h+=curveCard(t);
@@ -1853,11 +1868,28 @@ function compareView(){
        '</span></div>', ' head');
     h+=cell(sc.shot?('<img class="cmpShot" src="'+sc.shot+'" alt="">'):'');
     h+=cell(colourKey(sc.rows));
-    h+=cell(divergingPlot(sc.rows));
     ACCOUNTS.forEach(function(a){ h+=cell(accountChart(sc.rows,a.k)); });
     h+=cell(accountChart(sc.rows,'cost'));
   });
   return h+'</div></div></div>';
+}
+
+/* The browser writes the PDF. Its print dialog is also the path picker: "Save
+   as PDF" opens the system save dialog, so there is nothing for this code to
+   choose. Renaming the document first is the only thing worth doing - the
+   browser offers document.title as the filename, and "Sitewise" is a worse
+   suggestion than the project and the date. */
+function exportReport(){
+  var was=document.title;
+  document.title=(PROJECT||'Sitewise')+' - carbon report - '+
+                 new Date().toISOString().slice(0,10);
+  var restore=function(){
+    document.title=was;
+    window.removeEventListener('afterprint', restore);
+  };
+  window.addEventListener('afterprint', restore);
+  window.print();
+  setTimeout(restore, 1000);   // afterprint is not fired everywhere
 }
 
 /* Report: the same overlay frame as the comparison, holding the document the
@@ -1870,8 +1902,14 @@ function drawReport(){
   if(!UI.rep){ el.innerHTML=''; return; }
   el.innerHTML='<div class="cmpH"><span class="t">Report</span>'+
     '<span class="n">'+esc(PROJECT)+'</span>'+
+    '<button class="repExp" id="repExport" title="Save this report as a PDF">'+
+      '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" '+
+        'stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+
+      '<path d="M12 3v11m0 0 4-4m-4 4-4-4"/><path d="M4 17v2.5h16V17"/></svg>'+
+      'Export PDF</button>'+
     '<button class="cmpX" id="repClose" title="Close">\u00d7</button></div>'+
     '<div class="cmpBody">'+repTab()+'</div>';
+  $('#repExport').onclick=exportReport;
   $('#repClose').onclick=function(){ UI.rep=false; drawReport(); drawToolbar(); };
 }
 
@@ -2184,7 +2222,7 @@ function ingest(data){
         contentGroup.add(mesh);
       }
     });
-    return {color:group.color,qty:q};
+    return {color:group.color, label:group.name||null, qty:q};
   });
   applyVis();
   if(firstLoad && contentGroup.children.length>0){ frameView('axo'); firstLoad=false; }
