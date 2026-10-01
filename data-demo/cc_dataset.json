@@ -1,0 +1,236 @@
+{
+ "elements": {
+  "DEMO.01": {
+   "csi": "055000 - Metal Fabrications - Sitework",
+   "d": "30 mm steel grating walking surface",
+   "hi": 65.28,
+   "lo": 35.52,
+   "me": 48.0,
+   "sq": 0.0,
+   "st": 0.0
+  },
+  "DEMO.02": {
+   "csi": "321400 - Unit Paving",
+   "d": "60 mm clay unit paver on sand setting bed",
+   "hi": 38.08,
+   "lo": 20.72,
+   "me": 28.0,
+   "sq": 0.0,
+   "st": 0.0
+  },
+  "DEMO.03": {
+   "csi": "321400 - Unit Paving",
+   "d": "80 mm precast concrete paver on sand setting bed",
+   "hi": 57.12,
+   "lo": 31.08,
+   "me": 42.0,
+   "sq": 0.0,
+   "st": 0.0
+  },
+  "DEMO.04": {
+   "csi": "321540 - Crushed Stone Surfacing",
+   "d": "75 mm crushed stone wearing course",
+   "hi": 10.2,
+   "lo": 5.55,
+   "me": 7.5,
+   "sq": 0.0,
+   "st": 0.0
+  },
+  "DEMO.05": {
+   "csi": "321100 - Base Courses",
+   "d": "150 mm compacted aggregate base course",
+   "hi": 8.432,
+   "lo": 4.588,
+   "me": 6.2,
+   "sq": 0.0,
+   "st": 0.0
+  },
+  "DEMO.06": {
+   "csi": "312500 - Erosion and Sedimentation Controls",
+   "d": "Geotextile separation layer",
+   "hi": 1.088,
+   "lo": 0.592,
+   "me": 0.8,
+   "sq": 0.0,
+   "st": 0.0
+  },
+  "DEMO.07": {
+   "csi": "311000 - Site Clearing",
+   "d": "Subgrade preparation and compaction",
+   "hi": 1.496,
+   "lo": 0.814,
+   "me": 1.1,
+   "sq": 0.0,
+   "st": 0.0
+  },
+  "DEMO.08": {
+   "csi": "329200 - Turf and Grasses",
+   "d": "Turf sod, irrigated",
+   "hi": 3.264,
+   "lo": 1.776,
+   "me": 2.4,
+   "sq": -0.9,
+   "st": 0.0
+  },
+  "DEMO.09": {
+   "csi": "329113 - Soil Preparation",
+   "d": "150 mm imported topsoil",
+   "hi": 1.768,
+   "lo": 0.962,
+   "me": 1.3,
+   "sq": 0.0,
+   "st": -3.5
+  },
+  "DEMO.10": {
+   "csi": "055000 - Metal Fabrications - Sitework",
+   "d": "Galvanised steel support framing and fixings",
+   "hi": 14.96,
+   "lo": 8.14,
+   "me": 11.0,
+   "sq": 0.0,
+   "st": 0.0
+  },
+  "DEMO.11": {
+   "csi": "061000 - Rough Carpentry",
+   "d": "Softwood structural lumber, per cubic metre",
+   "hi": 223.72,
+   "lo": 121.73,
+   "me": 164.5,
+   "sq": 0.0,
+   "st": 0.0
+  },
+  "DEMO.12": {
+   "csi": "051200 - Structural Steel Framing",
+   "d": "Structural steel section, per cubic metre",
+   "hi": 21352.0,
+   "lo": 11618.0,
+   "me": 15700.0,
+   "sq": 0.0,
+   "st": 0.0
+  }
+ },
+ "landuses": {
+  "D1.00": {
+   "d": "Irrigated turf over imported topsoil on prepared subgrade.",
+   "n": "Lawn",
+   "sub": [
+    [
+     1,
+     "DEMO.08"
+    ],
+    [
+     1,
+     "DEMO.09"
+    ],
+    [
+     1,
+     "DEMO.07"
+    ]
+   ],
+   "t": [
+    "Softscape",
+    "Lawn and turf"
+   ]
+  },
+  "D2.00": {
+   "d": "Steel grating walking surface on galvanised support framing.",
+   "n": "Steel",
+   "sub": [
+    [
+     1,
+     "DEMO.01"
+    ],
+    [
+     1,
+     "DEMO.10"
+    ],
+    [
+     1,
+     "DEMO.07"
+    ]
+   ],
+   "t": [
+    "Hardscape",
+    "Elevated walking surface"
+   ]
+  },
+  "D3.00": {
+   "d": "Clay unit paving on an aggregate base, pedestrian loading.",
+   "n": "Unit Paver",
+   "sub": [
+    [
+     1,
+     "DEMO.02"
+    ],
+    [
+     1,
+     "DEMO.05"
+    ],
+    [
+     1,
+     "DEMO.06"
+    ],
+    [
+     1,
+     "DEMO.07"
+    ]
+   ],
+   "t": [
+    "Hardscape",
+    "Pedestrian paving"
+   ]
+  },
+  "D4.00": {
+   "d": "Precast concrete paving on an aggregate base, pedestrian loading.",
+   "n": "Concrete Paver",
+   "sub": [
+    [
+     1,
+     "DEMO.03"
+    ],
+    [
+     1,
+     "DEMO.05"
+    ],
+    [
+     1,
+     "DEMO.06"
+    ],
+    [
+     1,
+     "DEMO.07"
+    ]
+   ],
+   "t": [
+    "Hardscape",
+    "Pedestrian paving"
+   ]
+  },
+  "D5.00": {
+   "d": "Compacted crushed stone wearing course on an aggregate base.",
+   "n": "Crushed Stone",
+   "sub": [
+    [
+     1,
+     "DEMO.04"
+    ],
+    [
+     1,
+     "DEMO.05"
+    ],
+    [
+     1,
+     "DEMO.06"
+    ],
+    [
+     1,
+     "DEMO.07"
+    ]
+   ],
+   "t": [
+    "Hardscape",
+    "Permeable paving"
+   ]
+  }
+ }
+}

@@ -20,7 +20,9 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 VIEWER = os.path.join(ROOT, 'src', 'Sitewise', 'WebAssets', 'viewer.html')
-DATA = os.path.join(ROOT, 'data')
+# CARBONTOOLS_DATA chooses the dataset here the same way the plugin does,
+# so the demo set can be exercised without touching the real one.
+DATA = os.environ.get('CARBONTOOLS_DATA') or os.path.join(ROOT, 'data')
 PORT = 51999
 
 
@@ -59,9 +61,11 @@ MODEL = {
              'origin_offset': [0, 0, 0], 'timestamp': '2026-09-14T00:00:00Z', 'mesh_tolerance': 0.01,
              'mesh_format': 2},
     'groups': [
-        {'color': '#4C9F70', 'objects': [obj(1, slab(0, 0, 20, 12), area=240.0),
-                                         obj(5, wedge(0, -10, 12, 8), area=48.0)]},
-        {'color': '#C46A4E', 'objects': [obj(2, box(24, 0, 0, 4, 4, 3), volume=48.0, area=80.0)]},
+        {'color': '#4C9F70', 'name': 'Lawn terrace', 'objects': [
+            obj(1, slab(0, 0, 20, 12), area=240.0),
+            obj(5, wedge(0, -10, 12, 8), area=48.0)]},
+        {'color': '#C46A4E', 'name': 'Timber pavilion', 'objects': [
+            obj(2, box(24, 0, 0, 4, 4, 3), volume=48.0, area=80.0)]},
         # the case under test: a solid and a surface sharing one colour
         {'color': '#3E6FB0', 'objects': [obj(3, box(0, 16, 0, 5, 5, 2), volume=50.0, area=90.0),
                                          obj(4, slab(8, 16, 14, 6), area=84.0)]},
